@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class SewageController extends Controller
@@ -21,7 +22,9 @@ class SewageController extends Controller
     public function sewage()
     {
         //
-        return view("pages.sewage.sewage");
+        //$phone = Project::find(7)->pdate;
+        $projects = Project :: with('pdate')->select()->get();
+        return view("pages.sewage.sewage",compact('projects'));
     }
 
     /**

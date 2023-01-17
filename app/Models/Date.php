@@ -29,4 +29,9 @@ class Date extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function projectDate()
+    {
+        return $this->belongsTo('App\Models\Project', 'project_id');
+    }
 }

@@ -24,4 +24,9 @@ class Project extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function pdate()
+    {
+        return $this->hasOne(Date::class , 'project_id');
+    }
 }
