@@ -21,6 +21,8 @@ class Project extends Model
         'net_carat',
         'net_share',
         'total_cost',
+        'verified',
+        'has_changed',
         'created_at',
         'updated_at',
     ];

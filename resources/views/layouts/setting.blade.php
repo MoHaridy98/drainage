@@ -1,4 +1,4 @@
-<div class="settingSidebar">
+{{-- <div class="settingSidebar">
     <a href="javascript:void(0)" class="settingPanelToggle"> <i class="fa fa-spin fa-cog"></i>
     </a>
     <div class="settingSidebar-body ps-container ps-theme-default">
@@ -92,4 +92,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}

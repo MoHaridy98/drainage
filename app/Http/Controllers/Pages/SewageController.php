@@ -68,8 +68,9 @@ class SewageController extends Controller
      */
     public function edit($id)
     {
+        $Dates = Date ::with('projectDate')->select()->find($id);
         $projects = Project :: with('pdate')->select()->find($id);
-        return view("pages.sewage.edit",compact('projects'));
+        return view("pages.sewage.edit",compact('projects','Dates'));
     }
 
     /**
@@ -83,7 +84,7 @@ class SewageController extends Controller
     {
         try{
             $project = Project :: with('pdate')->select()->find($id);
-            $Dates = Date :: with('projectDate')->select()->find($id);
+            $Dates = Date :: where('project_id', $id)->select()->find($id);
             if(!$project){
                 return redirect()->route('sewage.list')->with(['error' => 'مشروع غير موجود']);
             }
@@ -93,14 +94,27 @@ class SewageController extends Controller
                 'carat' => $request['carat'],
                 'share' => $request['share'],
                 'total_cost' => $request['total_cost'],
+                'has_changed' => 1,
+                'verified' => 0,
+                
     
             ]));
-            $Dates -> update(([
-                'excution' => $request['excution'],
-                'end' => $request['end'],
-                'area_initial' => $request['area_initial'],
-                'tax_initial' => $request['area_initial'],
-            ]));
+            // if($project){
+                $project = Date:: where ('project_id', $id)-> update(([
+                    'excution' => $request['excution'],
+                    'end' => $request['end'],
+                    'area_initial' => $request['area_initial'],
+                    'tax_initial' => $request['area_initial'],
+                ]));
+            // }else{
+            //     $project = Date:: create(([
+            //         'excution' => $request['excution'],
+            //         'end' => $request['end'],
+            //         'area_initial' => $request['area_initial'],
+            //         'tax_initial' => $request['area_initial'],
+            //         'project_id' => $id ,
+            //     ]));
+            // }
             return redirect()->route('sewage.list') -> with(['success' => 'تم التسجيل بنجاح']);
         }catch(\Exception $ex){
             return redirect()->route('sewage.list') -> with(['error' => 'خطأ']);
@@ -120,7 +134,7 @@ class SewageController extends Controller
         try{
             $project = Project :: with('pdate')->find($id);
             $Dates = Date :: with('projectDate')->find($id);
-            $Dates->forcedelete();
+            if($Dates)$Dates->forcedelete();
             $project->forcedelete();
             return redirect()->route('sewage.list') -> with(['success' => 'تم الحذف!']);
         }catch(\Exception $ex){

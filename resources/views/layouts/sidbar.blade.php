@@ -175,6 +175,15 @@
             </li>
             <li class="menu-header"></li>
             <li class="dropdown">
+                <a href="#" class="menu-toggle nav-link has-dropdown"><span>الهيئة العامة للصرف</span>
+                    <i data-feather="briefcase"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{ route('sewage') }}"> اضافة مشروع</a></li>
+                    <li><a class="nav-link" href="{{ route('sewage.list') }}"> كل المشاريع</a></li>
+                </ul>
+            </li>
+            <li class="menu-header"></li>
+            <li class="dropdown">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><span>مدرية المساحة</span>
                     <i data-feather="briefcase"></i></a>
                 <ul class="dropdown-menu">
@@ -189,16 +198,6 @@
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{ route('agr') }}">اضافة مستحق </a></li>
                     <li><a class="nav-link" href="{{ route('agr.list') }}"> كل المستحقات</a></li>
-                </ul>
-            </li>
-
-            <li class="menu-header"></li>
-            <li class="dropdown">
-                <a href="#" class="menu-toggle nav-link has-dropdown"><span>الهيئة العامة للصرف</span>
-                    <i data-feather="briefcase"></i></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('sewage') }}"> اضافة مشروع</a></li>
-                    <li><a class="nav-link" href="{{ route('sewage.list') }}"> كل المشاريع</a></li>
                 </ul>
             </li>
             <li class="menu-header"></li>

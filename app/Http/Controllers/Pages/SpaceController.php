@@ -34,12 +34,12 @@ class SpaceController extends Controller
      */
     public function create(Request $request)
     {
-        $projects = Project:: where ('id', 7)-> update(([
+        $projects = Project:: where ('id', 8)-> update(([
             'net_acre' => $request['net_acre'],
             'net_carat' => $request['net_carat'],
             'net_share' => $request['net_share'],
         ]));
-        $Dates = Date:: where ('project_id', 7)-> update(([
+        $Dates = Date:: where ('project_id', 8)-> update(([
             'enclose_start' => $request['enclose_start'],
             'enclose_end' => $request['enclose_end'],
             'view_start' => $request['view_start'],
