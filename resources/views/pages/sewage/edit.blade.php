@@ -36,43 +36,31 @@
                             <div class="col-12 col-md-12 col-lg-12">
                                 @include('layouts.success')
                                 @include('layouts.error')
-                                <form class="needs-validation" novalidate="" action="{{ route('sewage.create') }}"
-                                    method="POST" enctype="multipart/form-data">
+                                <form class="needs-validation" novalidate=""
+                                    action="{{ route('sewage.update', $projects->id) }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="card card-primary">
                                         <div class="card-header">
-                                            <h4> اضافة مستحقات [الهيئة العامة المصرية لمشروعات الصرف ] </h4>
+                                            <h4> تعديل المشروع [الهيئة العامة المصرية لمشروعات الصرف ] </h4>
                                         </div>
-                                        <div class="card-body">
-
-                                            <div class="form-row">
-
-                                                <div class="form-group col-md-12">
-                                                    <label> لمشروع</label>
-                                                    <div class="input-group">
-                                                        <select class="form-control" name="categorys_id">
-                                                            <option> الصرف المغطي </option>
-                                                        </select>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="card card-primary">
                                         <div class="card-body">
                                             <div class="form-row pt-5">
                                                 <div class="form-group col-md-6">
-
-                                                    <input type="text" name="name"
+                                                    <label for="">اسم المشروع</label>
+                                                    <input type="text" value="{{ $projects->name }}"
                                                         class="form-control"placeholder=" اسم المشروع / المنطقة "
-                                                        required>
+                                                        disabled>
+                                                    <input type="text" name="name" value="{{ $projects->name }}"
+                                                        class="form-control"placeholder=" اسم المشروع / المنطقة ">
                                                 </div>
                                                 <div class="form-group col-md-6">
-
+                                                    <label for="">تكلفة المشروع</label>
+                                                    <input type="number" value="{{ $projects->total_cost }}"
+                                                        class="form-control"placeholder=" التكلفة الإجمالية" disabled>
                                                     <input type="number" name="total_cost"
-                                                        class="form-control"placeholder=" التكلفة الإجمالية" required>
+                                                        value="{{ $projects->total_cost }}"
+                                                        class="form-control"placeholder=" التكلفة الإجمالية">
                                                 </div>
                                             </div>
                                             <div class="form-row pt-2">
@@ -83,17 +71,23 @@
                                                 </div>
                                                 <div class="form-group col-md-3">
 
-                                                    <input type="number" name="acre"
+                                                    <input type="number" value="{{ $projects->acre }}"
+                                                        class="form-control"placeholder="فدان" disabled>
+                                                    <input type="number" name="acre" value="{{ $projects->acre }}"
                                                         class="form-control"placeholder="فدان">
                                                 </div>
                                                 <div class="form-group col-md-4">
 
-                                                    <input type="number" name="carat"
+                                                    <input type="number" value="{{ $projects->carat }}"
+                                                        class="form-control"placeholder="قراط" disabled>
+                                                    <input type="number" name="carat" value="{{ $projects->carat }}"
                                                         class="form-control"placeholder="قراط">
                                                 </div>
                                                 <div class="form-group col-md-4">
 
-                                                    <input type="number" name="share"
+                                                    <input type="number" value="{{ $projects->share }}"
+                                                        class="form-control"placeholder="سهم"disabled>
+                                                    <input type="number" name="share" value="{{ $projects->share }}"
                                                         class="form-control"placeholder="سهم">
                                                 </div>
                                             </div>
@@ -102,21 +96,34 @@
                                                     <label
                                                         style="font-size: 14px;font-weight: 700;line-height: 20px;-ms-grid-row-align: center;align-self: center;width: 100%;padding: 8px 8px;align-items: center;">
                                                         الإرسال لمساحةوالضرايب </label>
-                                                    <input type="date" name="area_initial" class="form-control">
+                                                    <input type="text"
+                                                        value="{{ $projects->pdate->area_initial ?? 'null' }}"
+                                                        class="form-control" disabled>
+                                                    <input type="date" name="area_initial" class="form-control"
+                                                        value="{{ $projects->pdate->area_initial ?? 'null' }}">
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label
                                                         style="font-size: 14px;font-weight: 700;line-height: 20px;-ms-grid-row-align: center;align-self: center;width: 100%;padding: 8px 8px;align-items: center;">
                                                         سنة التنفيذ </label>
-                                                    <input type="date" name="excution" class="form-control" required>
+                                                    <input type="text"
+                                                        value="{{ $projects->pdate->excution ?? 'null' }}"
+                                                        class="form-control" disabled>
+                                                    <input type="date" name="excution" class="form-control"
+                                                        value="{{ $projects->pdate->excution ?? 'null' }}">
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label
                                                         style="font-size: 14px;font-weight: 700;line-height: 20px;-ms-grid-row-align: center;align-self: center;width: 100%;padding: 8px 8px;align-items: center;">
                                                         سنة الانتهاء </label>
-                                                    <input type="date" name="end" class="form-control">
+                                                    <input type="text"
+                                                        value="{{ $projects->pdate->end ?? 'null' }}"
+                                                        class="form-control" disabled>
+                                                    <input type="date" name="end" class="form-control"
+                                                        value="{{ $projects->pdate->end ?? 'null' }}">
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-success">حفظ</button>

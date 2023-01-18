@@ -33,7 +33,7 @@
                             <div class="col-12">
                                 <div class="card card-secondary">
                                     <div class="card-header">
-                                        <h4> مـدريـة الزراعــة </h4>
+                                        <h4> الهيئة العامة لمشروعات الصرف</h4>
                                     </div>
 
                                     <div class="card-body" style="direction: rtl;">
@@ -44,42 +44,50 @@
                                                     <tr>
                                                         <th> # </th>
                                                         <th>اسم المشروع</th>
-                                                        <th> زمام</th>
-                                                        <th> تاريخ</th>
+                                                        <th> الزمام</th>
+                                                        <th> تاريخ البدأ</th>
                                                         <th>التكلفة الكلية</th>
                                                         <th>تفاصيل</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @isset($projects)
-                                                    @if ($projects && $projects->count() > 0)
-                                                    @foreach ($projects as $project)
-                                                        <tr>
-                                                            <td>{{ $project->id }}</td>
-                                                            <td>{{ $project->name }}</td>
-                                                            <td>
-                                                                <div class="badge badge-light">{{ $project->acre }} فدان</div>
-                                                                <div class="badge badge-light">{{ $project->carat }} فراط</div>
-                                                                <div class="badge badge-light">{{ $project->share }} سهم</div>
-                                                            </td>
-                                                            <td>{{ $project->pdate->excution ?? 'NULL'}}</td>
-                                                            <td>{{ $project->total_cost }} جنية</td>
-                                                            <td>
-                                                                <div class="btn-group dropup">
-                                                                    <button id="btnGroupVerticalDrop5"type="button" class="btn"data-toggle="dropdown" aria-haspopup="true"aria-expanded="false">
-                                                                        <i class="fas fa-ellipsis-v"></i>
-                                                                    </button>
+                                                        @if ($projects && $projects->count() > 0)
+                                                            @foreach ($projects as $project)
+                                                                <tr>
+                                                                    <td>{{ $project->id }}</td>
+                                                                    <td>{{ $project->name }}</td>
+                                                                    <td>
+                                                                        <div class="badge badge-light">{{ $project->acre }}
+                                                                            فدان</div>
+                                                                        <div class="badge badge-light">{{ $project->carat }}
+                                                                            فراط</div>
+                                                                        <div class="badge badge-light">{{ $project->share }}
+                                                                            سهم</div>
+                                                                    </td>
+                                                                    <td>{{ $project->pdate->excution ?? 'NULL' }}</td>
+                                                                    <td>{{ $project->total_cost }} جنية</td>
+                                                                    <td>
+                                                                        <div class="btn-group dropup">
+                                                                            <button id="btnGroupVerticalDrop5"type="button"
+                                                                                class="btn"data-toggle="dropdown"
+                                                                                aria-haspopup="true"aria-expanded="false">
+                                                                                <i class="fas fa-ellipsis-v"></i>
+                                                                            </button>
 
-                                                                    <div class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop2">
-                                                                        <a class="dropdown-item" href="#">عرض</a>
-                                                                        <a class="dropdown-item" href="#"> تعديل</a>
-                                                                        <a class="dropdown-item" href="#">حذف</a>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        @endforeach
-                                                    @endif
+                                                                            <div class="dropdown-menu"
+                                                                                aria-labelledby="btnGroupVerticalDrop2">
+                                                                                <a class="dropdown-item"
+                                                                                    href="{{ route('sewage.edit', $project->id) }}">عرض
+                                                                                    وتعديل</a>
+                                                                                <a class="dropdown-item"
+                                                                                    href="{{ route('sewage.delete', $project->id) }}">حذف</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        @endif
                                                     @endisset
                                                 </tbody>
                                             </table>

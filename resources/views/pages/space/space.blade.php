@@ -42,14 +42,53 @@
                                                 <thead>
                                                     <tr>
                                                         <th> # </th>
-                                                        <th>اسم القسم</th>
-                                                        <th>اسم الخدمة</th>
-                                                        <th>حالة</th>
+                                                        <th>اسم المشروع</th>
+                                                        <th> الزمام</th>
+                                                        <th> تاريخ البدأ</th>
+                                                        <th>تاريخ الاخطار</th>
                                                         <th>تفاصيل</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @isset($projects)
+                                                        @if ($projects && $projects->count() > 0)
+                                                            @foreach ($projects as $project)
+                                                                <tr>
+                                                                    <td>{{ $project->id }}</td>
+                                                                    <td>{{ $project->name }}</td>
+                                                                    <td>
+                                                                        <div class="badge badge-light">{{ $project->acre }}
+                                                                            فدان</div>
+                                                                        <div class="badge badge-light">{{ $project->carat }}
+                                                                            فراط</div>
+                                                                        <div class="badge badge-light">{{ $project->share }}
+                                                                            سهم</div>
+                                                                    </td>
+                                                                    <td>{{ $project->pdate->area_initial ?? 'NULL' }}</td>
+                                                                    <td>{{ $project->total_cost }} جنية</td>
+                                                                    <td>
+                                                                        <div class="btn-group dropup">
+                                                                            <button id="btnGroupVerticalDrop5"type="button"
+                                                                                class="btn"data-toggle="dropdown"
+                                                                                aria-haspopup="true"aria-expanded="false">
+                                                                                <i class="fas fa-ellipsis-v"></i>
+                                                                            </button>
 
+                                                                            <div class="dropdown-menu"
+                                                                                aria-labelledby="btnGroupVerticalDrop2">
+                                                                                <a class="dropdown-item"
+                                                                                    href="#">عرض</a>
+                                                                                <a class="dropdown-item" href="#">
+                                                                                    تعديل</a>
+                                                                                <a class="dropdown-item"
+                                                                                    href="#">حذف</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        @endif
+                                                    @endisset
                                                 </tbody>
                                             </table>
                                         </div>

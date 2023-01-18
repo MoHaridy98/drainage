@@ -61,8 +61,10 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
 | Dashboard sewage
 |--------------------------------------------------------------------------
 */
-
     Route::post('/create', [App\Http\Controllers\Pages\ProjectController::class, 'store'])->name('sewage.create');
+    Route::get('/sewage-edit{id}', [App\Http\Controllers\Pages\SewageController::class, 'edit'])->name('sewage.edit');
+    Route::post('/sewage-update{id}', [App\Http\Controllers\Pages\SewageController::class, 'update'])->name('sewage.update');
+    Route::get('/sewage-delete{id}', [App\Http\Controllers\Pages\SewageController::class, 'destroy'])->name('sewage.delete');
     Route::get('/sewage', [App\Http\Controllers\Pages\SewageController::class, 'sewage'])->name('sewage.list');
     Route::get('/sewage-create', [App\Http\Controllers\Pages\SewageController::class, 'index'])->name('sewage');
 /*

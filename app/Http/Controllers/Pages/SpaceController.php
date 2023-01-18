@@ -23,7 +23,8 @@ class SpaceController extends Controller
     public function space()
     {
         //
-        return view("pages.space.space");
+        $projects = Project :: with('pdate')->select()->get();
+        return view("pages.space.space",compact('projects'));
     }
 
     /**

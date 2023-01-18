@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Date;
 use Illuminate\Http\Request;
 
 class SewageController extends Controller
@@ -67,7 +68,8 @@ class SewageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $projects = Project :: with('pdate')->select()->find($id);
+        return view("pages.sewage.edit",compact('projects'));
     }
 
     /**
@@ -79,7 +81,32 @@ class SewageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $project = Project :: with('pdate')->select()->find($id);
+            $Dates = Date :: with('projectDate')->select()->find($id);
+            if(!$project){
+                return redirect()->route('sewage.list')->with(['error' => 'مشروع غير موجود']);
+            }
+            $project -> update(([
+                'name' => $request['name'],
+                'acre' => $request['acre'],
+                'carat' => $request['carat'],
+                'share' => $request['share'],
+                'total_cost' => $request['total_cost'],
+    
+            ]));
+            $Dates -> update(([
+                'excution' => $request['excution'],
+                'end' => $request['end'],
+                'area_initial' => $request['area_initial'],
+                'tax_initial' => $request['area_initial'],
+            ]));
+            return redirect()->route('sewage.list') -> with(['success' => 'تم التسجيل بنجاح']);
+        }catch(\Exception $ex){
+            return redirect()->route('sewage.list') -> with(['error' => 'خطأ']);
+        }
+        
+        
     }
 
     /**
@@ -90,6 +117,14 @@ class SewageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $project = Project :: with('pdate')->find($id);
+            $Dates = Date :: with('projectDate')->find($id);
+            $Dates->forcedelete();
+            $project->forcedelete();
+            return redirect()->route('sewage.list') -> with(['success' => 'تم الحذف!']);
+        }catch(\Exception $ex){
+            return redirect()->route('sewage.list') -> with(['error' => 'خطأ']);
+        }
     }
 }

@@ -150,21 +150,6 @@
 
     <div class="form-inline mr-auto">
         <ul class="navbar-nav mr-3">
-            <li>
-                <form class="form-inline mr-auto">
-                    <div class="search-element">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form>
-            </li>
-
-            <li><a href="#" class="nav-link nav-link-lg fullscreen-btn">
-                    <i data-feather="maximize"></i>
-                </a>
-            </li>
             <li><a href="#" data-toggle="sidebar"
                     class="nav-link nav-link-lg
                             collapse-btn">
@@ -193,8 +178,8 @@
                 <a href="#" class="menu-toggle nav-link has-dropdown"><span>مدرية المساحة</span>
                     <i data-feather="briefcase"></i></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('space') }}">اضافة مستحق</a></li>
-                    <li><a class="nav-link" href="{{ route('space.list') }}"> كل المستحقات</a></li>
+                    <li><a class="nav-link" href="{{ route('space') }}">مشاريع</a></li>
+                    <li><a class="nav-link" href="{{ route('space.list') }}"> كل المشاريع</a></li>
                 </ul>
             </li>
             <li class="menu-header"></li>
@@ -209,11 +194,11 @@
 
             <li class="menu-header"></li>
             <li class="dropdown">
-                <a href="#" class="menu-toggle nav-link has-dropdown"><span>الهيئة العامة لصرف</span>
+                <a href="#" class="menu-toggle nav-link has-dropdown"><span>الهيئة العامة للصرف</span>
                     <i data-feather="briefcase"></i></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('sewage') }}"> اضافة مستحق</a></li>
-                    <li><a class="nav-link" href="{{ route('sewage.list') }}"> كل المستحقات</a></li>
+                    <li><a class="nav-link" href="{{ route('sewage') }}"> اضافة مشروع</a></li>
+                    <li><a class="nav-link" href="{{ route('sewage.list') }}"> كل المشاريع</a></li>
                 </ul>
             </li>
             <li class="menu-header"></li>
