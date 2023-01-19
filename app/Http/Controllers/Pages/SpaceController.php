@@ -14,17 +14,19 @@ class SpaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
-        return view("pages.space.create");
+        $projects = Project :: with('pdate')->select()->find($id);
+        // $Dates = Date ::with('projectDate')->select()->find($id);
+        return view("pages.space.create",compact('projects'));
     }
 
     public function space()
     {
-        //
         $projects = Project :: with('pdate')->select()->get();
-        return view("pages.space.space",compact('projects'));
+        $Vprojects = Project :: with('pdate')->where('verified', 1 )->select()->get();
+        $unVprojects = Project :: with('pdate')->where('verified', 0 )->select()->get();
+        return view("pages.space.space",compact('projects','Vprojects','unVprojects'));
     }
 
     /**
@@ -32,24 +34,50 @@ class SpaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request , $id)
     {
-        $projects = Project:: where ('id', 8)-> update(([
-            'net_acre' => $request['net_acre'],
-            'net_carat' => $request['net_carat'],
-            'net_share' => $request['net_share'],
-        ]));
-        $Dates = Date:: where ('project_id', 8)-> update(([
-            'enclose_start' => $request['enclose_start'],
-            'enclose_end' => $request['enclose_end'],
-            'view_start' => $request['view_start'],
-            'view_end' => $request['view_end'],
-            'opposition_start' => $request['opposition_start'],
-            'opposition_end' => $request['opposition_end'],
-            'area_final' => $request['area_final'],
-            'tax_final' => $request['tax_final'],
-        ]));
-        return redirect()->route('space') -> with(['success' => 'تم التسجيل بنجاح']);
+        switch($request['verified']){
+            case NULL:
+                $projects = Project:: where ('id', $id)-> update(([
+                    'net_acre' => $request['net_acre'],
+                    'net_carat' => $request['net_carat'],
+                    'net_share' => $request['net_share'],
+                    'has_changed' => 1,
+                    'verified' => 0,
+                ]));
+                $Dates = Date:: where ('project_id', $id)-> update(([
+                    'enclose_start' => $request['enclose_start'],
+                    'enclose_end' => $request['enclose_end'],
+                    'view_start' => $request['view_start'],
+                    'view_end' => $request['view_end'],
+                    'opposition_start' => $request['opposition_start'],
+                    'opposition_end' => $request['opposition_end'],
+                    'area_final' => $request['area_final'],
+                    'tax_final' => $request['tax_final'],
+                ]));
+                return redirect()->route('space.list') -> with(['success' => 'تمت الاضافة بنجاح']);
+                break;
+            case !NULL:
+                $projects = Project:: where ('id', $id)-> update(([
+                    'net_acre' => $request['net_acre'],
+                    'net_carat' => $request['net_carat'],
+                    'net_share' => $request['net_share'],
+                    'has_changed' => 0,
+                    'verified' => 1,
+                ]));
+                $Dates = Date:: where ('project_id', $id)-> update(([
+                    'enclose_start' => $request['enclose_start'],
+                    'enclose_end' => $request['enclose_end'],
+                    'view_start' => $request['view_start'],
+                    'view_end' => $request['view_end'],
+                    'opposition_start' => $request['opposition_start'],
+                    'opposition_end' => $request['opposition_end'],
+                    'area_final' => $request['area_final'],
+                    'tax_final' => $request['tax_final'],
+                ]));
+                return redirect()->route('space.list') -> with(['success' => 'تم الاعتماد بنجاح']);
+                break;
+        }
     }
 
     /**

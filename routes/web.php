@@ -46,9 +46,9 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
 | Dashboard space
 |--------------------------------------------------------------------------
 */
-    Route::Post('/update', [App\Http\Controllers\Pages\SpaceController::class, 'create'])->name('space.update');
+    Route::Post('/update{id}', [App\Http\Controllers\Pages\SpaceController::class, 'create'])->name('space.update');
     Route::get('/space', [App\Http\Controllers\Pages\SpaceController::class, 'space'])->name('space.list');
-    Route::get('/space-create', [App\Http\Controllers\Pages\SpaceController::class, 'index'])->name('space');
+    Route::get('/space-create{id}', [App\Http\Controllers\Pages\SpaceController::class, 'index'])->name('space');
 /*
 |--------------------------------------------------------------------------
 | Dashboard taxes

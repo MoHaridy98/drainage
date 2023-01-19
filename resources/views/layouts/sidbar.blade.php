@@ -187,7 +187,7 @@
                 <a href="#" class="menu-toggle nav-link has-dropdown"><span>مدرية المساحة</span>
                     <i data-feather="briefcase"></i></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('space') }}">مشاريع</a></li>
+                    {{-- <li><a class="nav-link" href="{{ route('space') }}">مراجعة مشروع</a></li> --}}
                     <li><a class="nav-link" href="{{ route('space.list') }}"> كل المشاريع</a></li>
                 </ul>
             </li>

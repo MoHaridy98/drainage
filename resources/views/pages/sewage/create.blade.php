@@ -64,13 +64,17 @@
                                         <div class="card-body">
                                             <div class="form-row pt-5">
                                                 <div class="form-group col-md-6">
-
+                                                    <label
+                                                        style="font-size: 14px;font-weight: 700;line-height: 20px;-ms-grid-row-align: center;align-self: center;width: 100%;padding: 8px 8px;align-items: center;">
+                                                        اسم المشروع</label>
                                                     <input type="text" name="name"
                                                         class="form-control"placeholder=" اسم المشروع / المنطقة "
                                                         required>
                                                 </div>
                                                 <div class="form-group col-md-6">
-
+                                                    <label
+                                                        style="font-size: 14px;font-weight: 700;line-height: 20px;-ms-grid-row-align: center;align-self: center;width: 100%;padding: 8px 8px;align-items: center;">
+                                                        التكلفة الاجمالية</label>
                                                     <input type="number" name="total_cost"
                                                         class="form-control"placeholder=" التكلفة الإجمالية" required>
                                                 </div>

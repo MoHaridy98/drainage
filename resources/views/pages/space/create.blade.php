@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="assets/bundles/bootstrap-daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="assets/bundles/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
     <link rel="stylesheet" href="assets/bundles/izitoast/css/iziToast.min.css">
+    <link rel="stylesheet" href="assets/bundles/pretty-checkbox/pretty-checkbox.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/components.css">
     <!-- Custom style CSS -->
@@ -33,58 +34,57 @@
                             <div class="col-12 col-md-12 col-lg-12">
                                 @include('layouts.success')
                                 @include('layouts.error')
-                                <form class="needs-validation" novalidate="" action="{{ route('space.update') }}"
-                                    method="POST" enctype="multipart/form-data">
+                                <form class="needs-validation" novalidate=""
+                                    action="{{ route('space.update', $projects->id) }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
-                                    <div class="card card-primary">
+                                    <div class="card card-primary work-xp">
                                         <div class="card-header">
-                                            <h4>مراحل العمل [مـدريــة المساحة] </h4>
+                                            <h4>[مـدريــة المساحة] </h4>
                                         </div>
                                         <div class="card-body">
-
                                             <div class="form-row">
-
-                                                <div class="form-group col-md-12">
-                                                    <label> فئة المشاريع</label>
-                                                    <div class="input-group">
-                                                        <select class="form-control" name="categorys_id">
-                                                            <option> الصرف المغطي </option>
-                                                        </select>
-                                                    </div>
+                                                <div class="form-group col-md-6">
+                                                    <label> اسم المشروع</label>
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $projects->name }}" disabled>
                                                 </div>
-                                                <div class="form-group col-md-12">
-                                                    <label>اختر المشروع</label>
-                                                    <select class="form-control" style="height: unset"
-                                                        name="categorys_id">
-                                                        <option> الصرف المغطي </option>
-                                                    </select>
+                                                <div class="form-group col-md-2">
+                                                    <label>تاريخ الانشاء</label>
+                                                    <input type="text" value="{{ $projects->pdate->excution }}"
+                                                        class="form-control" disabled>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label>تاريخ الانتهاء</label>
+                                                    <input type="text" value="{{ $projects->pdate->end }}"
+                                                        class="form-control" disabled>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label>تاريخ ابلاغ المساحة</label>
+                                                    <input type="text" value="{{ $projects->pdate->area_initial }}"
+                                                        class="form-control" disabled>
                                                 </div>
                                             </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="card card-primary work-xp">
-                                        <div class="card-body">
                                             <div class="form-row">
                                                 <div class="form-group col-md-3">
                                                     <label> التكلفة المستحقة</label>
-                                                    <input type="number" name="work-xp"
-                                                        class="form-control"placeholder=" التكلفة المستحقة" disabled>
+                                                    <input type="text" value="{{ $projects->total_cost }}"
+                                                        class="form-control" disabled>
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <label>فدان زمام الصرف </label>
-                                                    <input type="number" name="acre"
-                                                        class="form-control"placeholder="فدان" disabled>
+                                                    <input type="text" value="{{ $projects->acre }}"
+                                                        class="form-control" disabled>
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <label>قيراط زمام الصرف </label>
-                                                    <input type="number" name="carat"
-                                                        class="form-control"placeholder="قراط" disabled>
+                                                    <input type="number" value="{{ $projects->carat }}"
+                                                        class="form-control" disabled>
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <label>سهم زمام الصرف </label>
-                                                    <input type="number" name="share"
-                                                        class="form-control"placeholder="سهم" disabled>
+                                                    <input type="number" value="{{ $projects->share }}"
+                                                        class="form-control" disabled>
                                                 </div>
 
                                             </div>
@@ -95,18 +95,27 @@
                                                         الزمام الفعلي للمصرف:</label>
                                                 </div>
                                                 <div class="form-group col-md-3">
-
                                                     <input type="number" name="net_acre"
+                                                        value="{{ $projects->net_acre }}"
+                                                        class="form-control"placeholder="فدان" disabled>
+                                                    <input type="number" name="net_acre"
+                                                        value="{{ $projects->net_acre }}"
                                                         class="form-control"placeholder="فدان">
                                                 </div>
                                                 <div class="form-group col-md-3">
-
                                                     <input type="number" name="net_carat"
+                                                        value="{{ $projects->net_carat }}"
+                                                        class="form-control"placeholder="قراط" disabled>
+                                                    <input type="number" name="net_carat"
+                                                        value="{{ $projects->net_carat }}"
                                                         class="form-control"placeholder="قراط">
                                                 </div>
                                                 <div class="form-group col-md-3">
-
                                                     <input type="number" name="net_share"
+                                                        value="{{ $projects->net_share }}"
+                                                        class="form-control"placeholder="سهم" disabled>
+                                                    <input type="number" name="net_share"
+                                                        value="{{ $projects->net_share }}"
                                                         class="form-control"placeholder="سهم">
                                                 </div>
                                             </div>
@@ -119,11 +128,19 @@
                                                 <div class="form-group col-md-5">
                                                     <label for="">بدأ</label>
                                                     <input type="date" name="enclose_start" class="form-control"
+                                                        value="{{ $projects->pdate->enclose_start }}"
+                                                        placeholder="فدان" disabled>
+                                                    <input type="date" name="enclose_start" class="form-control"
+                                                        value="{{ $projects->pdate->enclose_start }}"
                                                         placeholder="فدان">
                                                 </div>
                                                 <div class="form-group col-md-5">
                                                     <label for="">نهو</label>
                                                     <input type="date" name="enclose_end"
+                                                        value="{{ $projects->pdate->enclose_end }}"
+                                                        class="form-control"placeholder="قراط" disabled>
+                                                    <input type="date" name="enclose_end"
+                                                        value="{{ $projects->pdate->enclose_end }}"
                                                         class="form-control"placeholder="قراط">
                                                 </div>
                                             </div>
@@ -136,11 +153,19 @@
                                                 <div class="form-group col-md-5">
                                                     <label for="">بدأ</label>
                                                     <input type="date" name="view_start" class="form-control"
+                                                        value="{{ $projects->pdate->view_start }}" placeholder="فدان"
+                                                        disabled>
+                                                    <input type="date" name="view_start" class="form-control"
+                                                        value="{{ $projects->pdate->view_start }}"
                                                         placeholder="فدان">
                                                 </div>
                                                 <div class="form-group col-md-5">
                                                     <label for="">نهو</label>
                                                     <input type="date" name="view_end"
+                                                        value="{{ $projects->pdate->view_end }}"
+                                                        class="form-control"placeholder="قراط" disabled>
+                                                    <input type="date" name="view_end"
+                                                        value="{{ $projects->pdate->view_end }}"
                                                         class="form-control"placeholder="قراط">
                                                 </div>
                                             </div>
@@ -153,11 +178,19 @@
                                                 <div class="form-group col-md-5">
                                                     <label for="">بدأ</label>
                                                     <input type="date" name="opposition_start"
+                                                        value="{{ $projects->pdate->opposition_start }}"
+                                                        class="form-control" placeholder="فدان" disabled>
+                                                    <input type="date" name="opposition_start"
+                                                        value="{{ $projects->pdate->opposition_start }}"
                                                         class="form-control" placeholder="فدان">
                                                 </div>
                                                 <div class="form-group col-md-5">
                                                     <label for="">نهو</label>
                                                     <input type="date" name="opposition_end"
+                                                        value="{{ $projects->pdate->opposition_end }}"
+                                                        class="form-control"placeholder="قراط" disabled>
+                                                    <input type="date" name="opposition_end"
+                                                        value="{{ $projects->pdate->opposition_end }}"
                                                         class="form-control"placeholder="قراط">
                                                 </div>
                                             </div>
@@ -165,12 +198,33 @@
                                                 <div class="form-group col-md-6">
                                                     <label for="">تاريخ ارسال المناطق</label>
                                                     <input type="date" name="area_final" class="form-control"
+                                                        value="{{ $projects->pdate->area_final }}" placeholder="فدان"
+                                                        disabled>
+                                                    <input type="date" name="area_final" class="form-control"
+                                                        value="{{ $projects->pdate->area_final }}"
                                                         placeholder="فدان">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="">تاريخ ابلاغ الضرائب</label>
                                                     <input type="date" name="tax_final" class="form-control"
-                                                        placeholder="فدان">
+                                                        value="{{ $projects->pdate->tax_final }}" placeholder="فدان"
+                                                        disabled>
+                                                    <input type="date" name="tax_final" class="form-control"
+                                                        value="{{ $projects->pdate->tax_final }}" placeholder="فدان">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <br>
+                                                    <br>
+                                                    <div class="pretty p-switch p-fill" style="direction: ltr">
+                                                        @if ($projects->verified == 1)
+                                                            <input type="checkbox" name="verified" checked>
+                                                        @else
+                                                            <input type="checkbox" name="verified">
+                                                        @endif
+                                                        <div class="state p-success">
+                                                            <label for="">اعتماد المشروع</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
