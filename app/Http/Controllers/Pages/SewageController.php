@@ -25,7 +25,9 @@ class SewageController extends Controller
         //
         //$phone = Project::find(7)->pdate;
         $projects = Project :: with('pdate')->select()->get();
-        return view("pages.sewage.sewage",compact('projects'));
+        $Vprojects = Project :: with('pdate')->where('verified', 1 )->select()->get();
+        $unVprojects = Project :: with('pdate')->where('verified', 0 )->select()->get();
+        return view("pages.sewage.sewage",compact('projects','Vprojects','unVprojects'));
     }
 
     /**
@@ -96,8 +98,8 @@ class SewageController extends Controller
                 'total_cost' => $request['total_cost'],
                 'has_changed' => 1,
                 'verified' => 0,
-                
-    
+
+
             ]));
             // if($project){
                 $project = Date:: where ('project_id', $id)-> update(([
@@ -119,8 +121,8 @@ class SewageController extends Controller
         }catch(\Exception $ex){
             return redirect()->route('sewage.list') -> with(['error' => 'خطأ']);
         }
-        
-        
+
+
     }
 
     /**

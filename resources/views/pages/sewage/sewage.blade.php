@@ -77,24 +77,24 @@
                                                                                 <i class="fas fa-ellipsis-v"></i>
                                                                             </button>
 
-                                                                            <div class="dropdown-menu"
-                                                                                aria-labelledby="btnGroupVerticalDrop2">
-                                                                                <a class="dropdown-item"
-                                                                                    href="{{ route('sewage.edit', $project->id) }}">عرض
-                                                                                    وتعديل</a>
-                                                                                <a class="dropdown-item"
-                                                                                    href="{{ route('sewage.delete', $project->id) }}">حذف</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                        @endif
-                                                    @endisset
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                                                                    <div class="dropdown-menu"
+                                                                                        aria-labelledby="btnGroupVerticalDrop2">
+                                                                                        <a class="dropdown-item"
+                                                                                            href="{{ route('sewage.edit', $project->id) }}">عرض
+                                                                                            وتعديل</a>
+                                                                                        <a class="dropdown-item"
+                                                                                            href="{{ route('sewage.delete', $project->id) }}">حذف</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                @endif
+                                                            @endisset
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                 </div>
                             </div>
                         </div>
