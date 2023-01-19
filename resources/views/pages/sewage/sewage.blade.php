@@ -33,70 +33,214 @@
                             <div class="col-12">
                                 @include('layouts.success')
                                 @include('layouts.error')
-                                <div class="card card-secondary">
+
+                            </div>
+                            <div class="col-12">
+                                <div class="card">
                                     <div class="card-header">
                                         <h4> الهيئة العامة لمشروعات الصرف</h4>
                                     </div>
+                                  <div class="card-body">
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                      <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                          aria-controls="home" aria-selected="true">كل المشاريع</a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                          aria-controls="profile" aria-selected="false">مشاريع اعتمدت</a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                                          aria-controls="contact" aria-selected="false">مشاريع لم تعتمد</a>
+                                      </li>
+                                    </ul>
+                                    <div class="tab-content" id="myTabContent">
+                                      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-                                    <div class="card-body" style="direction: rtl;">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-hover" id="save-stage"
-                                                style="width:100%;">
-                                                <thead>
-                                                    <tr>
-                                                        <th> # </th>
-                                                        <th>اسم المشروع</th>
-                                                        <th> الزمام</th>
-                                                        <th> تاريخ البدأ</th>
-                                                        <th>التكلفة الكلية</th>
-                                                        <th>تفاصيل</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @isset($projects)
-                                                        @if ($projects && $projects->count() > 0)
-                                                            @foreach ($projects as $project)
-                                                                <tr>
-                                                                    <td>{{ $project->id }}</td>
-                                                                    <td>{{ $project->name }}</td>
-                                                                    <td>
-                                                                        <div class="badge badge-light">{{ $project->acre }}
-                                                                            فدان</div>
-                                                                        <div class="badge badge-light">{{ $project->carat }}
-                                                                            فراط</div>
-                                                                        <div class="badge badge-light">{{ $project->share }}
-                                                                            سهم</div>
-                                                                    </td>
-                                                                    <td>{{ $project->pdate->excution ?? 'NULL' }}</td>
-                                                                    <td>{{ $project->total_cost }} جنية</td>
-                                                                    <td>
-                                                                        <div class="btn-group dropup">
-                                                                            <button id="btnGroupVerticalDrop5"type="button"
-                                                                                class="btn"data-toggle="dropdown"
-                                                                                aria-haspopup="true"aria-expanded="false">
-                                                                                <i class="fas fa-ellipsis-v"></i>
-                                                                            </button>
 
-                                                                                    <div class="dropdown-menu"
-                                                                                        aria-labelledby="btnGroupVerticalDrop2">
-                                                                                        <a class="dropdown-item"
-                                                                                            href="{{ route('sewage.edit', $project->id) }}">عرض
-                                                                                            وتعديل</a>
-                                                                                        <a class="dropdown-item"
-                                                                                            href="{{ route('sewage.delete', $project->id) }}">حذف</a>
-                                                                                    </div>
-                                                                                </div>
+
+                                            <div class="card-body" style="direction: rtl;">
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped table-hover" id="save-stage"
+                                                        style="width:100%;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th> # </th>
+                                                                <th>اسم المشروع</th>
+                                                                <th> الزمام</th>
+                                                                <th> تاريخ البدأ</th>
+                                                                <th>التكلفة الكلية</th>
+                                                                <th>تفاصيل</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @isset($projects)
+                                                                @if ($projects && $projects->count() > 0)
+                                                                    @foreach ($projects as $project)
+                                                                        <tr>
+                                                                            <td>{{ $project->id }}</td>
+                                                                            <td>{{ $project->name }}</td>
+                                                                            <td>
+                                                                                <div class="badge badge-light">{{ $project->acre }}
+                                                                                    فدان</div>
+                                                                                <div class="badge badge-light">{{ $project->carat }}
+                                                                                    فراط</div>
+                                                                                <div class="badge badge-light">{{ $project->share }}
+                                                                                    سهم</div>
                                                                             </td>
-                                                                        </tr>
-                                                                    @endforeach
-                                                                @endif
-                                                            @endisset
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                                                            <td>{{ $project->pdate->excution ?? 'NULL' }}</td>
+                                                                            <td>{{ $project->total_cost }} جنية</td>
+                                                                            <td>
+                                                                                <div class="btn-group dropup">
+                                                                                    <button id="btnGroupVerticalDrop5"type="button"
+                                                                                        class="btn"data-toggle="dropdown"
+                                                                                        aria-haspopup="true"aria-expanded="false">
+                                                                                        <i class="fas fa-ellipsis-v"></i>
+                                                                                    </button>
+
+                                                                                            <div class="dropdown-menu"
+                                                                                                aria-labelledby="btnGroupVerticalDrop2">
+                                                                                                <a class="dropdown-item"
+                                                                                                    href="{{ route('sewage.edit', $project->id) }}">عرض
+                                                                                                    وتعديل</a>
+                                                                                                <a class="dropdown-item"
+                                                                                                    href="{{ route('sewage.delete', $project->id) }}">حذف</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            @endforeach
+                                                                        @endif
+                                                                    @endisset
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                      </div>
+                                      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="card-body" style="direction: rtl;">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover" id="save-stage"
+                                                    style="width:100%;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th> # </th>
+                                                            <th>اسم المشروع</th>
+                                                            <th> الزمام</th>
+                                                            <th> تاريخ البدأ</th>
+                                                            <th>التكلفة الكلية</th>
+                                                            <th>تفاصيل</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @isset($Vprojects)
+                                                            @if ($Vprojects && $Vprojects->count() > 0)
+                                                                @foreach ($Vprojects as $project)
+                                                                    <tr>
+                                                                        <td>{{ $project->id }}</td>
+                                                                        <td>{{ $project->name }}</td>
+                                                                        <td>
+                                                                            <div class="badge badge-light">{{ $project->acre }}
+                                                                                فدان</div>
+                                                                            <div class="badge badge-light">{{ $project->carat }}
+                                                                                فراط</div>
+                                                                            <div class="badge badge-light">{{ $project->share }}
+                                                                                سهم</div>
+                                                                        </td>
+                                                                        <td>{{ $project->pdate->excution ?? 'NULL' }}</td>
+                                                                        <td>{{ $project->total_cost }} جنية</td>
+                                                                        <td>
+                                                                            <div class="btn-group dropup">
+                                                                                <button id="btnGroupVerticalDrop5"type="button"
+                                                                                    class="btn"data-toggle="dropdown"
+                                                                                    aria-haspopup="true"aria-expanded="false">
+                                                                                    <i class="fas fa-ellipsis-v"></i>
+                                                                                </button>
+
+                                                                                <div class="dropdown-menu"
+                                                                                    aria-labelledby="btnGroupVerticalDrop2">
+                                                                                    <a class="dropdown-item"
+                                                                                        href="{{ route('sewage.edit', $project->id) }}">عرض
+                                                                                        وتعديل</a>
+                                                                                    <a class="dropdown-item"
+                                                                                        href="{{ route('sewage.delete', $project->id) }}">حذف</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            @endif
+                                                        @endisset
+                                                    </tbody>
+                                                </table>
                                             </div>
+                                        </div>
+                                      </div>
+                                      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                        <div class="card-body" style="direction: rtl;">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover" id="save-stage"
+                                                    style="width:100%;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th> # </th>
+                                                            <th>اسم المشروع</th>
+                                                            <th> الزمام</th>
+                                                            <th> تاريخ البدأ</th>
+                                                            <th>التكلفة الكلية</th>
+                                                            <th>تفاصيل</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @isset($unVprojects)
+                                                            @if ($unVprojects && $unVprojects->count() > 0)
+                                                                @foreach ($unVprojects as $project)
+                                                                    <tr>
+                                                                        <td>{{ $project->id }}</td>
+                                                                        <td>{{ $project->name }}</td>
+                                                                        <td>
+                                                                            <div class="badge badge-light">{{ $project->acre }}
+                                                                                فدان</div>
+                                                                            <div class="badge badge-light">{{ $project->carat }}
+                                                                                فراط</div>
+                                                                            <div class="badge badge-light">{{ $project->share }}
+                                                                                سهم</div>
+                                                                        </td>
+                                                                        <td>{{ $project->pdate->excution ?? 'NULL' }}</td>
+                                                                        <td>{{ $project->total_cost }} جنية</td>
+                                                                        <td>
+                                                                            <div class="btn-group dropup">
+                                                                                <button id="btnGroupVerticalDrop5"type="button"
+                                                                                    class="btn"data-toggle="dropdown"
+                                                                                    aria-haspopup="true"aria-expanded="false">
+                                                                                    <i class="fas fa-ellipsis-v"></i>
+                                                                                </button>
+
+                                                                                <div class="dropdown-menu"
+                                                                                    aria-labelledby="btnGroupVerticalDrop2">
+                                                                                    <a class="dropdown-item"
+                                                                                        href="{{ route('sewage.edit', $project->id) }}">عرض
+                                                                                        وتعديل</a>
+                                                                                    <a class="dropdown-item"
+                                                                                        href="{{ route('sewage.delete', $project->id) }}">حذف</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            @endif
+                                                        @endisset
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                                 </div>
-                            </div>
+                              </div>
                         </div>
                     </div>
                 </section>
@@ -117,6 +261,11 @@
     <script src="assets/js/scripts.js"></script>
     <!-- Custom JS File -->
     <script src="assets/js/custom.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('table.table').DataTable();
+        });
+    </script>
 </body>
 
 
