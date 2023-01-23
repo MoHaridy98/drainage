@@ -29,63 +29,86 @@
             @include('layouts.sidbar')
             <!-- Main Content -->
             <div class="main-content">
-                <section class="section">
-                    <div class="section-body">
-                        <div class="row" style="direction: rtl">
-                            <div class="col-12 col-md-12 col-lg-12">
+
+                <div class="row" style="direction: rtl">
+
+                    <div class="col-lg-6">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h4>مـدريــة الزراعة</h4>
+                            </div>
+                            <div class="card-body">
                                 <form class="needs-validation" id="work_experience" novalidate="" action="#"
                                     method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    <div class="card card-primary">
-                                        <div class="card-header">
-                                            <h4>مـدريــة الزراعة</h4>
-                                            <button class="btn btn-dark"
-                                                style="position: absolute; left: 10px; top:5px"><a
-                                                    class="nav-link text-white"
-                                                    href="{{ route('agr.list') }}">عودة</a></button>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label> اختر المركز</label>
+                                            <input type="text" class="form-control" value="" disabled>
+                                            <select class="form-control" name="city">
+                                                <option> الصرف المغطي </option>
+                                            </select>
                                         </div>
-                                        <div class="card-body">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-4">
-                                                    <label> اختر المركز</label>
-                                                    <select class="form-control" name="city">
-                                                        <option> الصرف المغطي </option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-4">
-                                                    <label> المنطقة</label>
-                                                    <select class="form-control" name="region">
-                                                        <option> الصرف المغطي </option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-4">
-                                                    <label> اسم الجمعية</label>
-                                                    <input style="height: calc(2.25rem + 6px);" type="text"
-                                                        name="agr_name"
-                                                        class="form-control"placeholder="الجمعية الزراعية">
-                                                </div>
-                                            </div>
+                                        <div class="form-group col-md-12">
+                                            <label> المنطقة</label>
+                                            <input type="text" class="form-control" value="" disabled>
+                                            <select class="form-control" name="region">
+                                                <option> الصرف المغطي </option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label> اسم الجمعية</label>
+                                            <input type="text" class="form-control" value="" disabled>
+                                            <input style="height: calc(2.25rem + 6px);" type="text" name="agr_name"
+                                                class="form-control"placeholder="الجمعية الزراعية">
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-success">حفظ</button>
                                 </form>
                             </div>
-                            {{-- <a href="javascript:void(0)" style="padding: 5px 10px 5px 10px;" id="addWork-btn"
-                                class="btn btn-primary form-label" onclick="addWorkRow()">+ اضف مستحق
-                            </a> --}}
                         </div>
                     </div>
+                    <div class="col-lg-6">
+                        <div class="card card-secondary">
+                            <div class="card-header">
+                                <h4> مزارعو الجمعية</h4>
+                            </div>
+                            <div class="card-body" style="direction: rtl;">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover" id="save-stage" style="width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th> # </th>
+                                                <th>اسم الجمعية</th>
+                                                <th>اسم المزارع</th>
+                                                <th>تفاصيل</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- <a href="javascript:void(0)" style="padding: 5px 10px 5px 10px;" id="addWork-btn"
+                                class="btn btn-primary form-label" onclick="addWorkRow()">+ اضف مستحق
+                            </a> --}}
+                </div>
+                @include('layouts.setting')
             </div>
-            </section>
-            @include('layouts.setting')
+            @include('layouts.footer')
         </div>
-        @include('layouts.footer')
-    </div>
     </div>
     <!-- General JS Scripts -->
     <script src="assets/js/app.min.js"></script>
     <!-- JS Libraies -->
+    <script src="assets/bundles/datatables/datatables.min.js"></script>
+    <script src="assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script src="assets/bundles/jquery-ui/jquery-ui.min.js"></script>
     <!-- Page Specific JS File -->
+    <script src="assets/js/page/datatables.js"></script>
     <script src="assets/bundles/izitoast/js/iziToast.min.js"></script>
     <!-- Page Specific JS File -->
     <script src="assets/js/page/toastr.js"></script>

@@ -167,24 +167,23 @@
                 div.className = 'card card-primary';
                 div.innerHTML = `
                 <div class="card-body form-row">
-                <div class="form-group col-md-4">
-                    <input type="text" class="form-control"placeholder=" اسم المشروع / المنطقة">
-                </div>
+                    <div class="form-group col-md-4">
+                        <input type="text" class="form-control"placeholder=" اسم المشروع / المنطقة">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <input type="number" name="xp-year" class="form-control"placeholder="المساحة">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <input type="number" name="work-xp" class="form-control"placeholder=" التكلفة المستحقة">
+                    </div>
+                    <div class="form-group col-md-3">
 
-                <div class="form-group col-md-2">
-                    <input type="number" name="xp-year" class="form-control"placeholder="المساحة">
-                </div>
-                <div class="form-group col-md-2">
-                    <input type="number" name="work-xp" class="form-control"placeholder=" التكلفة المستحقة">
-                </div>
-                <div class="form-group col-md-3">
-
-                     <input type="date" name="date-xp" class="form-control"placeholder="تاريخ الإستحقاق">
-                </div>
-                <br />
-                <hr/>
-                <input type="button" class="btn-danger" style="width: 50px;
-                 height: 35px;" value="x" onclick="removeWorkRow(this)" />
+                        <input type="date" name="date-xp" class="form-control"placeholder="تاريخ الإستحقاق">
+                    </div>
+                    <br />
+                    <hr/>
+                    <input type="button" class="btn-danger" style="width: 50px;
+                    height: 35px;" value="x" onclick="removeWorkRow(this)" />
                  </div>
                 `;
                 document.getElementById('work_experience').appendChild(div);

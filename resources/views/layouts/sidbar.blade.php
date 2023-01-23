@@ -196,8 +196,8 @@
                 <a href="#" class="menu-toggle nav-link has-dropdown"><span>مدرية الزراعــة</span>
                     <i data-feather="briefcase"></i></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('agr') }}">اضافة مستحق </a></li>
-                    <li><a class="nav-link" href="{{ route('agr.list') }}"> كل المستحقات</a></li>
+                    <li><a class="nav-link" href="{{ route('agr.list') }}">جمعيات زراعية</a></li>
+                    <li><a class="nav-link" href="{{ route('agr.create') }}">مزارعين</a></li>
                 </ul>
             </li>
             <li class="menu-header"></li>

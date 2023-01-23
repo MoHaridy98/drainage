@@ -40,8 +40,13 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
 */
 
     Route::get('/agr', [App\Http\Controllers\Pages\AgrController::class, 'agr'])->name('agr.list');
-    Route::get('/agr-create', [App\Http\Controllers\Pages\AgrController::class, 'index'])->name('agr');
-/*
+    Route::get('/agr-edit{id}', [App\Http\Controllers\Pages\AgrController::class, 'agrEdit'])->name('agr.edit');
+    Route::get('/agr-create', [App\Http\Controllers\Pages\AgrController::class, 'agrCreate'])->name('agr.create');
+    
+    Route::get('/farmer', [App\Http\Controllers\Pages\AgrController::class, 'farmer'])->name('agr.farmer');
+    Route::get('/farmer-edit{id}', [App\Http\Controllers\Pages\AgrController::class, 'farmerEdit'])->name('agr.farmerEdit');
+    Route::get('/farmer-create', [App\Http\Controllers\Pages\AgrController::class, 'farmerCreate'])->name('agr.farmerCreate');
+    /*
 |--------------------------------------------------------------------------
 | Dashboard space
 |--------------------------------------------------------------------------

@@ -36,7 +36,7 @@
                                         <h4> مـدريـة الزراعــة </h4>
                                         <button class="btn btn-dark" style="position: absolute; left: 10px; top:5px"><a
                                                 class="nav-link text-white"
-                                                href="{{ route('agr.create') }}">اضافة</a></button>
+                                                href="{{ route('agr.farmerCreate') }}">اضافة</a></button>
                                     </div>
                                     <div class="card-body" style="direction: rtl;">
                                         <div class="table-responsive">
@@ -45,10 +45,11 @@
                                                 <thead>
                                                     <tr>
                                                         <th> # </th>
-                                                        <th>اسم الجمعية</th>
                                                         <th>اسم المركز</th>
                                                         <th>اسم المنطقة</th>
-                                                        <th>عدد المزارعين</th>
+                                                        <th>اسم الجمعية</th>
+                                                        <th>اسم المزارع</th>
+                                                        <th>مساحة الارض المملوكة</th>
                                                         <th>تفاصيل</th>
                                                     </tr>
                                                 </thead>

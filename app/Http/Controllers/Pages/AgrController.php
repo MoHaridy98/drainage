@@ -15,6 +15,11 @@ class AgrController extends Controller
     public function index()
     {
         //
+    }
+
+    public function agrCreate()
+    {
+        //
         return view("pages.agr.create");
     }
 
@@ -22,6 +27,30 @@ class AgrController extends Controller
     {
         //
         return view("pages.agr.agr");
+    }
+    
+    public function agrEdit()
+    {
+        //
+        return view("pages.agr.edit");
+    }
+    
+    public function farmer()
+    {
+        //
+        return view("pages.agr.farmer");
+    }
+    
+    public function farmerCreate()
+    {
+        //
+        return view("pages.agr.FarmerCreate");
+    }
+    
+    public function farmerEdit()
+    {
+        //
+        return view("pages.agr.farmerEdit");
     }
 
     /**
