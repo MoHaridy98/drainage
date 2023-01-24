@@ -5,13 +5,13 @@
         <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                 class="nav-link nav-link-lg message-toggle"><i data-feather="mail"></i>
                 <span class="badge headerBadge1">
-                    6 </span> </a>
+                    * </span> </a>
             <div class="dropdown-menu dropdown-list dropdown-menu-left pullDown">
                 <div class="dropdown-header">
-                    Messages
-                    <div class="float-left">
+                    اشعارات
+                    {{-- <div class="float-left">
                         <a href="#">Mark All As Read</a>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="dropdown-list-content dropdown-list-message">
                     <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar
@@ -22,97 +22,18 @@
                             <span class="time messege-text">Please check your mail !!</span>
                             <span class="time">2 Min Ago</span>
                         </span>
-                    </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
+                    </a>
+                    <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
                             <img alt="image" src="assets/img/users/user-2.png" class="rounded-circle">
                         </span> <span class="dropdown-item-desc"> <span class="message-user">Sarah
                                 Smith</span> <span class="time messege-text">Request for leave
                                 application</span>
                             <span class="time">5 Min Ago</span>
                         </span>
-                    </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                            <img alt="image" src="assets/img/users/user-5.png" class="rounded-circle">
-                        </span> <span class="dropdown-item-desc"> <span class="message-user">Jacob
-                                Ryan</span> <span class="time messege-text">Your payment invoice is
-                                generated.</span> <span class="time">12 Min Ago</span>
-                        </span>
-                    </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                            <img alt="image" src="assets/img/users/user-4.png" class="rounded-circle">
-                        </span> <span class="dropdown-item-desc"> <span class="message-user">Lina
-                                Smith</span> <span class="time messege-text">hii John, I have upload
-                                doc
-                                related to task.</span> <span class="time">30
-                                Min Ago</span>
-                        </span>
-                    </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                            <img alt="image" src="assets/img/users/user-3.png" class="rounded-circle">
-                        </span> <span class="dropdown-item-desc"> <span class="message-user">Jalpa
-                                Joshi</span> <span class="time messege-text">Please do as specify.
-                                Let me
-                                know if you have any query.</span> <span class="time">1
-                                Days Ago</span>
-                        </span>
-                    </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                            <img alt="image" src="assets/img/users/user-2.png" class="rounded-circle">
-                        </span> <span class="dropdown-item-desc"> <span class="message-user">Sarah
-                                Smith</span> <span class="time messege-text">Client Requirements</span>
-                            <span class="time">2 Days Ago</span>
-                        </span>
                     </a>
                 </div>
                 <div class="dropdown-footer text-center">
-                    <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-                </div>
-            </div>
-        </li>
-        <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
-                class="nav-link notification-toggle nav-link-lg"><i data-feather="bell" class="bell"></i>
-            </a>
-            <div class="dropdown-menu dropdown-list dropdown-menu-left pullDown">
-                <div class="dropdown-header">
-                    Notifications
-                    <div class="float-left">
-                        <a href="#">Mark All As Read</a>
-                    </div>
-                </div>
-                <div class="dropdown-list-content dropdown-list-icons">
-                    <a href="#" class="dropdown-item dropdown-item-unread"> <span
-                            class="dropdown-item-icon bg-primary text-white"> <i class="fas
-												fa-code"></i>
-                        </span> <span class="dropdown-item-desc"> Template update is
-                            available now! <span class="time">2 Min
-                                Ago</span>
-                        </span>
-                    </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-info text-white">
-                            <i class="far
-												fa-user"></i>
-                        </span> <span class="dropdown-item-desc"> <b>You</b> and <b>Dedik
-                                Sugiharto</b> are now friends <span class="time">10 Hours
-                                Ago</span>
-                        </span>
-                    </a> <a href="#" class="dropdown-item"> <span
-                            class="dropdown-item-icon bg-success text-white"> <i class="fas
-												fa-check"></i>
-                        </span> <span class="dropdown-item-desc"> <b>Kusnaedi</b> has
-                            moved task <b>Fix bug header</b> to <b>Done</b> <span class="time">12
-                                Hours
-                                Ago</span>
-                        </span>
-                    </a> <a href="#" class="dropdown-item"> <span
-                            class="dropdown-item-icon bg-danger text-white"> <i
-                                class="fas fa-exclamation-triangle"></i>
-                        </span> <span class="dropdown-item-desc"> Low disk space. Let's
-                            clean it! <span class="time">17 Hours Ago</span>
-                        </span>
-                    </a> <a href="#" class="dropdown-item"> <span
-                            class="dropdown-item-icon bg-info text-white"> <i class="fas
-												fa-bell"></i>
-                        </span> <span class="dropdown-item-desc"> Welcome to Otika
-                            template! <span class="time">Yesterday</span>
-                        </span>
-                    </a>
-                </div>
-                <div class="dropdown-footer text-center">
-                    <a href="#">View All <i class="fas fa-chevron-left"></i></a>
+                    <a href="#">عرض الكل <i class="fas fa-chevron-right"></i></a>
                 </div>
             </div>
         </li>
@@ -122,12 +43,7 @@
                     class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-left pullDown">
                 <div class="dropdown-title"> {{ Auth::user()->name }} : مرحبا</div>
-                <a href="#" class="dropdown-item has-icon"> <i class="far
-										fa-user"></i> الصفحة
-                    الشخصية
-                </a> <a href="timeline.html" class="dropdown-item has-icon"> <i class="fas fa-bolt"></i>
-                    المفضلة
-                </a> <a href="#" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
+                <a href="#" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
                     الإعدادات
                 </a>
                 <div class="dropdown-divider"></div>
@@ -163,15 +79,15 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ route('home') }}"> <img alt="image" src="assets/img/logo.png" class="header-logo" />
-                <span class="logo-name">Otika</span>
+            <a href="{{ route('home') }}" style="letter-spacing: initial"> <img alt="image" src="assets/img/logo.png"
+                    class="header-logo" />
+                <span class="logo-name">متابعة المشاريع</span>
             </a>
         </div>
         <ul class="sidebar-menu">
-            <li class="menu-header">Main</li>
+            <li class="menu-header">القائمة الرئيسية</li>
             <li class="dropdown active">
-                <a href="{{ route('home') }}" class="nav-link"><span>الرئيسية</span><i
-                        data-feather="monitor"></i></a>
+                <a href="{{ route('home') }}" class="nav-link"><span>الرئيسية</span><i data-feather="monitor"></i></a>
             </li>
             <li class="menu-header"></li>
             <li class="dropdown">
@@ -197,7 +113,7 @@
                     <i data-feather="briefcase"></i></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{ route('agr.list') }}">جمعيات زراعية</a></li>
-                    <li><a class="nav-link" href="{{ route('agr.create') }}">مزارعين</a></li>
+                    <li><a class="nav-link" href="{{ route('agr.farmer') }}">مزارعين</a></li>
                 </ul>
             </li>
             <li class="menu-header"></li>

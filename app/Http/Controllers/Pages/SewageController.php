@@ -119,7 +119,7 @@ class SewageController extends Controller
             // }
             return redirect()->route('sewage.list') -> with(['success' => 'تم التسجيل بنجاح']);
         }catch(\Exception $ex){
-            return redirect()->route('sewage.list') -> with(['error' => 'خطأ']);
+            return redirect()->route('sewage.list') -> with(['error' => 'خطأ' + $ex]);
         }
 
 
@@ -140,7 +140,7 @@ class SewageController extends Controller
             $project->forcedelete();
             return redirect()->route('sewage.list') -> with(['success' => 'تم الحذف!']);
         }catch(\Exception $ex){
-            return redirect()->route('sewage.list') -> with(['error' => 'خطأ']);
+            return redirect()->route('sewage.list') -> with(['error' => 'خطأ' + $ex]);
         }
     }
 }

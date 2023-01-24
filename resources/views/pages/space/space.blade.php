@@ -38,22 +38,28 @@
                                     <div class="card-body">
                                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link active" id="profile-tab" data-toggle="tab"
-                                                    href="#profile" role="tab" aria-controls="profile"
+                                                <a class="nav-link active" id="approved-tab" data-toggle="tab"
+                                                    href="#approved" role="tab" aria-controls="approved"
                                                     aria-selected="false">مشاريع
                                                     اعتمدت</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact"
-                                                    role="tab" aria-controls="contact" aria-selected="false">مشاريع
-                                                    لم تعتمد</a>
+                                                <a class="nav-link" id="notapproved-tab" data-toggle="tab"
+                                                    href="#notapproved" role="tab" aria-controls="notapproved"
+                                                    aria-selected="false">مشاريع
+                                                    جديدة</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="changed-tab" data-toggle="tab" href="#changed"
+                                                    role="tab" aria-controls="changed" aria-selected="false">مشاريع
+                                                    عُدلت</a>
                                             </li>
                                         </ul>
                                         @include('layouts.success')
                                         @include('layouts.error')
                                         <div class="tab-content" id="myTabContent">
-                                            <div class="tab-pane fade show active" id="profile" role="tabpanel"
-                                                aria-labelledby="profile-tab">
+                                            <div class="tab-pane fade show active" id="approved" role="tabpanel"
+                                                aria-labelledby="approved-tab">
                                                 <div class="card-body" style="direction: rtl;">
                                                     <div class="table-responsive">
                                                         <table class="table table-striped table-hover" id="save-stage"
@@ -103,8 +109,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="tab-pane fade" id="contact" role="tabpanel"
-                                                aria-labelledby="contact-tab">
+                                            <div class="tab-pane fade" id="notapproved" role="tabpanel"
+                                                aria-labelledby="notapproved-tab">
                                                 <div class="card-body" style="direction: rtl;">
                                                     <div class="table-responsive">
                                                         <table class="table table-striped table-hover" id="save-stage"
@@ -123,6 +129,57 @@
                                                                 @isset($unVprojects)
                                                                     @if ($unVprojects && $unVprojects->count() > 0)
                                                                         @foreach ($unVprojects as $project)
+                                                                            <tr>
+                                                                                <td>{{ $project->id }}</td>
+                                                                                <td>{{ $project->name }}</td>
+                                                                                <td>
+                                                                                    <div class="badge badge-light">
+                                                                                        {{ $project->acre }}
+                                                                                        فدان</div>
+                                                                                    <div class="badge badge-light">
+                                                                                        {{ $project->carat }}
+                                                                                        فراط</div>
+                                                                                    <div class="badge badge-light">
+                                                                                        {{ $project->share }}
+                                                                                        سهم</div>
+                                                                                </td>
+                                                                                <td>{{ $project->pdate->excution ?? 'NULL' }}
+                                                                                </td>
+                                                                                <td>{{ $project->total_cost }} جنية</td>
+                                                                                <td>
+                                                                                    <a class="dropdown-item"
+                                                                                        href="{{ route('space', $project->id) }}">عرض
+                                                                                        وتعديل</a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        @endforeach
+                                                                    @endif
+                                                                @endisset
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="changed" role="tabpanel"
+                                                aria-labelledby="changed-tab">
+                                                <div class="card-body" style="direction: rtl;">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped table-hover" id="save-stage"
+                                                            style="width:100%;">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th> # </th>
+                                                                    <th>اسم المشروع</th>
+                                                                    <th> الزمام</th>
+                                                                    <th> تاريخ البدأ</th>
+                                                                    <th>التكلفة الكلية</th>
+                                                                    <th>تفاصيل</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @isset($chVprojects)
+                                                                    @if ($chVprojects && $chVprojects->count() > 0)
+                                                                        @foreach ($chVprojects as $project)
                                                                             <tr>
                                                                                 <td>{{ $project->id }}</td>
                                                                                 <td>{{ $project->name }}</td>

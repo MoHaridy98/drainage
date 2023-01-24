@@ -25,8 +25,9 @@ class SpaceController extends Controller
     {
         $projects = Project :: with('pdate')->select()->get();
         $Vprojects = Project :: with('pdate')->where('verified', 1 )->select()->get();
-        $unVprojects = Project :: with('pdate')->where('verified', 0 )->select()->get();
-        return view("pages.space.space",compact('projects','Vprojects','unVprojects'));
+        $unVprojects = Project :: with('pdate')->where('verified', 0 )->where('has_changed', 0 )->select()->get();
+        $chVprojects = Project :: with('pdate')->where('verified', 0 )->where('has_changed', 1 )->select()->get();
+        return view("pages.space.space",compact('projects','Vprojects','unVprojects','chVprojects'));
     }
 
     /**
