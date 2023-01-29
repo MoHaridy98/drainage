@@ -33,8 +33,10 @@
                     <div class="section-body">
                         <div class="row" style="direction: rtl">
                             <div class="col-12 col-md-12 col-lg-12">
-                                <form class="needs-validation" id="work_experience" novalidate="" action="#"
-                                    method="POST" enctype="multipart/form-data">
+                                @include('layouts.success')
+                                @include('layouts.error')
+                                <form class="needs-validation" id="work_experience" novalidate=""
+                                    action="{{ route('agr.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="card card-primary">
                                         <div class="card-header">
@@ -48,16 +50,36 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-4">
                                                     <label> اختر المركز</label>
-                                                    <select class="form-control" name="city">
-                                                        <option> الصرف المغطي </option>
+                                                    <select class="form-control" id="city" name="city">
+                                                        <option value="" disabled selected>اختر المركز</option>
+                                                        @isset($City)
+                                                            @if ($City && $City->count() > 0)
+                                                                @foreach ($City as $item)
+                                                                    <option value="{{ $item->id }}">{{ $item->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            @endif
+                                                        @endisset
                                                     </select>
                                                 </div>
+
                                                 <div class="form-group col-md-4">
                                                     <label> المنطقة</label>
                                                     <select class="form-control" name="region">
-                                                        <option> الصرف المغطي </option>
+                                                        <option value="" disabled selected>اختر المنطقة</option>
+                                                        @isset($Region)
+                                                            @if ($Region && $Region->count() > 0)
+                                                                @foreach ($Region as $item)
+                                                                    <option class="option city-{{ $item->city_id }}"
+                                                                        value="{{ $item->id }}">
+                                                                        {{ $item->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            @endif
+                                                        @endisset
                                                     </select>
                                                 </div>
+
                                                 <div class="form-group col-md-4">
                                                     <label> اسم الجمعية</label>
                                                     <input style="height: calc(2.25rem + 6px);" type="text"
@@ -96,6 +118,12 @@
     <script src="assets/bundles/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
     <script src="assets/bundles/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script>
+        $('.option').hide();
+        $('#city').on('change', function(e) {
+            $('.option').hide();
+            $('.city-' + e.target.value).show();
+        });
+
         function addWorkRow() {
             var elements = document.getElementsByClassName('work-xp-input');
             var empty = "no"
