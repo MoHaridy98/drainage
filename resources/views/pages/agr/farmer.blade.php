@@ -33,7 +33,7 @@
                             <div class="col-12">
                                 <div class="card card-secondary">
                                     <div class="card-header">
-                                        <h4> مـدريـة الزراعــة </h4>
+                                        <h4> المزارعيـــن</h4>
                                         <button class="btn btn-dark" style="position: absolute; left: 10px; top:5px"><a
                                                 class="nav-link text-white"
                                                 href="{{ route('agr.farmerCreate') }}">اضافة</a></button>
@@ -54,7 +54,48 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @isset($Farmer)
+                                                        @if ($Farmer && $Farmer->count() > 0)
+                                                            @foreach ($Farmer as $Farmer)
+                                                                <tr>
+                                                                    <td>{{ $Farmer->id }}</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>{{ $Farmer->association_id }}</td>
+                                                                    <td>{{ $Farmer->name }}</td>
+                                                                    <td>
+                                                                        <div class="badge badge-light">
+                                                                            {{ $Farmer->acre }}
+                                                                            فدان</div>
+                                                                        <div class="badge badge-light">
+                                                                            {{ $Farmer->carat }}
+                                                                            فراط</div>
+                                                                        <div class="badge badge-light">
+                                                                            {{ $Farmer->share }}
+                                                                            سهم</div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="btn-group dropup">
+                                                                            <button id="btnGroupVerticalDrop5"type="button"
+                                                                                class="btn"data-toggle="dropdown"
+                                                                                aria-haspopup="true"aria-expanded="false">
+                                                                                <i class="fas fa-ellipsis-v"></i>
+                                                                            </button>
 
+                                                                            <div class="dropdown-menu"
+                                                                                aria-labelledby="btnGroupVerticalDrop2">
+                                                                                <a class="dropdown-item"
+                                                                                    href="{{ route('agr.farmerEdit', $Farmer->id) }}">عرض
+                                                                                    وتعديل</a>
+                                                                                {{-- <a class="dropdown-item"
+                                                                                href="{{ route('', $Farmer->id) }}">حذف</a> --}}
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                <tr>
+                                                            @endforeach
+                                                        @endif
+                                                    @endisset
                                                 </tbody>
                                             </table>
                                         </div>

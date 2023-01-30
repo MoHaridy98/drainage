@@ -51,7 +51,8 @@
                                                 <div class="form-row">
                                                     <div class="form-group col-md-4">
                                                         <label> اختر المركز</label>
-                                                        <select class="form-control" id="city" name="city">
+                                                        <select class="form-control" id="city" name="city"
+                                                            required>
                                                             <option value="" disabled selected>اختر المركز
                                                             </option>
                                                             @isset($City)
@@ -67,7 +68,8 @@
                                                     </div>
                                                     <div class="form-group col-md-4">
                                                         <label> المنطقة</label>
-                                                        <select class="form-control" id="area" name="region">
+                                                        <select class="form-control" id="area" name="region"
+                                                            required>
                                                             <option value="" disabled selected>اختر المنطقة
                                                             </option>
                                                             @isset($Region)
@@ -84,7 +86,7 @@
                                                     </div>
                                                     <div class="form-group col-md-4">
                                                         <label> اختر الجمعية</label>
-                                                        <select class="form-control" name="agr_ass">
+                                                        <select class="form-control" name="agr_ass" required>
                                                             <option value="" disabled selected>اختر الجمعية
                                                             </option>
                                                             @isset($Agrass)
@@ -116,17 +118,19 @@
                                                     <div class="form-group col-md-2">
                                                         <label for="">فدان</label>
                                                         <input type="number" name="acre[]"
-                                                            class="form-control farmer-input"placeholder="فدان">
+                                                            class="form-control farmer-input"placeholder="فدان"
+                                                            required>
                                                     </div>
                                                     <div class="form-group col-md-2">
                                                         <label for="">قراط</label>
                                                         <input type="number" name="carat[]"
-                                                            class="form-control farmer-input"placeholder="قراط">
+                                                            class="form-control farmer-input"placeholder="قراط"
+                                                            required>
                                                     </div>
                                                     <div class="form-group col-md-2">
                                                         <label for="">سهم</label>
                                                         <input type="number" name="share[]"
-                                                            class="form-control farmer-input"placeholder="سهم">
+                                                            class="form-control farmer-input"placeholder="سهم" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -192,7 +196,7 @@
                             <label>اسم المزارع</label>
                             <input style="height: calc(2.25rem + 6px);" type="text"
                                 name="farmer_name[]"
-                                class="form-control farmer-input"placeholder="اسم المزارع رباعي">
+                                class="form-control farmer-input" placeholder="اسم المزارع رباعي" required>
                         </div>
                         <div class="form-group col-md-1">
                             <label
@@ -202,17 +206,17 @@
                         <div class="form-group col-md-2">
                             <label for="">فدان</label>
                             <input type="number" name="acre[]"
-                                class="form-control farmer-input"placeholder="فدان">
+                                class="form-control farmer-input" placeholder="فدان" required>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="">قراط</label>
                             <input type="number" name="carat[]"
-                                class="form-control farmer-input"placeholder="قراط">
+                                class="form-control farmer-input" placeholder="قراط" required>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="">سهم</label>
                             <input type="number" name="share[]"
-                                class="form-control farmer-input"placeholder="سهم">
+                                class="form-control farmer-input" placeholder="سهم" required>
                         </div>
                     </div>
                     <input type="button" class="btn btn-danger btn-sm" style="width: 30px;

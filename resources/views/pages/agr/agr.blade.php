@@ -33,7 +33,7 @@
                             <div class="col-12">
                                 <div class="card card-secondary">
                                     <div class="card-header">
-                                        <h4> مـدريـة الزراعــة </h4>
+                                        <h4> الجمعيات الزراعية </h4>
                                         <button class="btn btn-dark" style="position: absolute; left: 10px; top:5px"><a
                                                 class="nav-link text-white"
                                                 href="{{ route('agr.create') }}">اضافة</a></button>
@@ -45,15 +45,45 @@
                                                 <thead>
                                                     <tr>
                                                         <th> # </th>
-                                                        <th>اسم الجمعية</th>
                                                         <th>اسم المركز</th>
                                                         <th>اسم المنطقة</th>
+                                                        <th>اسم الجمعية</th>
                                                         <th>عدد المزارعين</th>
                                                         <th>تفاصيل</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @isset($Agrass)
+                                                        @if ($Agrass && $Agrass->count() > 0)
+                                                            @foreach ($Agrass as $Agrass)
+                                                                <tr>
+                                                                    <td>{{ $Agrass->id }}</td>
+                                                                    <td></td>
+                                                                    <td>{{ $Agrass->region_id }}</td>
+                                                                    <td>{{ $Agrass->name }}</td>
+                                                                    <td></td>
+                                                                    <td>
+                                                                        <div class="btn-group dropup">
+                                                                            <button id="btnGroupVerticalDrop5"type="button"
+                                                                                class="btn"data-toggle="dropdown"
+                                                                                aria-haspopup="true"aria-expanded="false">
+                                                                                <i class="fas fa-ellipsis-v"></i>
+                                                                            </button>
 
+                                                                            <div class="dropdown-menu"
+                                                                                aria-labelledby="btnGroupVerticalDrop2">
+                                                                                <a class="dropdown-item"
+                                                                                    href="{{ route('agr.edit', $Agrass->id) }}">عرض
+                                                                                    وتعديل</a>
+                                                                                {{-- <a class="dropdown-item"
+                                                                                href="{{ route('', $Agrass->id) }}">حذف</a> --}}
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                <tr>
+                                                            @endforeach
+                                                        @endif
+                                                    @endisset
                                                 </tbody>
                                             </table>
                                         </div>

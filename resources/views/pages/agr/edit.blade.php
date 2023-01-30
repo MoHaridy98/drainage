@@ -44,23 +44,43 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label> اختر المركز</label>
-                                            <input type="text" class="form-control" value="" disabled>
-                                            <select class="form-control" name="city">
-                                                <option> الصرف المغطي </option>
+                                            <input type="text" class="form-control" value="{{ $Agrass->name }}"
+                                                disabled>
+                                            <select class="form-control" id="city" name="city">
+                                                <option value="">اختر المركز</option>
+                                                @isset($City)
+                                                    @if ($City && $City->count() > 0)
+                                                        @foreach ($City as $item)
+                                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
+                                                @endisset
                                             </select>
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label> المنطقة</label>
                                             <input type="text" class="form-control" value="" disabled>
                                             <select class="form-control" name="region">
-                                                <option> الصرف المغطي </option>
+                                                <option value="{{ $Agrass->region_id }}">اختر المنطقة</option>
+                                                @isset($Region)
+                                                    @if ($Region && $Region->count() > 0)
+                                                        @foreach ($Region as $item)
+                                                            <option class="option city-{{ $item->city_id }}"
+                                                                value="{{ $item->id }}">
+                                                                {{ $item->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
+                                                @endisset
                                             </select>
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label> اسم الجمعية</label>
-                                            <input type="text" class="form-control" value="" disabled>
+                                            <input type="text" class="form-control" value="{{ $Agrass->name }}"
+                                                disabled>
                                             <input style="height: calc(2.25rem + 6px);" type="text" name="agr_name"
-                                                class="form-control"placeholder="الجمعية الزراعية">
+                                                class="form-control" value="{{ $Agrass->name }}">
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-success">حفظ</button>
@@ -85,7 +105,35 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @isset($Farmer)
+                                                @if ($Farmer && $Farmer->count() > 0)
+                                                    @foreach ($Farmer as $Farmer)
+                                                        <tr>
+                                                            <td>{{ $Farmer->id }}</td>
+                                                            <td>{{ $Agrass->name }}</td>
+                                                            <td>{{ $Farmer->name }}</td>
+                                                            <td>
+                                                                <div class="btn-group dropup">
+                                                                    <button id="btnGroupVerticalDrop5"type="button"
+                                                                        class="btn"data-toggle="dropdown"
+                                                                        aria-haspopup="true"aria-expanded="false">
+                                                                        <i class="fas fa-ellipsis-v"></i>
+                                                                    </button>
 
+                                                                    <div class="dropdown-menu"
+                                                                        aria-labelledby="btnGroupVerticalDrop2">
+                                                                        <a class="dropdown-item"
+                                                                            href="{{ route('agr.farmerEdit', $Farmer->id) }}">عرض
+                                                                            وتعديل</a>
+                                                                        {{-- <a class="dropdown-item"
+                                                                        href="{{ route('', $Farmer->id) }}">حذف</a> --}}
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
+                                            @endisset
                                         </tbody>
                                     </table>
                                 </div>
@@ -119,6 +167,12 @@
     <script src="assets/bundles/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
     <script src="assets/bundles/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script>
+        $('.option').hide();
+        $('#city').on('change', function(e) {
+            $('.option').hide();
+            $('.city-' + e.target.value).show();
+        });
+
         function addWorkRow() {
             var elements = document.getElementsByClassName('work-xp-input');
             var empty = "no"

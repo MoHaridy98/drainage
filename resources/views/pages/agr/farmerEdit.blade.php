@@ -75,11 +75,11 @@
                                                 <div class="form-row">
                                                     <div class="form-group col-md-5">
                                                         <label>اسم المزارع</label>
-                                                        <input type="text" class="form-control" value=""
-                                                            disabled>
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $Farmer->name }}" disabled>
                                                         <input style="height: calc(2.25rem + 6px);" type="text"
-                                                            name="farmer_name"
-                                                            class="form-control farmer-input"placeholder="اسم المزارع رباعي">
+                                                            name="farmer_name" class="form-control farmer-input"
+                                                            value="{{ $Farmer->name }}">
                                                     </div>
                                                     <div class="form-group col-md-1">
                                                         <label
@@ -88,24 +88,27 @@
                                                     </div>
                                                     <div class="form-group col-md-2">
                                                         <label for="">فدان</label>
-                                                        <input type="text" class="form-control" value=""
-                                                            disabled>
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $Farmer->acre }}" disabled>
                                                         <input type="number" name="acre"
-                                                            class="form-control farmer-input"placeholder="فدان">
+                                                            class="form-control farmer-input"
+                                                            value="{{ $Farmer->acre }}">
                                                     </div>
                                                     <div class="form-group col-md-2">
                                                         <label for="">قراط</label>
-                                                        <input type="text" class="form-control" value=""
-                                                            disabled>
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $Farmer->carat }}" disabled>
                                                         <input type="number" name="carat"
-                                                            class="form-control farmer-input"placeholder="قراط">
+                                                            class="form-control farmer-input"
+                                                            value="{{ $Farmer->carat }}">
                                                     </div>
                                                     <div class="form-group col-md-2">
                                                         <label for="">سهم</label>
-                                                        <input type="text" class="form-control" value=""
-                                                            disabled>
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $Farmer->share }}" disabled>
                                                         <input type="number" name="share"
-                                                            class="form-control farmer-input"placeholder="سهم">
+                                                            class="form-control farmer-input"
+                                                            value="{{ $Farmer->share }}">
                                                     </div>
                                                 </div>
                                             </div>

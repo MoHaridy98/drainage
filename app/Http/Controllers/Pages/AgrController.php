@@ -32,19 +32,28 @@ class AgrController extends Controller
     public function agr()
     {
         //
-        return view("pages.agr.agr");
+        $Agrass = Agrass :: select()->get();
+        //$phone = Agrass::find(1)->agrRegion;
+        //$Agrass = Agrass :: with('agrRegion')->select()->get();
+        return view("pages.agr.agr",compact('Agrass'));
     }
     
-    public function agrEdit()
+    public function agrEdit($id)
     {
         //
-        return view("pages.agr.edit");
+        //$Dates = Date ::with('projectDate')->select()->find($id);
+        $City = City :: select()->get();
+        $Region = Region :: select()->get();
+        $Agrass = Agrass :: select()->find($id);
+        $Farmer = Farmer :: select()->where('association_id',$id)->get();
+        return view("pages.agr.edit",compact('Agrass','Farmer','City','Region'));
     }
     
     public function farmer()
     {
         //
-        return view("pages.agr.farmer");
+        $Farmer = Farmer :: select()->get();
+        return view("pages.agr.farmer",compact('Farmer'));
     }
     
     public function farmerCreate()
@@ -55,10 +64,14 @@ class AgrController extends Controller
         return view("pages.agr.farmerCreate",compact('Region', 'City','Agrass'));
     }
     
-    public function farmerEdit()
+    public function farmerEdit($id)
     {
         //
-        return view("pages.agr.farmerEdit");
+        $City = City :: select()->get();
+        $Region = Region :: select()->get();
+        $Agrass = Agrass :: select()->get();
+        $Farmer = Farmer :: select()->find($id);
+        return view("pages.agr.farmerEdit",compact('Agrass','Farmer','City','Region'));
     }
 
     /**
