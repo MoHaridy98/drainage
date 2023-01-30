@@ -51,16 +51,33 @@
                                                         <label> اختر المركز</label>
                                                         <input type="text" class="form-control" value=""
                                                             disabled>
-                                                        <select class="form-control" name="city">
-                                                            <option> الصرف المغطي </option>
+                                                        <select class="form-control" id="city" name="city">
+                                                            @isset($City)
+                                                                @if ($City && $City->count() > 0)
+                                                                    @foreach ($City as $item)
+                                                                        <option value="{{ $item->id }}">
+                                                                            {{ $item->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                @endif
+                                                            @endisset
                                                         </select>
                                                     </div>
                                                     <div class="form-group col-md-4">
                                                         <label> المنطقة</label>
                                                         <input type="text" class="form-control" value=""
                                                             disabled>
-                                                        <select class="form-control" name="region">
-                                                            <option> الصرف المغطي </option>
+                                                        <select class="form-control" id="area" name="region">
+                                                            @isset($Region)
+                                                                @if ($Region && $Region->count() > 0)
+                                                                    @foreach ($Region as $item)
+                                                                        <option class="coption city-{{ $item->city_id }}"
+                                                                            value="{{ $item->id }}">
+                                                                            {{ $item->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                @endif
+                                                            @endisset
                                                         </select>
                                                     </div>
                                                     <div class="form-group col-md-4">
@@ -68,7 +85,17 @@
                                                         <input type="text" class="form-control" value=""
                                                             disabled>
                                                         <select class="form-control" name="agr_ass">
-                                                            <option> الصرف المغطي </option>
+                                                            @isset($Agrass)
+                                                                @if ($Agrass && $Agrass->count() > 0)
+                                                                    @foreach ($Agrass as $item)
+                                                                        <option
+                                                                            class="aoption agrass-{{ $item->region_id }}"
+                                                                            value="{{ $item->id }}">
+                                                                            {{ $item->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                @endif
+                                                            @endisset
                                                         </select>
                                                     </div>
                                                 </div>
@@ -142,6 +169,20 @@
     <script src="assets/js/custom.js"></script>
     <script src="assets/bundles/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
     <script src="assets/bundles/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script>
+        $('.option').hide();
+        $('.coption').hide();
+        $('.aoption').hide();
+        $('#city').on('change', function(e) {
+            $('.coption').hide();
+            $('.city-' + e.target.value).show();
+        });
+
+        $('#area').on('change', function(e) {
+            $('.aoption').hide();
+            $('.agrass-' + e.target.value).show();
+        });
+    </script>
     {{-- <script>
         function addWorkRow() {
             var elements = document.getElementsByClassName('farmer-input');
