@@ -58,10 +58,10 @@
                                                             @foreach ($Agrass as $Agrass)
                                                                 <tr>
                                                                     <td>{{ $Agrass->id }}</td>
-                                                                    <td></td>
-                                                                    <td>{{ $Agrass->region_id }}</td>
+                                                                    <td>{{ $Agrass->regionname->cityname->name }}</td>
+                                                                    <td>{{ $Agrass->regionname->name }}</td>
                                                                     <td>{{ $Agrass->name }}</td>
-                                                                    <td></td>
+                                                                    <td>{{ $Agrass->Farmer->count() }}</td>
                                                                     <td>
                                                                         <div class="btn-group dropup">
                                                                             <button id="btnGroupVerticalDrop5"type="button"

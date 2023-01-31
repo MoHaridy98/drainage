@@ -18,4 +18,11 @@ class Region extends Model
         'updated_at',
     ];
 
+    public function region(){
+        return $this->hasMany(Agrass::class ,'region_id');
+    }
+
+    public function cityname(){
+        return  $this->belongsTo(City::class ,'city_id');
+    }
 }

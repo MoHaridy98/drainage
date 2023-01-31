@@ -44,10 +44,12 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label> اختر المركز</label>
-                                            <input type="text" class="form-control" value="{{ $Agrass->name }}"
-                                                disabled>
+                                            <input type="text" class="form-control"
+                                                value="{{ $Agrass->regionname->cityname->name }}" disabled>
                                             <select class="form-control" id="city" name="city">
-                                                <option value="">اختر المركز</option>
+                                                {{-- <option value="{{ $Agrass->regionname->cityname->id }}" selected hidden>
+                                                    {{ $Agrass->regionname->cityname->name }}</option> --}}
+                                                <option value="" selected disabled hidden>اختر المركز</option>
                                                 @isset($City)
                                                     @if ($City && $City->count() > 0)
                                                         @foreach ($City as $item)
@@ -60,9 +62,12 @@
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label> المنطقة</label>
-                                            <input type="text" class="form-control" value="" disabled>
+                                            <input type="text" class="form-control"
+                                                value="{{ $Agrass->regionname->name }}" disabled>
                                             <select class="form-control" name="region">
-                                                <option value="{{ $Agrass->region_id }}">اختر المنطقة</option>
+                                                {{-- <option value="{{ $Agrass->regionname->id }}" selected hidden>
+                                                    {{ $Agrass->regionname->name }}</option> --}}
+                                                <option value="" selected disabled hidden>اختر المنطقة</option>
                                                 @isset($Region)
                                                     @if ($Region && $Region->count() > 0)
                                                         @foreach ($Region as $item)

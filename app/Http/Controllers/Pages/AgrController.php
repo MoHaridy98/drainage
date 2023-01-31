@@ -32,7 +32,7 @@ class AgrController extends Controller
     public function agr()
     {
         //
-        $Agrass = Agrass :: select()->get();
+        $Agrass = Agrass :: select()->with('regionname','Farmer','regionname.cityname')->get();
         //$phone = Agrass::find(1)->agrRegion;
         //$Agrass = Agrass :: with('agrRegion')->select()->get();
         return view("pages.agr.agr",compact('Agrass'));

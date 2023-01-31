@@ -18,5 +18,12 @@ class agrass extends Model
         'created_at',
         'updated_at',
     ];
+    
+    public function farmer(){
+        return $this->hasMany(Farmer::class ,'association_id');
+    }
 
+    public function regionname(){
+        return $this->belongsTo(Region::class ,'region_id');
+    }
 }
