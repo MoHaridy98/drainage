@@ -136,21 +136,21 @@ class AgrController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $Agrass = Agrass :: select()->find($id);
+            if(!$Agrass){
+                return redirect()->route('agr.list')->with(['error' => 'مشروع غير موجود']);
+            }
+            $Agrass -> update(([
+                'name' => $request['agr_name'],
+                'region_id' => $request['region'],
+            ]));
+            return redirect()->route('agr.list') -> with(['success' => 'تم التسجيل بنجاح']);
+        }catch(\Exception $ex){
+            return redirect()->route('agr.list') -> with(['error' => 'خطأ' + $ex]);
+        }
     }
 
     /**

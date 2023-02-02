@@ -38,8 +38,9 @@
                                 <h4>مـدريــة الزراعة</h4>
                             </div>
                             <div class="card-body">
-                                <form class="needs-validation" id="work_experience" novalidate="" action="#"
-                                    method="POST" enctype="multipart/form-data">
+                                <form class="needs-validation" id="work_experience" novalidate=""
+                                    action="{{ route('agr.update', $Agrass->id) }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-row">
                                         <div class="form-group col-md-12">

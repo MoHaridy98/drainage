@@ -43,6 +43,7 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
     Route::get('/agr-edit{id}', [App\Http\Controllers\Pages\AgrController::class, 'agrEdit'])->name('agr.edit');
     Route::get('/agr-create', [App\Http\Controllers\Pages\AgrController::class, 'agrCreate'])->name('agr.create');
     Route::post('/agr-store', [App\Http\Controllers\Pages\AgrController::class, 'store'])->name('agr.store');
+    Route::post('/agr-update{id}', [App\Http\Controllers\Pages\AgrController::class, 'update'])->name('agr.update');
 
     Route::get('/farmer', [App\Http\Controllers\Pages\AgrController::class, 'farmer'])->name('agr.farmer');
     Route::get('/farmer-edit{id}', [App\Http\Controllers\Pages\AgrController::class, 'farmerEdit'])->name('agr.farmerEdit');
