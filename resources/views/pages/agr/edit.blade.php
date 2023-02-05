@@ -50,7 +50,8 @@
                                             <select class="form-control" id="city" name="city">
                                                 {{-- <option value="{{ $Agrass->regionname->cityname->id }}" selected hidden>
                                                     {{ $Agrass->regionname->cityname->name }}</option> --}}
-                                                <option value="" selected disabled hidden>اختر المركز</option>
+                                                <option value="{{ $Agrass->regionname->cityname->id }}" selected hidden>
+                                                    اختر المركز</option>
                                                 @isset($City)
                                                     @if ($City && $City->count() > 0)
                                                         @foreach ($City as $item)
@@ -68,7 +69,8 @@
                                             <select class="form-control" name="region">
                                                 {{-- <option value="{{ $Agrass->regionname->id }}" selected hidden>
                                                     {{ $Agrass->regionname->name }}</option> --}}
-                                                <option value="" selected disabled hidden>اختر المنطقة</option>
+                                                <option value="{{ $Agrass->regionname->id }}" selected hidden>اختر
+                                                    المنطقة</option>
                                                 @isset($Region)
                                                     @if ($Region && $Region->count() > 0)
                                                         @foreach ($Region as $item)

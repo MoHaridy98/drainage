@@ -52,7 +52,8 @@ class AgrController extends Controller
     public function farmer()
     {
         //
-        $Farmer = Farmer :: select()->get();
+        //$Farmer = Farmer :: select()->get();
+        $Farmer = Farmer :: select()->with('assname','assname.regionname','assname.regionname.cityname')->get();
         return view("pages.agr.farmer",compact('Farmer'));
     }
     
@@ -61,7 +62,7 @@ class AgrController extends Controller
         $City = City :: select()->get();
         $Region = Region :: select()->get();
         $Agrass = Agrass :: select()->get();
-        return view("pages.agr.farmerCreate",compact('Region', 'City','Agrass'));
+        return view("pages.agr.farmerCreate",compact('Region','City','Agrass'));
     }
     
     public function farmerEdit($id)
@@ -70,7 +71,7 @@ class AgrController extends Controller
         $City = City :: select()->get();
         $Region = Region :: select()->get();
         $Agrass = Agrass :: select()->get();
-        $Farmer = Farmer :: select()->find($id);
+        $Farmer = Farmer :: select()->with('assname','assname.regionname','assname.regionname.cityname')->find($id);
         return view("pages.agr.farmerEdit",compact('Agrass','Farmer','City','Region'));
     }
 
@@ -92,7 +93,6 @@ class AgrController extends Controller
      */
     public function store(Request $request)
     {
-
         $agr_ass = Agrass:: create(([
             'name' => $request['agr_name'],
             'region_id' => $request['region'],
@@ -141,7 +141,7 @@ class AgrController extends Controller
         try{
             $Agrass = Agrass :: select()->find($id);
             if(!$Agrass){
-                return redirect()->route('agr.list')->with(['error' => 'مشروع غير موجود']);
+                return redirect()->route('agr.list')->with(['error' => 'جمعية غير موجودة']);
             }
             $Agrass -> update(([
                 'name' => $request['agr_name'],
@@ -150,6 +150,26 @@ class AgrController extends Controller
             return redirect()->route('agr.list') -> with(['success' => 'تم التسجيل بنجاح']);
         }catch(\Exception $ex){
             return redirect()->route('agr.list') -> with(['error' => 'خطأ' + $ex]);
+        }
+    }
+
+    public function farmerUpdate(Request $request, $id)
+    {
+        try{
+            $Farmer = Farmer :: select()->find($id);
+            if(!$Farmer){
+                return redirect()->route('agr.farmer')->with(['error' => 'مزارع غير موجود']);
+            }
+            $Farmer -> update(([
+                'name' => $request['farmer_name'],
+                'acre' => $request['acre'],
+                'carat' => $request['carat'],
+                'share' => $request['share'],
+                'association_id' => $request['agr_ass'],
+            ]));
+            return redirect()->route('agr.farmer') -> with(['success' => 'تم التسجيل بنجاح']);
+        }catch(\Exception $ex){
+            return redirect()->route('agr.farmer') -> with(['error' => 'خطأ' . $ex]);
         }
     }
 

@@ -21,4 +21,8 @@ class Farmer extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function assname(){
+        return $this->belongsTo(agrass::class ,'association_id');
+    }
 }

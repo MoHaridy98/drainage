@@ -44,11 +44,12 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
     Route::get('/agr-create', [App\Http\Controllers\Pages\AgrController::class, 'agrCreate'])->name('agr.create');
     Route::post('/agr-store', [App\Http\Controllers\Pages\AgrController::class, 'store'])->name('agr.store');
     Route::post('/agr-update{id}', [App\Http\Controllers\Pages\AgrController::class, 'update'])->name('agr.update');
-
+    //farmer
     Route::get('/farmer', [App\Http\Controllers\Pages\AgrController::class, 'farmer'])->name('agr.farmer');
     Route::get('/farmer-edit{id}', [App\Http\Controllers\Pages\AgrController::class, 'farmerEdit'])->name('agr.farmerEdit');
     Route::get('/farmer-create', [App\Http\Controllers\Pages\AgrController::class, 'farmerCreate'])->name('agr.farmerCreate');
     Route::post('/farmer-store', [App\Http\Controllers\Pages\AgrController::class, 'farmerStore'])->name('agr.farmerStore');
+    Route::post('/farmer-update{id}', [App\Http\Controllers\Pages\AgrController::class, 'farmerUpdate'])->name('farmer.update');
     
     /*
 |--------------------------------------------------------------------------
@@ -76,17 +77,4 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
     Route::get('/sewage-delete{id}', [App\Http\Controllers\Pages\SewageController::class, 'destroy'])->name('sewage.delete');
     Route::get('/sewage', [App\Http\Controllers\Pages\SewageController::class, 'sewage'])->name('sewage.list');
     Route::get('/sewage-create', [App\Http\Controllers\Pages\SewageController::class, 'index'])->name('sewage');
-/*
-|--------------------------------------------------------------------------
-| Dashboard sewage
-|--------------------------------------------------------------------------
-*/
-    //Route::get('/meeting', [App\Http\Controllers\Pages\MeetController::class, 'meet'])->name('meeting.list');
-    Route::get('/meeting-create', [App\Http\Controllers\Pages\MeetController::class, 'index'])->name('meeting');
   });
-
-  /*
-|--------------------------------------------------------------------------
-| Dashboard Site
-|--------------------------------------------------------------------------
-*/

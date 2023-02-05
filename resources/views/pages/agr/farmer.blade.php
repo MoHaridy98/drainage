@@ -31,6 +31,8 @@
                     <div class="section-body">
                         <div class="row">
                             <div class="col-12">
+                                @include('layouts.success')
+                                @include('layouts.error')
                                 <div class="card card-secondary">
                                     <div class="card-header">
                                         <h4> المزارعيـــن</h4>
@@ -59,9 +61,10 @@
                                                             @foreach ($Farmer as $Farmer)
                                                                 <tr>
                                                                     <td>{{ $Farmer->id }}</td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td>{{ $Farmer->association_id }}</td>
+                                                                    <td>{{ $Farmer->assname->regionname->cityname->name }}
+                                                                    </td>
+                                                                    <td>{{ $Farmer->assname->regionname->name }}</td>
+                                                                    <td>{{ $Farmer->assname->name }}</td>
                                                                     <td>{{ $Farmer->name }}</td>
                                                                     <td>
                                                                         <div class="badge badge-light">
@@ -92,7 +95,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                <tr>
+                                                                </tr>
                                                             @endforeach
                                                         @endif
                                                     @endisset
@@ -120,6 +123,11 @@
     <script src="assets/js/page/datatables.js"></script>
     <!-- Template JS File -->
     <script src="assets/js/scripts.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('table.table').DataTable();
+        });
+    </script>
     <!-- Custom JS File -->
     <script src="assets/js/custom.js"></script>
 </body>
