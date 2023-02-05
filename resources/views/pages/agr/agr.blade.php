@@ -56,31 +56,32 @@
                                                     @isset($Agrass)
                                                         @if ($Agrass && $Agrass->count() > 0)
                                                             @foreach ($Agrass as $Agrass)
-                                                                <tr>
-                                                                    <td>{{ $Agrass->id }}</td>
-                                                                    <td>{{ $Agrass->regionname->cityname->name }}</td>
-                                                                    <td>{{ $Agrass->regionname->name }}</td>
-                                                                    <td>{{ $Agrass->name }}</td>
-                                                                    <td>{{ $Agrass->Farmer->count() }}</td>
-                                                                    <td>
-                                                                        <div class="btn-group dropup">
-                                                                            <button id="btnGroupVerticalDrop5"type="button"
-                                                                                class="btn"data-toggle="dropdown"
-                                                                                aria-haspopup="true"aria-expanded="false">
-                                                                                <i class="fas fa-ellipsis-v"></i>
-                                                                            </button>
 
-                                                                            <div class="dropdown-menu"
-                                                                                aria-labelledby="btnGroupVerticalDrop2">
-                                                                                <a class="dropdown-item"
-                                                                                    href="{{ route('agr.edit', $Agrass->id) }}">عرض
-                                                                                    وتعديل</a>
-                                                                                {{-- <a class="dropdown-item"
-                                                                                href="{{ route('', $Agrass->id) }}">حذف</a> --}}
-                                                                            </div>
+                                                            <tr>
+                                                                <td>{{ $Agrass->id }}</td>
+                                                                <td>{{ $Agrass->regionname->cityname->name }}</td>
+                                                                <td>{{ $Agrass->regionname->name }}</td>
+                                                                <td>{{ $Agrass->name }}</td>
+                                                                <td>{{ $Agrass->Farmer->count() }}</td>
+                                                                <td>
+                                                                    <div class="btn-group dropup">
+                                                                        <button id="btnGroupVerticalDrop5"type="button"
+                                                                            class="btn"data-toggle="dropdown"
+                                                                            aria-haspopup="true"aria-expanded="false">
+                                                                            <i class="fas fa-ellipsis-v"></i>
+                                                                        </button>
+
+                                                                        <div class="dropdown-menu"
+                                                                            aria-labelledby="btnGroupVerticalDrop2">
+                                                                            <a class="dropdown-item"
+                                                                                href="{{ route('agr.edit', $Agrass->id) }}">عرض
+                                                                                وتعديل</a>
+                                                                            {{-- <a class="dropdown-item"
+                                                                            href="{{ route('', $Agrass->id) }}">حذف</a> --}}
                                                                         </div>
-                                                                    </td>
-                                                                <tr>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
                                                             @endforeach
                                                         @endif
                                                     @endisset

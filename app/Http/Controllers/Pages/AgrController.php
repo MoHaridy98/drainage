@@ -11,14 +11,14 @@ use Illuminate\Http\Request;
 
 class AgrController extends Controller
 {
-    /** 
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        
+
     }
 
     public function agrCreate()
@@ -37,7 +37,7 @@ class AgrController extends Controller
         //$Agrass = Agrass :: with('agrRegion')->select()->get();
         return view("pages.agr.agr",compact('Agrass'));
     }
-    
+
     public function agrEdit($id)
     {
         //
@@ -48,14 +48,14 @@ class AgrController extends Controller
         $Farmer = Farmer :: select()->where('association_id',$id)->get();
         return view("pages.agr.edit",compact('Agrass','Farmer','City','Region'));
     }
-    
+
     public function farmer()
     {
         //
-        $Farmer = Farmer :: select()->get();
+        $Farmer = Farmer :: select()->with('farmerAgr','farmerAgr.regionname','farmerAgr.regionname.cityname')->get();
         return view("pages.agr.farmer",compact('Farmer'));
     }
-    
+
     public function farmerCreate()
     {
         $City = City :: select()->get();
@@ -63,7 +63,7 @@ class AgrController extends Controller
         $Agrass = Agrass :: select()->get();
         return view("pages.agr.farmerCreate",compact('Region', 'City','Agrass'));
     }
-    
+
     public function farmerEdit($id)
     {
         //

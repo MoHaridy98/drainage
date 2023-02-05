@@ -48,8 +48,8 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
     Route::get('/farmer-edit{id}', [App\Http\Controllers\Pages\AgrController::class, 'farmerEdit'])->name('agr.farmerEdit');
     Route::get('/farmer-create', [App\Http\Controllers\Pages\AgrController::class, 'farmerCreate'])->name('agr.farmerCreate');
     Route::post('/farmer-store', [App\Http\Controllers\Pages\AgrController::class, 'farmerStore'])->name('agr.farmerStore');
-    
-    /*
+
+/*
 |--------------------------------------------------------------------------
 | Dashboard space
 |--------------------------------------------------------------------------
@@ -82,10 +82,22 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
 */
     //Route::get('/meeting', [App\Http\Controllers\Pages\MeetController::class, 'meet'])->name('meeting.list');
     Route::get('/meeting-create', [App\Http\Controllers\Pages\MeetController::class, 'index'])->name('meeting');
-  });
 
-  /*
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Dashboard sewage
+|--------------------------------------------------------------------------
+*/
+    Route::get('/report', [App\Http\Controllers\Pages\ReportController::class, 'index'])->name('report');
+    Route::get('/print{id}', [App\Http\Controllers\Pages\ReportController::class, 'print'])->name('print');
+
+   });
+/*
 |--------------------------------------------------------------------------
 | Dashboard Site
 |--------------------------------------------------------------------------
 */
+

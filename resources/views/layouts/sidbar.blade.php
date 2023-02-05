@@ -138,11 +138,11 @@
             <li class="menu-header"></li>
             <li class="menu-header"></li>
             <li class="dropdown">
-                <a href="#" class="menu-toggle nav-link has-dropdown"><span> التقارير الشهرية</span>
+                <a href="#" class="menu-toggle nav-link has-dropdown"><span> تقارير المشرعات</span>
                     <i data-feather="briefcase"></i></a>
                 <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{ route('report') }}">تقرير مفصل</a></li>
                     <li><a class="nav-link" href="#">تقرير مجمع</a></li>
-                    <li><a class="nav-link" href="#">تقرير مفصل</a></li>
                 </ul>
             </li>
         </ul>

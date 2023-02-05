@@ -59,9 +59,9 @@
                                                             @foreach ($Farmer as $Farmer)
                                                                 <tr>
                                                                     <td>{{ $Farmer->id }}</td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td>{{ $Farmer->association_id }}</td>
+                                                                    <td>{{ $Farmer->farmerAgr->regionname->cityname->name }}</td>
+                                                                    <td>{{ $Farmer->farmerAgr->regionname->name }}</td>
+                                                                    <td>{{ $Farmer->farmerAgr->name }}</td>
                                                                     <td>{{ $Farmer->name }}</td>
                                                                     <td>
                                                                         <div class="badge badge-light">
