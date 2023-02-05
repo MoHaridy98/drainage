@@ -33,7 +33,8 @@
                     <div class="section-body">
                         <div class="row" style="direction: rtl">
                             <div class="col-12 col-md-12 col-lg-12">
-                                <form class="needs-validation" novalidate="" action="#" method="POST"
+                                <form class="needs-validation" novalidate=""
+                                    action="{{ route('farmer.update', $Farmer->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div id="work_experience">
@@ -49,9 +50,14 @@
                                                 <div class="form-row">
                                                     <div class="form-group col-md-4">
                                                         <label> اختر المركز</label>
-                                                        <input type="text" class="form-control" value=""
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $Farmer->assname->regionname->cityname->name }}"
                                                             disabled>
                                                         <select class="form-control" id="city" name="city">
+                                                            <option
+                                                                value="{{ $Farmer->assname->regionname->cityname->id }}"
+                                                                selected hidden>
+                                                                اختر المركز</option>
                                                             @isset($City)
                                                                 @if ($City && $City->count() > 0)
                                                                     @foreach ($City as $item)
@@ -65,9 +71,12 @@
                                                     </div>
                                                     <div class="form-group col-md-4">
                                                         <label> المنطقة</label>
-                                                        <input type="text" class="form-control" value=""
-                                                            disabled>
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $Farmer->assname->regionname->name }}" disabled>
                                                         <select class="form-control" id="area" name="region">
+                                                            <option value="{{ $Farmer->assname->regionname->id }}"
+                                                                selected hidden>اختر
+                                                                المنطقة</option>
                                                             @isset($Region)
                                                                 @if ($Region && $Region->count() > 0)
                                                                     @foreach ($Region as $item)
@@ -82,9 +91,12 @@
                                                     </div>
                                                     <div class="form-group col-md-4">
                                                         <label> اختر الجمعية</label>
-                                                        <input type="text" class="form-control" value=""
-                                                            disabled>
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $Farmer->assname->name }}" disabled>
                                                         <select class="form-control" name="agr_ass">
+                                                            <option value="{{ $Farmer->assname->id }}" selected hidden>
+                                                                اختر
+                                                                المنطقة</option>
                                                             @isset($Agrass)
                                                                 @if ($Agrass && $Agrass->count() > 0)
                                                                     @foreach ($Agrass as $item)

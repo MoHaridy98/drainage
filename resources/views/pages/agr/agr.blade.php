@@ -79,9 +79,8 @@
                                                                             {{-- <a class="dropdown-item"
                                                                             href="{{ route('', $Agrass->id) }}">حذف</a> --}}
                                                                         </div>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
+                                                                    </td>
+                                                                </tr>
                                                             @endforeach
                                                         @endif
                                                     @endisset
@@ -109,6 +108,11 @@
     <script src="assets/js/page/datatables.js"></script>
     <!-- Template JS File -->
     <script src="assets/js/scripts.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('table.table').DataTable();
+        });
+    </script>
     <!-- Custom JS File -->
     <script src="assets/js/custom.js"></script>
 </body>

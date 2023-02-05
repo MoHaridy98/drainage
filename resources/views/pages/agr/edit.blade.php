@@ -38,8 +38,9 @@
                                 <h4>مـدريــة الزراعة</h4>
                             </div>
                             <div class="card-body">
-                                <form class="needs-validation" id="work_experience" novalidate="" action="#"
-                                    method="POST" enctype="multipart/form-data">
+                                <form class="needs-validation" id="work_experience" novalidate=""
+                                    action="{{ route('agr.update', $Agrass->id) }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
@@ -49,7 +50,8 @@
                                             <select class="form-control" id="city" name="city">
                                                 {{-- <option value="{{ $Agrass->regionname->cityname->id }}" selected hidden>
                                                     {{ $Agrass->regionname->cityname->name }}</option> --}}
-                                                <option value="" selected disabled hidden>اختر المركز</option>
+                                                <option value="{{ $Agrass->regionname->cityname->id }}" selected hidden>
+                                                    اختر المركز</option>
                                                 @isset($City)
                                                     @if ($City && $City->count() > 0)
                                                         @foreach ($City as $item)
@@ -67,7 +69,8 @@
                                             <select class="form-control" name="region">
                                                 {{-- <option value="{{ $Agrass->regionname->id }}" selected hidden>
                                                     {{ $Agrass->regionname->name }}</option> --}}
-                                                <option value="" selected disabled hidden>اختر المنطقة</option>
+                                                <option value="{{ $Agrass->regionname->id }}" selected hidden>اختر
+                                                    المنطقة</option>
                                                 @isset($Region)
                                                     @if ($Region && $Region->count() > 0)
                                                         @foreach ($Region as $item)
