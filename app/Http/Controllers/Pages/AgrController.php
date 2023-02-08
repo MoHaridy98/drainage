@@ -149,7 +149,7 @@ class AgrController extends Controller
             ]));
             return redirect()->route('agr.list') -> with(['success' => 'تم التسجيل بنجاح']);
         }catch(\Exception $ex){
-            return redirect()->route('agr.list') -> with(['error' => 'خطأ' + $ex]);
+            return redirect()->route('agr.list') -> with(['error' => 'خطأ' . $ex]);
         }
     }
 

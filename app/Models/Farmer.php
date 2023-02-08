@@ -25,4 +25,8 @@ class Farmer extends Model
     public function assname(){
         return $this->belongsTo(agrass::class ,'association_id');
     }
+
+    public function farmerBenifit(){
+        return $this->hasOne(Benefits::class ,'farmer_id');
+    }
 }
