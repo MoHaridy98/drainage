@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Pages;
 use App\Http\Controllers\Controller;
 use App\Models\Date;
 use App\Models\Project;
+use App\Models\Agrass;
+use App\Models\Region;
+use App\Models\City;
+use App\Models\Farmer;
+use App\Models\Benefits;
 use Illuminate\Http\Request;
 
 class SpaceController extends Controller
@@ -30,6 +35,50 @@ class SpaceController extends Controller
         return view("pages.space.space",compact('projects','Vprojects','unVprojects','chVprojects'));
     }
 
+    public function dues($id){
+        $projects = Project :: with('pdate')->select()->find($id);
+        $City = City :: select()->get();
+        $Region = Region :: select()->get();
+        $Agrass = Agrass :: select()->get();
+        $FarmerAll = Farmer :: select()->with('assname','farmerBenifit')->get();
+        return view("pages.space.dues",compact('FarmerAll','projects','Agrass','City','Region'));
+    }
+    public function duesCreate(Request $request , $pid){
+        $aid = $request['agr_ass'];
+        $projects = Project :: with('pdate')->select()->find($pid);
+        $City = City :: select()->get();
+        $Region = Region :: select()->get();
+        $Agrass = Agrass :: select()->get();
+        $Farmer = Farmer :: select()->with('assname','farmerBenifit')->where('association_id',$aid)->get();
+        $FarmerAll = Farmer :: select()->with('assname','farmerBenifit')->get();
+        return view("pages.space.dues",compact('FarmerAll','projects','Agrass','Farmer','City','Region'));
+    }
+    public function duesStore(Request $request)
+    {
+        try{
+            for($i = 0 ; $i< count($request->fid) ; $i++){
+                $cost[] = $request->cost[$i];
+                $farmer_id[] = $request->fid[$i];
+                $farmer_benifit = Benefits:: select('farmer_id')->where('farmer_id',$farmer_id[$i])->value('farmer_id');
+                //return response()->json([$farmer_benifit]);
+                if($farmer_benifit == NULL){
+                    $benefits = Benefits:: create(([
+                        'Total_installment' => $cost[$i],
+                        'farmer_id' => $farmer_id[$i],
+                        'project_id' => $request['pid'],
+                    ]));
+                }else{
+                    $benefits = Benefits:: where ('farmer_id', $farmer_id[$i])-> update(([
+                        'Total_installment' => $cost[$i],
+                        'project_id' => $request['pid'],
+                    ]));
+                }
+            }
+            return redirect()->route('space.dues' , $request['pid']) -> with(['success' => 'تمت الاضافة بنجاح']);
+        }catch(\Exception $ex){
+            return redirect()->route('space.dues' , $request['pid']) -> with(['error' => 'خطأ' . $ex]);
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *

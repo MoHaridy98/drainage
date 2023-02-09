@@ -55,6 +55,9 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
     Route::Post('/update{id}', [App\Http\Controllers\Pages\SpaceController::class, 'create'])->name('space.update');
     Route::get('/space', [App\Http\Controllers\Pages\SpaceController::class, 'space'])->name('space.list');
     Route::get('/space-create{id}', [App\Http\Controllers\Pages\SpaceController::class, 'index'])->name('space');
+    Route::get('/space-dues{id}', [App\Http\Controllers\Pages\SpaceController::class, 'dues'])->name('space.dues');
+    Route::POST('/space-dues{pid}', [App\Http\Controllers\Pages\SpaceController::class, 'duesCreate'])->name('space.duescreate');
+    Route::POST('/dues-store', [App\Http\Controllers\Pages\SpaceController::class, 'duesStore'])->name('space.duesstore');
 /*
 |--------------------------------------------------------------------------
 | Dashboard taxes
