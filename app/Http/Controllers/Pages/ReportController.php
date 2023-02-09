@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Pages;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Date;
+use App\Models\Agrass;
+use App\Models\Region;
+use App\Models\City;
 use App\Models\Project;
 
 class ReportController extends Controller
@@ -57,6 +60,21 @@ class ReportController extends Controller
         $projects = Project :: with('pdate')->select()->find($id);
         // $Dates = Date ::with('projectDate')->select()->find($id);
         return view("pages.report.print",compact('projects'));
+    }
+    /**
+     * Display the specified resource.
+     *
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function allreport()
+    {
+        //
+        $Region = Region :: select()->get();
+        $City = City :: select()->get();
+        $Agrass = Agrass :: select()->get();
+        $projects = Project :: with('pdate')->select()->get();
+        return view("pages.report.all-report",compact('Region','City','Agrass','projects'));
     }
 
     /**

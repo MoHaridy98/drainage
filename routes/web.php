@@ -73,4 +73,19 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
     Route::get('/sewage-delete{id}', [App\Http\Controllers\Pages\SewageController::class, 'destroy'])->name('sewage.delete');
     Route::get('/sewage', [App\Http\Controllers\Pages\SewageController::class, 'sewage'])->name('sewage.list');
     Route::get('/sewage-create', [App\Http\Controllers\Pages\SewageController::class, 'index'])->name('sewage');
-  });
+
+/*
+|--------------------------------------------------------------------------
+| Dashboard sewage
+|--------------------------------------------------------------------------
+*/
+
+    Route::get('/report', [App\Http\Controllers\Pages\ReportController::class, 'index'])->name('report');
+    Route::get('/all-report', [App\Http\Controllers\Pages\ReportController::class, 'allreport'])->name('all-report');
+    Route::get('/report-print{id}', [App\Http\Controllers\Pages\ReportController::class, 'print'])->name('print');
+
+
+});
+
+
+
