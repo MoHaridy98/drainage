@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
 <!-- forms-validation.html  21 Nov 2019 03:55:16 GMT -->
 
 <head>
@@ -14,75 +12,129 @@
     <link rel="stylesheet" href="assets/bundles/bootstrap-daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="assets/bundles/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
     <link rel="stylesheet" href="assets/bundles/izitoast/css/iziToast.min.css">
+    <link rel="stylesheet" href="assets/bundles/pretty-checkbox/pretty-checkbox.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/components.css">
     <!-- Custom style CSS -->
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel='shortcut icon' type='image/x-icon' href='assets/img/favicon.ico' />
+
 </head>
 
 <body>
     <div class="loader"></div>
     <div id="app">
         <div class="main-wrapper main-wrapper-1">
-
             @include('layouts.sidbar')
             <!-- Main Content -->
             <div class="main-content">
                 <section class="section">
                     <div class="section-body">
+                        @include('layouts.success')
+                        @include('layouts.error')
                         <div class="row" style="direction: rtl">
-                            <div class="col-12 col-md-12 col-lg-12">
-                                <form class="needs-validation" id="work_experience" novalidate="" action="#"
-                                    method="POST" enctype="multipart/form-data">
+                            <div class="col-lg-6">
+                                <form class="needs-validation" novalidate="" action="#" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
-                                    <div class="card card-primary">
+                                    <div class="card card-primary work-xp">
                                         <div class="card-header">
-                                            <h4>اضافة مستحقات [مـدريــة الضرائب] </h4>
+                                            <h4>الضرائب العقارية</h4>
+                                            {{-- <button class="btn btn-success" type="button"
+                                                style="position: absolute; left: 10px; top:5px"><a
+                                                    class="nav-link text-white"
+                                                    href="{{ route('space.dues', $project->id) }}">اضافة
+                                                    مستحقات</a></button> --}}
                                         </div>
                                         <div class="card-body">
-
                                             <div class="form-row">
-
                                                 <div class="form-group col-md-12">
-                                                    <label> لمشروع</label>
-                                                    <div class="input-group">
-                                                        <select class="form-control" name="categorys_id">
-                                                            <option> الصرف المغطي </option>
-                                                        </select>
-
-                                                    </div>
+                                                    <label> اسم المشروع</label>
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $project->name }}" disabled>
                                                 </div>
                                             </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="card card-primary">
-                                        <div class="card-body">
                                             <div class="form-row">
                                                 <div class="form-group col-md-4">
-                                                    <label> اسم المشروع / المنطقة</label>
-                                                    <input type="text"
-                                                        class="form-control"placeholder=" اسم المشروع / المنطقة ">
+                                                    <label>تاريخ الانشاء</label>
+                                                    <input type="text" value="{{ $project->pdate->excution }}"
+                                                        class="form-control" disabled>
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <label> المساحة</label>
-                                                    <input type="number" name="xp-year"
-                                                        class="form-control"placeholder="المساحة">
+                                                    <label>تاريخ الانتهاء</label>
+                                                    <input type="text" value="{{ $project->pdate->end }}"
+                                                        class="form-control" disabled>
                                                 </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>تاريخ ابلاغ الضرائب</label>
+                                                    <input type="text" value="{{ $project->pdate->tax_final }}"
+                                                        class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
                                                 <div class="form-group col-md-4">
                                                     <label> التكلفة المستحقة</label>
-                                                    <input type="number" name="work-xp"
-                                                        class="form-control"placeholder=" التكلفة المستحقة">
+                                                    <input type="text" value="{{ $project->total_cost }}"
+                                                        class="form-control" disabled>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>اجمالي ما تم جمعه</label>
+                                                    <input type="text" value="{{ $project->amount }}"
+                                                        class="form-control" disabled>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>المتبقي من اجمالي التكلفة</label>
+                                                    <input type="number"
+                                                        value="{{ $project->total_cost - $project->amount }}"
+                                                        class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <hr>
+                                            <div class="form-row pt-2">
+                                                <div class="form-group col-md-7">
+                                                    <label>
+                                                        <h6>اضافة اجمالي مستحقات</h6>
+                                                    </label>
+                                                    <input type="text" name="amount"
+                                                        placeholder="ادخل القيمة الجديدة" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-5">
+                                                    <label>
+                                                        <h6>التاريخ</h6>
+                                                    </label>
+                                                    <input type="date" name="date" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <button type="submit" class="btn btn-success">حفظ</button>
                                 </form>
                             </div>
-                            <a href="javascript:void(0)" style="padding: 5px 10px 5px 10px;" id="addWork-btn"
-                                class="btn btn-primary form-label" onclick="addWorkRow()">+ اضف مستحق
-                            </a>
+                            <div class="col-lg-6">
+                                <div class="card card-secondary">
+                                    <div class="card-header">
+                                        <h4>جدول الاقساط</h4>
+                                    </div>
+                                    <div class="card-body" style="direction: rtl;">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover" id="save-stage"
+                                                style="width:100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th> # </th>
+                                                        <th>قيمة القسط</th>
+                                                        <th>التاريخ</th>
+                                                        <th>تفاصيل</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
             </div>
@@ -115,29 +167,29 @@
                 }
             }
 
-            if (empty == "no" && document.getElementsByClassName("work-xp").length < 4) {
+            if (empty == "no" && document.getElementsByClassName("work-xp").length < 6) {
                 const div = document.createElement('div');
-                div.className = 'card card-primary';
+                div.className = 'card card-primary work-xp';
                 div.innerHTML = `
                 <div class="card-body form-row">
-                <div class="form-group col-md-3">
-                    <input type="text" class="form-control"placeholder=" اسم المشروع / المنطقة">
-                </div>
-                <div class="form-group col-md-4">
-                    <input type="number" name="xp-year" class="form-control"placeholder="المساحة">
-                </div>
-                <div class="form-group col-md-4">
-                    <input type="number" name="work-xp" class="form-control"placeholder=" التكلفة المستحقة">
-                </div>
-                <input type="button" class="btn-danger" style="width: 50px;
-                height: 35px;" value="x" onclick="removeWorkRow(this)" />
-                </div>
+                    <div class="form-group col-md-3">
+                        <input type="text" class="form-control"placeholder=" اسم المشروع / المنطقة">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <input type="number" name="xp-year" class="form-control"placeholder="المساحة">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <input type="number" name="work-xp" class="form-control"placeholder=" التكلفة المستحقة">
+                    </div>
+                    </div>
+                    <input type="button" class="btn-danger" style="width: 50px;
+                    height: 35px; position: absolute; left: 0; border-radius: 10px" value="x" onclick="removeWorkRow(this)" />
                 `;
                 document.getElementById('work_experience').appendChild(div);
-                if (document.getElementsByClassName("work-xp").length == 4) {
+                if (document.getElementsByClassName("work-xp").length == 6) {
                     document.getElementById("addWork-btn").style.display = "none";
                 }
-                if (document.getElementsByClassName("work-xp").length != 4) {
+                if (document.getElementsByClassName("work-xp").length != 6) {
                     document.getElementById("addWork-btn").style.display = "block";
                 }
             } else {
@@ -146,8 +198,9 @@
         }
 
         function removeWorkRow(input) {
+            console.log(input);
             confirm("متأكد؟") ? document.getElementById('work_experience').removeChild(input.parentNode) : 0;
-            if (document.getElementsByClassName("work-xp").length != 4) {
+            if (document.getElementsByClassName("work-xp").length != 6) {
                 document.getElementById("addWork-btn").style.display = "block";
             }
         }
@@ -198,4 +251,5 @@
     </script>
 </body>
 <!-- forms-validation.html  21 Nov 2019 03:55:16 GMT -->
+
 </html>

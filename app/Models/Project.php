@@ -27,8 +27,14 @@ class Project extends Model
         'updated_at',
     ];
 
-    public function pdate()
-    {
+    public function pdate(){
         return $this->hasOne(Date::class , 'project_id');
+    }
+
+    public function projectBenifit(){
+        return $this->hasOne(Benefits::class ,'project_id');
+    }
+    public function projectInstallment(){
+        return $this->hasOne(Installment::class ,'project_id');
     }
 }
