@@ -63,8 +63,10 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
 | Dashboard taxes
 |--------------------------------------------------------------------------
 */
-    Route::get('/taxes', [App\Http\Controllers\Pages\TaxesController::class, 'taxes'])->name('taxes.list');
-    Route::get('/taxes-create', [App\Http\Controllers\Pages\TaxesController::class, 'index'])->name('taxes');
+    Route::get('/taxes', [App\Http\Controllers\Pages\TaxesController::class, 'index'])->name('taxes.list');
+    Route::get('/taxes-create{id}', [App\Http\Controllers\Pages\TaxesController::class, 'taxCreate'])->name('taxes.total');
+    Route::post('/taxes-store{id}', [App\Http\Controllers\Pages\TaxesController::class, 'store'])->name('taxes.create');
+    Route::get('/taxes-delete{id}', [App\Http\Controllers\Pages\TaxesController::class, 'destroy'])->name('taxes.delete');
 /*
 |--------------------------------------------------------------------------
 | Dashboard sewage

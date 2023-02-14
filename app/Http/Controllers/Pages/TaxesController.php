@@ -3,7 +3,16 @@
 namespace App\Http\Controllers\Pages;
 use App\Models\Project;
 use App\Http\Controllers\Controller;
+use App\Models\Date;
+use App\Models\Agrass;
+use App\Models\Region;
+use App\Models\City;
+use App\Models\Farmer;
+use App\Models\Benefits;
+use App\Models\Installment;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\DB as DB;
 
 class TaxesController extends Controller
 {
@@ -15,14 +24,28 @@ class TaxesController extends Controller
     public function index()
     {
         //
-        return view("pages.taxes.create");
+        $farmer = Benefits :: select()->with('farmerName.assname','farmerName.assname.regionname','farmerName.assname.regionname.cityname')->get();
+        // $project = Benefits :: select(DB::raw("SUM(Total_installment) as Total_installment , project_id"))->with('projectName','projectName.pdate')->groupBy('project_id')->get();
+        $projectTotal = DB::table('installment')
+            ->rightjoin('project', 'project.id', '=', 'installment.project_id')
+            ->join('date' , DB::raw('date.tax_final IS NOT NULL  AND date.project_id'), '=', 'project.id')
+            ->select('project.id','date.tax_final','project.name','project.total_cost' , DB::raw('COALESCE(SUM(installment.amount),0) as amount'))
+            ->groupBy('project.id', 'project.total_cost','project.name','date.tax_final')
+            ->get();
+        return view("pages.taxes.taxes" , compact('farmer','projectTotal'));
+
     }
 
-    public function taxes()
+    public function taxCreate($id)
     {
         //
-        $projects = Project :: with('pdate')->where('verified', 1 )->select()->get();
-        return view("pages.taxes.taxes",compact('projects'));
+        $project = Project :: with('pdate')->select()->find($id);
+        // $installment = DB::table('installment')
+        // ->select(DB::raw('SUM(amount) as amount'))
+        // ->where('project_id',$id)
+        // ->get();
+        $installment = Installment :: select()->where('project_id',$id)->get();
+        return view("pages.taxes.create", compact('project','installment'));
     }
 
     /**
@@ -32,7 +55,7 @@ class TaxesController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -41,9 +64,21 @@ class TaxesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        try
+        {
+            $installment = Installment:: create(([
+                'date' => $request['date'],
+                'amount' => $request['amount'],
+                'project_id' => $id,
+            ]));
+            return redirect()->back()-> with(['success' => 'تم التسجيل بنجاح']);
+        }
+        catch(\Exception $ex)
+        {
+            return redirect()->back()-> with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد' . $ex]);
+        }
     }
 
     /**
@@ -88,6 +123,13 @@ class TaxesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $item = Installment :: find($id);
+            if($item)$item->forcedelete();
+            $item->forcedelete();
+            return redirect()->back()-> with(['success' => 'تم الحذف!']);
+        }catch(\Exception $ex){
+            return redirect()->back()-> with(['error' => 'خطأ' + $ex]);
+        }
     }
 }

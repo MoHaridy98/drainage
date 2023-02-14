@@ -121,18 +121,8 @@
                 <a href="#" class="menu-toggle nav-link has-dropdown"><span> الضرائـب العقاريــة</span>
                     <i data-feather="briefcase"></i></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('taxes') }}">اضافة مستحق </a></li>
+                    {{-- <li><a class="nav-link" href="{{ route('taxes') }}">اضافة مستحق </a></li> --}}
                     <li><a class="nav-link" href="{{ route('taxes.list') }}"> كل المستحقات</a></li>
-                </ul>
-            </li>
-
-            <li class="menu-header"></li>
-            <li class="dropdown">
-                <a href="#" class="menu-toggle nav-link has-dropdown"><span>المديونيات المستحقة</span>
-                    <i data-feather="briefcase"></i></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="#">المستحقات لكل مشروع</a></li>
-                    <li><a class="nav-link" href="#"> المرفقات </a></li>
                 </ul>
             </li>
             <li class="menu-header"></li>
