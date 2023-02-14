@@ -34,7 +34,8 @@
                         @include('layouts.error')
                         <div class="row" style="direction: rtl">
                             <div class="col-lg-6">
-                                <form class="needs-validation" novalidate="" action="#" method="POST"
+                                <form class="needs-validation" novalidate=""
+                                    action="{{ route('taxes.create', $project->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="card card-primary work-xp">
@@ -79,17 +80,21 @@
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label>اجمالي ما تم جمعه</label>
-                                                    <input type="text" value="{{ $project->amount }}"
-                                                        class="form-control" disabled>
+                                                    {{-- <input type="text"
+                                                        value="
+                                                    @if ($installment && $installment->count() > 0) @foreach ($installment as $item)
+                                                            {{ $item->amount->count() }}
+                                                            @endforeach @endif
+                                                     "
+                                                        class="form-control" disabled> --}}
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label>المتبقي من اجمالي التكلفة</label>
-                                                    <input type="number"
-                                                        value="{{ $project->total_cost - $project->amount }}"
-                                                        class="form-control" disabled>
+                                                    {{-- <input type="text"
+                                                        value="{{ $project->total_cost - $installment->amount }}"
+                                                        class="form-control" disabled> --}}
                                                 </div>
                                             </div>
-                                            <br>
                                             <hr>
                                             <div class="form-row pt-2">
                                                 <div class="form-group col-md-7">
@@ -129,6 +134,32 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @isset($installment)
+                                                        @if ($installment && $installment->count() > 0)
+                                                            @foreach ($installment as $item)
+                                                                <tr>
+                                                                    <td>{{ $item->id }}</td>
+                                                                    <td>{{ $item->amount }}</td>
+                                                                    <td>{{ $item->date }}</td>
+                                                                    <td>
+                                                                        <div class="btn-group dropup">
+                                                                            <button id="btnGroupVerticalDrop5"type="button"
+                                                                                class="btn"data-toggle="dropdown"
+                                                                                aria-haspopup="true"aria-expanded="false">
+                                                                                <i class="fas fa-ellipsis-v"></i>
+                                                                            </button>
+
+                                                                            <div class="dropdown-menu"
+                                                                                aria-labelledby="btnGroupVerticalDrop2">
+                                                                                <a class="dropdown-item"
+                                                                                    href="{{ route('taxes.delete', $item->id) }}">حذف</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        @endif
+                                                    @endisset
                                                 </tbody>
                                             </table>
                                         </div>
@@ -154,10 +185,16 @@
     <!-- Template JS File -->
     <script src="assets/js/scripts.js"></script>
     <!-- Custom JS File -->
+    <script src="assets/bundles/datatables/datatables.min.js"></script>
+    <script src="assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
     <script src="assets/js/custom.js"></script>
     <script src="assets/bundles/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
     <script src="assets/bundles/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script>
+        $(document).ready(function() {
+            $('table.table').DataTable();
+        });
+
         function addWorkRow() {
             var elements = document.getElementsByClassName('work-xp-input');
             var empty = "no"

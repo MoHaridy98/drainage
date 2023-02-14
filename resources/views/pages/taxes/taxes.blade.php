@@ -162,6 +162,7 @@
                                                                     <th>المنطقة</th>
                                                                     <th>الجمعية</th> --}}
                                                                     <th>المشروع</th>
+                                                                    <th>ت وارد م.المساحة</th>
                                                                     <th>تكلفة المشروع</th>
                                                                     <th>ما تم تحصيله</th>
                                                                     <th>المتبقي</th>
@@ -174,6 +175,7 @@
                                                                         @foreach ($projectTotal as $project)
                                                                             <tr>
                                                                                 <td>{{ $project->name }}</td>
+                                                                                <td>{{ $project->tax_final }}</td>
                                                                                 <td>{{ $project->total_cost }} جنية
                                                                                 </td>
                                                                                 <td>{{ $project->amount ?? '0' }} جنية

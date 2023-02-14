@@ -41,7 +41,7 @@
                                     <div class="card card-primary work-xp">
                                         <div class="card-header">
                                             <h4>مـدريــة المساحة</h4>
-                                            <button class="btn btn-success" type="button"
+                                            <button class="btn btn-dark" type="button"
                                                 style="position: absolute; left: 10px; top:5px"><a
                                                     class="nav-link text-white"
                                                     href="{{ route('space.dues', $projects->id) }}">اضافة

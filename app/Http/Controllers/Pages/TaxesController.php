@@ -29,8 +29,8 @@ class TaxesController extends Controller
         $projectTotal = DB::table('installment')
             ->rightjoin('project', 'project.id', '=', 'installment.project_id')
             ->join('date' , DB::raw('date.tax_final IS NOT NULL  AND date.project_id'), '=', 'project.id')
-            ->select('project.id','project.name','project.total_cost' , DB::raw('COALESCE(SUM(installment.amount),0) as amount'))
-            ->groupBy('project.id', 'project.total_cost','project.name')
+            ->select('project.id','date.tax_final','project.name','project.total_cost' , DB::raw('COALESCE(SUM(installment.amount),0) as amount'))
+            ->groupBy('project.id', 'project.total_cost','project.name','date.tax_final')
             ->get();
         return view("pages.taxes.taxes" , compact('farmer','projectTotal'));
         
@@ -40,7 +40,11 @@ class TaxesController extends Controller
     {
         //
         $project = Project :: with('pdate')->select()->find($id);
-        $installment = Installment :: select(DB::raw("SUM(amount) as amount"))->where('project_id',$id)->groupBy('project_id')->get();
+        // $installment = DB::table('installment')
+        // ->select(DB::raw('SUM(amount) as amount'))
+        // ->where('project_id',$id)
+        // ->get();
+        $installment = Installment :: select()->where('project_id',$id)->get();
         return view("pages.taxes.create", compact('project','installment'));
     }
 
@@ -51,7 +55,7 @@ class TaxesController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -60,9 +64,21 @@ class TaxesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        try
+        {
+            $installment = Installment:: create(([
+                'date' => $request['date'],
+                'amount' => $request['amount'],
+                'project_id' => $id,
+            ]));
+            return redirect()->back()-> with(['success' => 'تم التسجيل بنجاح']);
+        }
+        catch(\Exception $ex)
+        {
+            return redirect()->back()-> with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد' . $ex]);
+        }
     }
 
     /**
@@ -107,6 +123,13 @@ class TaxesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $item = Installment :: find($id);
+            if($item)$item->forcedelete();
+            $item->forcedelete();
+            return redirect()->back()-> with(['success' => 'تم الحذف!']);
+        }catch(\Exception $ex){
+            return redirect()->back()-> with(['error' => 'خطأ' + $ex]);
+        }
     }
 }
