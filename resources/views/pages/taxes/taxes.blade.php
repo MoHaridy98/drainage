@@ -33,7 +33,7 @@
                             <div class="col-12">
                                 <div class="card card-secondary">
                                     <div class="card-header">
-                                        <h4> مـدريـة الزراعــة </h4>
+                                        <h4> المشاريع للتحصيل </h4>
                                     </div>
                                     <div class="card-body" style="direction: rtl;">
                                         <div class="table-responsive">
@@ -42,14 +42,36 @@
                                                 <thead>
                                                     <tr>
                                                         <th> # </th>
-                                                        <th>اسم القسم</th>
-                                                        <th>اسم الخدمة</th>
-                                                        <th>حالة</th>
+                                                        <th>اسم المشروع</th>
+                                                        <th>ت : وارد مدرية المساحة </th>
+                                                        <th>التكلفة الكلية</th>
+                                                        <th>إجمالي التحصيل</th>
                                                         <th>تفاصيل</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @isset($projects)
+                                                        @if ($projects && $projects->count() > 0)
+                                                            @foreach ($projects as $project)
 
+                                                            <tr>
+                                                                <td>{{ $project->id }}</td>
+                                                                <td>{{ $project->name }}</td>
+
+                                                                <td>{{ $project->pdate->tax_final ?? 'NULL' }}
+                                                                </td>
+                                                                <td>{{ $project->total_cost }} جنية</td>
+                                                                <td>{{ $project->total_cost }} جنية</td>
+                                                                <td>
+                                                                    <a class="dropdown-item"
+                                                                        href="{{ route('space', $project->id) }}">
+                                                                         عرض وتعديل</a>
+                                                                </td>
+                                                            </tr>
+
+                                                            @endforeach
+                                                        @endif
+                                                    @endisset
                                                 </tbody>
                                             </table>
                                         </div>

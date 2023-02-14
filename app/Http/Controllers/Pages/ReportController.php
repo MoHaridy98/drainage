@@ -9,6 +9,7 @@ use App\Models\Agrass;
 use App\Models\Region;
 use App\Models\City;
 use App\Models\Project;
+use App\Models\Farmer;
 
 class ReportController extends Controller
 {
@@ -22,9 +23,7 @@ class ReportController extends Controller
         //
         $projects = Project :: with('pdate')->select()->get();
         $Vprojects = Project :: with('pdate')->where('verified', 1 )->select()->get();
-        $unVprojects = Project :: with('pdate')->where('verified', 0 )->where('has_changed', 0 )->select()->get();
-        $chVprojects = Project :: with('pdate')->where('verified', 0 )->where('has_changed', 1 )->select()->get();
-        return view('pages.report.report',compact('projects','Vprojects','unVprojects','chVprojects'));
+        return view('pages.report.report',compact('projects','Vprojects'));
     }
 
     /**
@@ -67,14 +66,30 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function allreport()
+    public function allreport(Request $request )
     {
         //
         $Region = Region :: select()->get();
         $City = City :: select()->get();
         $Agrass = Agrass :: select()->get();
-        $projects = Project :: with('pdate')->select()->get();
-        return view("pages.report.all-report",compact('Region','City','Agrass','projects'));
+        return view("pages.report.all-report",compact('Region','City','Agrass'));
+    }
+    /**
+     * Display the specified resource.
+     *
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function allreport_project(Request $request)
+    {
+        $aid = $request['agr_ass'];
+        $Projects = Project :: with('pdate')->where('verified', 1 )->select()->get();
+        $City = City :: select()->get();
+        $Region = Region :: select()->get();
+        $Agrass = Agrass :: select()->get();
+        $Farmer = Farmer :: select()->with('assname','farmerBenifit')->where('association_id',$aid)->get();
+
+        return view("pages.report.all-report",compact('Region','City','Agrass','Farmer','Projects'));
     }
 
     /**

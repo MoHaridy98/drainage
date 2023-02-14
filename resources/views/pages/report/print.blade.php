@@ -18,7 +18,26 @@
     <!-- Custom style CSS -->
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel='shortcut icon' type='image/x-icon' href='assets/img/favicon.ico' />
+    <style>
+        @media print {
+            #print_Button {
+                display: none;
+            }
+            #DataTables_Table_0_filter{
+                display: none;
+            }
+            #DataTables_Table_0_length{
+                display: none;
+            }
+            #DataTables_Table_0_paginate{
+                display: none;
+            }
+            #DataTables_Table_0_info{
+                display: none;
+            }
+        }
 
+    </style>
 </head>
 
 <body>
@@ -27,8 +46,8 @@
         <div class="main-wrapper main-wrapper-1">
             @include('layouts.sidbar')
             <!-- Main Content -->
-            <div class="main-content">
-                <section class="section">
+            <div class="main-content" >
+                <section class="section" id="print">
                     <div class="section-body">
                         <div class="row" style="direction: rtl">
                             <div class="col-12 col-md-12 col-lg-12">
@@ -114,6 +133,10 @@
                                     </div>
                                 </form>
                             </div>
+                            <div class="justify-content-right d-flex">
+                                <button class="btn btn-danger  float-left mt-3 mr-2" id="print_Button" onclick="printDiv()"> <i
+                                        class="mdi mdi-printer ml-1"></i>طباعة</button>
+                            </div>
                         </div>
                     </div>
             </div>
@@ -136,6 +159,16 @@
     <script src="assets/js/custom.js"></script>
     <script src="assets/bundles/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
     <script src="assets/bundles/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script type="text/javascript">
+        function printDiv() {
+            var printContents = document.getElementById('print').innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+            location.reload();
+        }
+    </script>
     <script>
         function addWorkRow() {
             var elements = document.getElementsByClassName('work-xp-input');

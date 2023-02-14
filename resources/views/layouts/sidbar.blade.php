@@ -142,7 +142,7 @@
                     <i data-feather="briefcase"></i></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{ route('report') }}">تقرير مفصل</a></li>
-                    <li><a class="nav-link" href="{{ route('all-report') }}">تقرير مجمع</a></li>
+                    <li><a class="nav-link" href="{{ route('all.report_project') }}">تقرير مجمع</a></li>
                 </ul>
             </li>
         </ul>

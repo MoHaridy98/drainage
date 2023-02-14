@@ -18,7 +18,26 @@
     <!-- Custom style CSS -->
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel='shortcut icon' type='image/x-icon' href='assets/img/favicon.ico' />
+    <style>
+        @media print {
+            #print_Button {
+                display: none;
+            }
+            #DataTables_Table_0_filter{
+                display: none;
+            }
+            #DataTables_Table_0_length{
+                display: none;
+            }
+            #DataTables_Table_0_paginate{
+                display: none;
+            }
+            #DataTables_Table_0_info{
+                display: none;
+            }
+        }
 
+    </style>
 </head>
 
 <body>
@@ -27,21 +46,22 @@
         <div class="main-wrapper main-wrapper-1">
             @include('layouts.sidbar')
             <!-- Main Content -->
-            <div class="main-content">
+            <div class="main-content" id="print" style="padding-top: 76px;">
+                <div id="centerlogo" style="margin-bottom: 30px ; justify-content: space-between; align-items: center; display:flex;">
+                    <img width="100px" height="120px" src="../images/logo/aswan.png">
+
+                    <img width="80px" height="100px" src="../images/logo/logo.png">
+                </div>
                 <section class="section">
                     <div class="section-body">
                         <div class="row" style="direction: rtl">
                             <div class="col-12 col-md-12 col-lg-12">
                                 @include('layouts.success')
                                 @include('layouts.error')
-                                <form class="needs-validation" novalidate="" action="" method="POST"
-                                    enctype="multipart/form-data">
+                                {{-- <form class="needs-validation" novalidate="" action="{{ route('all.report_project') }}"
+                                    method="GET" enctype="multipart/form-data">
                                     @csrf
                                     <div class="card card-primary">
-                                        <div class="card-header">
-                                            <h4>[ تقرير مجمع ] </h4>
-                                        </div>
-
                                         <div class="card-body">
                                             <div class="form-row">
                                                 <div class="form-group col-md-3">
@@ -100,7 +120,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                </form> --}}
                             </div>
                         </div>
                     </div>
@@ -109,87 +129,108 @@
                     <div class="section-body">
                         <div class="row" style="direction: rtl">
                             <div class="col-12 col-md-12 col-lg-12">
-                                @include('layouts.success')
-                                @include('layouts.error')
-                                <form class="needs-validation" novalidate="" action="" method="POST"
+                                <form class="needs-validation" novalidate="" action="" method="GET"
                                     enctype="multipart/form-data">
                                     @csrf
-                                    <div class="card card-primary">
-                                        <div class="card-header">
-                                            <h4>[ تقرير مجمع ] </h4>
-                                        </div>
+                                    @isset($Projects)
+                                        @if ($Projects && $Projects->count() > 0)
+                                            @foreach ($Projects as $projects)
+                                                <div class="card card-primary">
+                                                    <div class="card-header">
+                                                        <h4>[ تقرير مشروع / {{ $projects->name }} ] </h4>
+                                                    </div>
 
-                                        <div class="card-body">
-                                            <table class="table">
-                                                {{-- <tbody>
-                                                    <tr style="height: 50px;">
-                                                        <th scope="row" style="text-align: inherit;width: 130px; ">
-                                                            اسم المشروع : </th>
-                                                        <td style="text-align: inherit; ">{{ $projects->name }}</td>
-                                                    </tr>
-                                                    <tr style="height: 50px;">
-                                                        <th scope="row" style="text-align: inherit;width: 130px; ">
-                                                            تاريخ الانشاء</th>
-                                                        <td style="text-align: inherit; ">
-                                                            {{ $projects->pdate->enclose_end }}</td>
-                                                    </tr>
-                                                    <tr style="height: 50px;">
-                                                        <th scope="row" style="text-align: inherit;width: 130px; ">
-                                                            تاريخ الانتهاء</th>
-                                                        <td style="text-align: inherit;">
-                                                            {{ $projects->pdate->enclose_end }}</td>
-                                                    </tr>
-                                                    <tr style="height: 50px;">
-                                                        <th scope="row" style="text-align: inherit;width: 130px;">
-                                                            التكلفة المستحقة </th>
-                                                        <td style="text-align: inherit;">{{ $projects->total_cost }}
-                                                        </td>
-                                                    </tr>
-                                                    <tr style="height: 50px;">
-                                                        <th scope="row" style="text-align: inherit;width: 130px;">
-                                                            المساحة / الزمام :</th>
-                                                        <td style="text-align: inherit;">
-                                                            <div class="badge badge-light">
-                                                                {{ $projects->acre }}
-                                                                فدان</div>
-                                                            <div class="badge badge-light">
-                                                                {{ $projects->carat }}
-                                                                فراط</div>
-                                                            <div class="badge badge-light">
-                                                                {{ $projects->share }}
-                                                                سهم</div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody> --}}
-                                            </table>
-                                            <table class="table table-bordered" style="margin-top: 50px;">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">تاريخ الحصر </th>
-                                                        <th scope="col">تاريخ العرض والنشر </th>
-                                                        <th scope="col">تاريخ المعارضات </th>
-                                                    </tr>
-                                                </thead>
-                                                {{-- <tbody>
-                                                    <tr>
-                                                        <th scope="row">بدأ</th>
-                                                        <td>{{ $projects->pdate->enclose_start }}</td>
-                                                        <td>{{ $projects->pdate->view_start }}</td>
-                                                        <td>{{ $projects->pdate->opposition_start }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">نهو</th>
-                                                        <td>{{ $projects->pdate->enclose_end }}</td>
-                                                        <td>{{ $projects->pdate->view_end }}</td>
-                                                        <td>{{ $projects->pdate->opposition_end }}</td>
-                                                    </tr>
+                                                    <div class="card-body">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr style="height: 50px;">
+                                                                    <th scope="row"
+                                                                        style="text-align: inherit;width: 130px; ">
+                                                                        اسم المشروع : </th>
+                                                                    <td style="text-align: inherit; ">{{ $projects->name }}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr style="height: 50px;">
+                                                                    <th scope="row"
+                                                                        style="text-align: inherit;width: 130px; ">
+                                                                        تاريخ الانشاء</th>
+                                                                    <td style="text-align: inherit; ">
+                                                                        {{ $projects->pdate->enclose_end }}</td>
+                                                                </tr>
+                                                                <tr style="height: 50px;">
+                                                                    <th scope="row"
+                                                                        style="text-align: inherit;width: 130px; ">
+                                                                        تاريخ الانتهاء</th>
+                                                                    <td style="text-align: inherit;">
+                                                                        {{ $projects->pdate->enclose_end }}</td>
+                                                                </tr>
+                                                                <tr style="height: 50px;">
+                                                                    <th scope="row"
+                                                                        style="text-align: inherit;width: 130px;">
+                                                                        التكلفة المستحقة </th>
+                                                                    <td style="text-align: inherit;">
+                                                                        {{ $projects->total_cost }}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr style="height: 50px;">
+                                                                    <th scope="row"
+                                                                        style="text-align: inherit;width: 130px;">
+                                                                        المساحة / الزمام :</th>
+                                                                    <td style="text-align: inherit;">
+                                                                        <div class="badge badge-light">
+                                                                            {{ $projects->acre }}
+                                                                            فدان</div>
+                                                                        <div class="badge badge-light">
+                                                                            {{ $projects->carat }}
+                                                                            فراط</div>
+                                                                        <div class="badge badge-light">
+                                                                            {{ $projects->share }}
+                                                                            سهم</div>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="card-header">
+                                                            <p>    مدرية المساحة لمشروع  : {{ $projects->name }}  </h4>
+                                                        </div>
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">تاريخ الحصر </th>
+                                                                    <th scope="col">تاريخ العرض والنشر </th>
+                                                                    <th scope="col">تاريخ المعارضات </th>
+                                                                    <th>تاريخ ابلاغ الضرائب </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
 
-                                                </tbody> --}}
-                                            </table>
-                                        </div>
-                                    </div>
+                                                                <tr>
+                                                                    <th scope="row">بدأ</th>
+                                                                    <td>{{ $projects->pdate->enclose_start }}</td>
+                                                                    <td>{{ $projects->pdate->view_start }}</td>
+                                                                    <td>{{ $projects->pdate->opposition_start }}</td>
+                                                                    <td rowspan="2">{{ $projects->pdate->tax_final }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">نهو</th>
+                                                                    <td>{{ $projects->pdate->enclose_end }}</td>
+                                                                    <td>{{ $projects->pdate->view_end }}</td>
+                                                                    <td>{{ $projects->pdate->opposition_end }}</td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                    @endisset
                                 </form>
+                            </div>
+                            <div class="justify-content-right d-flex">
+                                <button class="btn btn-danger  float-left mt-3 mr-2" id="print_Button" onclick="printDiv()"> <i
+                                        class="mdi mdi-printer ml-1"></i>طباعة</button>
                             </div>
                         </div>
                     </div>
@@ -274,6 +315,16 @@
             }
         }
     </script>
+        <script type="text/javascript">
+            function printDiv() {
+                var printContents = document.getElementById('print').innerHTML;
+                var originalContents = document.body.innerHTML;
+                document.body.innerHTML = printContents;
+                window.print();
+                document.body.innerHTML = originalContents;
+                location.reload();
+            }
+        </script>
     <script>
         function addSkillRow() {
             var elements = document.getElementsByClassName('skill-input');

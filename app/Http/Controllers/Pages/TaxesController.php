@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Pages;
-
+use App\Models\Project;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -21,7 +21,8 @@ class TaxesController extends Controller
     public function taxes()
     {
         //
-        return view("pages.taxes.taxes");
+        $projects = Project :: with('pdate')->where('verified', 1 )->select()->get();
+        return view("pages.taxes.taxes",compact('projects'));
     }
 
     /**
