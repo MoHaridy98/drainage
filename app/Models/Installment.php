@@ -23,6 +23,6 @@ class Installment extends Model
         return $this->belongsTo(Farmer::class ,'farmer_id');
     }
     public function proName(){
-        return $this->belongsTo(Project::class ,'project_id');
+        return $this->belongsToMany(Project::class ,'project_id');
     }
 }

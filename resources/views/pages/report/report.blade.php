@@ -31,9 +31,9 @@
                     <div class="section-body">
                         <div class="row">
                             <div class="col-12">
-                                <div class="card card-secondary">
+                                <div class="card card-secondary" id="print">
                                     <div class="card-header">
-                                        <h4>  تقارير مشروع الصرف المغطي </h4>
+                                        <h3> تقارير مشروع الصرف المغطي </h3>
                                     </div>
                                     <div class="card-body">
                                         {{-- <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -55,8 +55,6 @@
                                                     عُدلت</a>
                                             </li>
                                         </ul> --}}
-                                        @include('layouts.success')
-                                        @include('layouts.error')
                                         <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="approved" role="tabpanel"
                                                 aria-labelledby="approved-tab">
@@ -68,9 +66,11 @@
                                                                 <tr>
                                                                     <th> # </th>
                                                                     <th> المشروع</th>
-                                                                    <th> تاريخ الحصر (نهو)</th>
-                                                                    <th> تاريخ العرض والنشر (نهو)</th>
-                                                                    <th> تاريخ المعارضات (نهو)</th>
+                                                                    <th> تاريخ الانشاء</th>
+                                                                    <th> تاريخ الانتهاء</th>
+                                                                    <th> التكلفة</th>
+                                                                    <th> المحصل</th>
+                                                                    <th> المتبقي</th>
                                                                     <th> إبلاغ الضرائب</th>
                                                                     <th>تفاصيل</th>
                                                                 </tr>
@@ -82,10 +82,24 @@
                                                                             <tr>
                                                                                 <td>{{ $project->id }}</td>
                                                                                 <td>{{ $project->name }}</td>
-                                                                                <td class="text-danger mb-2">{{ $project->pdate->enclose_end ?? 'NULL' }}</td>
-                                                                                <td class="text-danger mb-2">{{ $project->pdate->view_end ?? 'NULL' }}</td>
-                                                                                <td class="text-danger mb-2">{{ $project->pdate->opposition_end ?? 'NULL' }}</td>
-                                                                                <td class="text-danger mb-2">{{ $project->pdate->tax_final ?? 'NULL' }}</td>
+                                                                                <td>{{ $project->pdate->excution ?? 'NULL' }}
+                                                                                </td>
+                                                                                <td>{{ $project->pdate->end ?? 'NULL' }}
+                                                                                </td>
+                                                                                <td>
+                                                                                    {{ $project->total_cost ?? 'NULL' }}
+                                                                                </td>
+                                                                                <td>
+                                                                                    {{ $project->projectInstallment->sum('amount') ?? '0' }}
+                                                                                    جنية
+                                                                                </td>
+                                                                                <td class="text-danger mb-2">
+                                                                                    {{ ($project->total_cost ?? '0') - ($project->projectInstallment->sum('amount') ?? '0') }}
+                                                                                    جنية
+                                                                                </td>
+                                                                                </td>
+                                                                                <td>{{ $project->pdate->tax_final ?? 'NULL' }}
+                                                                                </td>
                                                                                 <td>
                                                                                     <a class="badge badge-info text-dark mb-1"
                                                                                         href="{{ route('print', $project->id) }}">عرض
@@ -98,9 +112,13 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
+                                                    {{-- <div class="justify-content-right d-flex">
+                                                        <button class="btn btn-danger  float-left mt-3 mr-2"
+                                                            id="print_Button" onclick="printDiv()"> <i
+                                                                class="mdi mdi-printer ml-1"></i>طباعة</button>
+                                                    </div> --}}
                                                 </div>
                                             </div>
-                                            
                                         </div>
                                     </div>
                                 </div>
@@ -129,6 +147,15 @@
         $(document).ready(function() {
             $('table.table').DataTable();
         });
+
+        function printDiv() {
+            var printContents = document.getElementById('print').innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+            location.reload();
+        }
     </script>
 </body>
 

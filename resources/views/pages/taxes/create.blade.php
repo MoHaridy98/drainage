@@ -101,7 +101,7 @@
                                                     <label>
                                                         <h6>اضافة اجمالي مستحقات</h6>
                                                     </label>
-                                                    <input type="text" name="amount"
+                                                    <input type="text" name="amount" step="0.1"
                                                         placeholder="ادخل القيمة الجديدة" class="form-control">
                                                 </div>
                                                 <div class="form-group col-md-5">
