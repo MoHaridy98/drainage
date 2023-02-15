@@ -35,6 +35,11 @@
                                     <div class="card-header">
                                         <h3> تقارير مشروع الصرف المغطي </h3>
                                     </div>
+                                    {{-- <div id="centerlogo"
+                                        style="margin-bottom: 30px ; justify-content: space-around; display:flex;">
+                                        <img width="100px" height="120px" src="../images/logo/aswan.png">
+                                        <img width="80px" height="100px" src="../images/logo/logo.png">
+                                    </div> --}}
                                     <div class="card-body">
                                         {{-- <ul class="nav nav-tabs" id="myTab" role="tablist">
                                             <li class="nav-item">
@@ -71,7 +76,8 @@
                                                                     <th> التكلفة</th>
                                                                     <th> المحصل</th>
                                                                     <th> المتبقي</th>
-                                                                    <th> إبلاغ الضرائب</th>
+                                                                    <th> ت.ارساله للمساحة والضرائب</th>
+                                                                    <th> تاريخ إبلاغ الضرائب </th>
                                                                     <th>تفاصيل</th>
                                                                 </tr>
                                                             </thead>
@@ -91,12 +97,12 @@
                                                                                 </td>
                                                                                 <td>
                                                                                     {{ $project->projectInstallment->sum('amount') ?? '0' }}
-                                                                                    جنية
                                                                                 </td>
                                                                                 <td class="text-danger mb-2">
                                                                                     {{ ($project->total_cost ?? '0') - ($project->projectInstallment->sum('amount') ?? '0') }}
-                                                                                    جنية
                                                                                 </td>
+                                                                                </td>
+                                                                                <td>{{ $project->pdate->tax_initial ?? 'NULL' }}
                                                                                 </td>
                                                                                 <td>{{ $project->pdate->tax_final ?? 'NULL' }}
                                                                                 </td>
@@ -110,6 +116,20 @@
                                                                     @endif
                                                                 @endisset
                                                             </tbody>
+                                                            <tfoot class="table-info">
+                                                                <tr>
+                                                                    <th style="text-align:left">الاجمالي:</th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </tfoot>
                                                         </table>
                                                     </div>
                                                     {{-- <div class="justify-content-right d-flex">
@@ -137,15 +157,53 @@
     <script src="assets/bundles/datatables/datatables.min.js"></script>
     <script src="assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
     <script src="assets/bundles/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Page Specific JS File -->
-    <script src="assets/js/page/datatables.js"></script>
     <!-- Template JS File -->
     <script src="assets/js/scripts.js"></script>
     <!-- Custom JS File -->
     <script src="assets/js/custom.js"></script>
     <script>
         $(document).ready(function() {
-            $('table.table').DataTable();
+            $('table.table').DataTable({
+                footerCallback: function(row, data, start, end, display) {
+                    var api = this.api();
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function(i) {
+                        return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i ===
+                            'number' ? i : 0;
+                    };
+
+                    //total projects
+                    totalProject = api
+                        .column(1)
+                        .data();
+                    // TotalCost over all pages
+                    totalCost = api
+                        .column(4)
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+                    // totalCollect over all pages
+                    totalCollect = api
+                        .column(5)
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+                    // totalRemain over all pages
+                    totalRemain = api
+                        .column(6)
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+                    // Update footer
+                    $(api.column(1).footer()).html(totalProject.count());
+                    $(api.column(4).footer()).html(totalCost + ' جنية ');
+                    $(api.column(5).footer()).html(totalCollect + ' جنية ');
+                    $(api.column(6).footer()).html(totalRemain + ' جنية ');
+                },
+            });
         });
 
         function printDiv() {

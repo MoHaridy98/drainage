@@ -51,6 +51,12 @@
             <!-- Main Content -->
             <div class="main-content">
                 <section class="section" id="print">
+                    <div id="centerlogo"
+                        style="margin: 30px ; justify-content: space-between; align-items: center; display:flex;">
+                        <img width="80px" height="100px" src="../images/logo/aswan.png">
+
+                        <img width="80px" height="100px" src="../images/logo/logo.png">
+                    </div>
                     <div class="section-body">
                         <div class="row" style="direction: rtl">
                             <div class="col-12 col-md-12 col-lg-12">

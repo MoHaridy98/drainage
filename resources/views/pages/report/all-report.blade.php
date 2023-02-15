@@ -200,7 +200,6 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
-
                                                     <table class="table table-bordered" style="margin-top: 50px;">
                                                         <thead>
                                                             <tr>
@@ -249,6 +248,13 @@
                                                     </table>
                                                 </div>
                                             </div>
+                                            @php
+                                                $i = 0;
+                                                $i = $loop->iteration % 4;
+                                            @endphp
+                                            @if ($i == 2 || $i == 0)
+                                                <div class="pagebreak"> </div>
+                                            @endif
                                         @endforeach
                                     @endif
                                 @endisset
