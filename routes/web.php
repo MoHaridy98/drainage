@@ -90,6 +90,21 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
     Route::get('/project-report', [App\Http\Controllers\Pages\ReportController::class, 'allreport_project'])->name('all.report_project');
     Route::get('/report-print{id}', [App\Http\Controllers\Pages\ReportController::class, 'print'])->name('print');
 
+/*
+|--------------------------------------------------------------------------
+| Dashboard Users
+|--------------------------------------------------------------------------
+*/
+
+    Route::get('/users', [App\Http\Controllers\Pages\UsersController::class, 'index'])->name('Users');
+    Route::get('/adduser', [App\Http\Controllers\Pages\UsersController::class, 'add_user'])->name('AddUsers');
+    Route::get('/edit-user{id}', [App\Http\Controllers\Pages\UsersController::class, 'edit'])->name('editUsers');
+    Route::get('/updateuser{id}', [App\Http\Controllers\Pages\UsersController::class, 'update'])->name('update.User');
+
+    Route::get('/roles', [App\Http\Controllers\Pages\RolesController::class, 'index'])->name('Roles');
+    Route::get('/addRoles', [App\Http\Controllers\Pages\RolesController::class, 'create'])->name('AddRoles.Permission');
+    Route::get('/editRoles{id}', [App\Http\Controllers\Pages\RolesController::class, 'edit'])->name('editRoles.Permission');
+    Route::post('/updateRoles{id}', [App\Http\Controllers\Pages\RolesController::class, 'update'])->name('updateRoles.Permission');
 
 });
 

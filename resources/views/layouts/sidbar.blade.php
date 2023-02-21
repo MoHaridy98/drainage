@@ -126,13 +126,32 @@
                 </ul>
             </li>
             <li class="menu-header"></li>
-            <li class="menu-header"></li>
+
             <li class="dropdown">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><span> تقارير المشرعات</span>
                     <i data-feather="briefcase"></i></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('report') }}">تقرير مفصل</a></li>
-                    <li><a class="nav-link" href="{{ route('all.report_project') }}">تقرير مجمع</a></li>
+
+                    @if (auth()->user()->hasRole('super_admin'))
+                        @can('report')
+                            <li><a class="nav-link" href="{{ route('report') }}">تقرير مفصل</a></li>
+                        @endcan
+                        @can('all-report')
+                            <li><a class="nav-link" href="{{ route('all.report_project') }}">تقرير مجمع</a></li>
+                        @endcan
+                        @endif
+                </ul>
+            </li>
+            <li class="menu-header"></li>
+
+            <li class="dropdown">
+                <a href="#" class="menu-toggle nav-link has-dropdown"><span>الإعدادات</span>
+                    <i data-feather="briefcase"></i></a>
+                <ul class="dropdown-menu">
+                    
+                    <li><a class="nav-link" href="{{ route('Users') }}">  مستخدميين</a></li>
+
+                    <li><a class="nav-link" href="{{ route('Roles') }}">اضافة اذونات</a></li>
                 </ul>
             </li>
         </ul>
