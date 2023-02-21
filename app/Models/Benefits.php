@@ -22,6 +22,6 @@ class Benefits extends Model
         return $this->belongsTo(Farmer::class ,'farmer_id');
     }
     public function projectName(){
-        return $this->belongsTo(Project::class ,'project_id');
+        return $this->belongsToMany(Project::class ,'project_id');
     }
 }

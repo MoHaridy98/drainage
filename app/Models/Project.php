@@ -32,9 +32,9 @@ class Project extends Model
     }
 
     public function projectBenifit(){
-        return $this->hasOne(Benefits::class ,'project_id');
+        return $this->hasMany(Benefits::class ,'project_id');
     }
     public function projectInstallment(){
-        return $this->hasOne(Installment::class ,'project_id');
+        return $this->hasMany(Installment::class ,'project_id');
     }
 }

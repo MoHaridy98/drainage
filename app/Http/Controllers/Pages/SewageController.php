@@ -101,22 +101,22 @@ class SewageController extends Controller
 
 
             ]));
-            // if($project){
+            if($Dates){
                 $project = Date:: where ('project_id', $id)-> update(([
                     'excution' => $request['excution'],
                     'end' => $request['end'],
                     'area_initial' => $request['area_initial'],
                     'tax_initial' => $request['area_initial'],
                 ]));
-            // }else{
-            //     $project = Date:: create(([
-            //         'excution' => $request['excution'],
-            //         'end' => $request['end'],
-            //         'area_initial' => $request['area_initial'],
-            //         'tax_initial' => $request['area_initial'],
-            //         'project_id' => $id ,
-            //     ]));
-            // }
+            }else{
+                $project = Date:: create(([
+                    'excution' => $request['excution'],
+                    'end' => $request['end'],
+                    'area_initial' => $request['area_initial'],
+                    'tax_initial' => $request['area_initial'],
+                    'project_id' => $id ,
+                ]));
+            }
             return redirect()->route('sewage.list') -> with(['success' => 'تم التسجيل بنجاح']);
         }catch(\Exception $ex){
             return redirect()->route('sewage.list') -> with(['error' => 'خطأ' + $ex]);

@@ -23,20 +23,23 @@
             #print_Button {
                 display: none;
             }
-            #DataTables_Table_0_filter{
+
+            #DataTables_Table_0_filter {
                 display: none;
             }
-            #DataTables_Table_0_length{
+
+            #DataTables_Table_0_length {
                 display: none;
             }
-            #DataTables_Table_0_paginate{
+
+            #DataTables_Table_0_paginate {
                 display: none;
             }
-            #DataTables_Table_0_info{
+
+            #DataTables_Table_0_info {
                 display: none;
             }
         }
-
     </style>
 </head>
 
@@ -47,7 +50,8 @@
             @include('layouts.sidbar')
             <!-- Main Content -->
             <div class="main-content" id="print" style="padding-top: 76px;">
-                <div id="centerlogo" style="margin-bottom: 30px ; justify-content: space-between; align-items: center; display:flex;">
+                <div id="centerlogo"
+                    style="margin-bottom: 30px ; justify-content: space-between; align-items: center; display:flex;">
                     <img width="100px" height="120px" src="../images/logo/aswan.png">
 
                     <img width="80px" height="100px" src="../images/logo/logo.png">
@@ -64,8 +68,7 @@
                                     <div class="card card-primary">
                                         <div class="card-body">
                                             <div class="form-row">
-                                                <div class="form-group col-md-3">
-
+                                                <div class="form-group col-md-5">
                                                     <select class="form-control" id="city" name="city" required>
                                                         <option value="" disabled selected>اختر المركز
                                                         </option>
@@ -80,32 +83,14 @@
                                                         @endisset
                                                     </select>
                                                 </div>
-                                                <div class="form-group col-md-4">
-
-                                                    <select class="form-control" id="area" name="region" required>
+                                                <div class="form-group col-md-6">
+                                                    <select class="form-control" id="area" name="region">
                                                         <option value="" disabled selected>اختر المنطقة
                                                         </option>
                                                         @isset($Region)
                                                             @if ($Region && $Region->count() > 0)
                                                                 @foreach ($Region as $item)
                                                                     <option class="coption city-{{ $item->city_id }}"
-                                                                        value="{{ $item->id }}">
-                                                                        {{ $item->name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            @endif
-                                                        @endisset
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-4">
-
-                                                    <select class="form-control" name="agr_ass" required>
-                                                        <option value="" disabled selected>اختر الجمعية
-                                                        </option>
-                                                        @isset($Agrass)
-                                                            @if ($Agrass && $Agrass->count() > 0)
-                                                                @foreach ($Agrass as $item)
-                                                                    <option class="aoption agrass-{{ $item->region_id }}"
                                                                         value="{{ $item->id }}">
                                                                         {{ $item->name }}
                                                                     </option>
@@ -129,108 +114,154 @@
                     <div class="section-body">
                         <div class="row" style="direction: rtl">
                             <div class="col-12 col-md-12 col-lg-12">
-                                <form class="needs-validation" novalidate="" action="" method="GET"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    @isset($Projects)
-                                        @if ($Projects && $Projects->count() > 0)
-                                            @foreach ($Projects as $projects)
-                                                <div class="card card-primary">
-                                                    <div class="card-header">
-                                                        <h4>[ تقرير مشروع / {{ $projects->name }} ] </h4>
-                                                    </div>
-
-                                                    <div class="card-body">
-                                                        <table class="table">
-                                                            <tbody>
-                                                                <tr style="height: 50px;">
-                                                                    <th scope="row"
-                                                                        style="text-align: inherit;width: 130px; ">
-                                                                        اسم المشروع : </th>
-                                                                    <td style="text-align: inherit; ">{{ $projects->name }}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr style="height: 50px;">
-                                                                    <th scope="row"
-                                                                        style="text-align: inherit;width: 130px; ">
-                                                                        تاريخ الانشاء</th>
-                                                                    <td style="text-align: inherit; ">
-                                                                        {{ $projects->pdate->enclose_end }}</td>
-                                                                </tr>
-                                                                <tr style="height: 50px;">
-                                                                    <th scope="row"
-                                                                        style="text-align: inherit;width: 130px; ">
-                                                                        تاريخ الانتهاء</th>
-                                                                    <td style="text-align: inherit;">
-                                                                        {{ $projects->pdate->enclose_end }}</td>
-                                                                </tr>
-                                                                <tr style="height: 50px;">
-                                                                    <th scope="row"
-                                                                        style="text-align: inherit;width: 130px;">
-                                                                        التكلفة المستحقة </th>
-                                                                    <td style="text-align: inherit;">
-                                                                        {{ $projects->total_cost }}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr style="height: 50px;">
-                                                                    <th scope="row"
-                                                                        style="text-align: inherit;width: 130px;">
-                                                                        المساحة / الزمام :</th>
-                                                                    <td style="text-align: inherit;">
-                                                                        <div class="badge badge-light">
-                                                                            {{ $projects->acre }}
-                                                                            فدان</div>
-                                                                        <div class="badge badge-light">
-                                                                            {{ $projects->carat }}
-                                                                            فراط</div>
-                                                                        <div class="badge badge-light">
-                                                                            {{ $projects->share }}
-                                                                            سهم</div>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                        <div class="card-header">
-                                                            <p>    مدرية المساحة لمشروع  : {{ $projects->name }}  </h4>
-                                                        </div>
-                                                        <table class="table table-bordered">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th scope="col">#</th>
-                                                                    <th scope="col">تاريخ الحصر </th>
-                                                                    <th scope="col">تاريخ العرض والنشر </th>
-                                                                    <th scope="col">تاريخ المعارضات </th>
-                                                                    <th>تاريخ ابلاغ الضرائب </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-
-                                                                <tr>
-                                                                    <th scope="row">بدأ</th>
-                                                                    <td>{{ $projects->pdate->enclose_start }}</td>
-                                                                    <td>{{ $projects->pdate->view_start }}</td>
-                                                                    <td>{{ $projects->pdate->opposition_start }}</td>
-                                                                    <td rowspan="2">{{ $projects->pdate->tax_final }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">نهو</th>
-                                                                    <td>{{ $projects->pdate->enclose_end }}</td>
-                                                                    <td>{{ $projects->pdate->view_end }}</td>
-                                                                    <td>{{ $projects->pdate->opposition_end }}</td>
-                                                                </tr>
-
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                @isset($Projects)
+                                    @if ($Projects && $Projects->count() > 0)
+                                        @foreach ($Projects as $projects)
+                                            <div class="card card-primary work-xp">
+                                                <div class="card-header">
+                                                    <h3>تقرير تفصيلي لمشروع "{{ $projects->name }}"</h3>
                                                 </div>
-                                            @endforeach
-                                        @endif
-                                    @endisset
-                                </form>
+                                                <div class="card-body">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr style="height: 50px;">
+                                                                <th scope="row"
+                                                                    style="text-align: inherit;width: 130px; ">
+                                                                    اسم المشروع : </th>
+                                                                <td style="text-align: inherit; ">{{ $projects->name }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="height: 50px;">
+                                                                <th scope="row"
+                                                                    style="text-align: inherit;width: 130px; ">
+                                                                    تاريخ الانشاء :</th>
+                                                                <td style="text-align: inherit; ">
+                                                                    {{ $projects->pdate->enclose_end }}</td>
+                                                            </tr>
+                                                            <tr style="height: 50px;">
+                                                                <th scope="row"
+                                                                    style="text-align: inherit;width: 130px; ">
+                                                                    تاريخ الانتهاء :</th>
+                                                                <td style="text-align: inherit;">
+                                                                    {{ $projects->pdate->enclose_end }}</td>
+                                                            </tr>
+                                                            <tr style="height: 50px;">
+                                                                <th scope="row"
+                                                                    style="text-align: inherit;width: 130px;">
+                                                                    التكلفة المستحقة :</th>
+                                                                <td style="text-align: inherit;">
+                                                                    {{ $projects->total_cost }}
+                                                                    جنيه
+                                                                </td>
+                                                                <th scope="row"
+                                                                    style="text-align: inherit;width: 130px;">
+                                                                    ما تم تحصيله :</th>
+                                                                <td style="text-align: inherit;">
+                                                                    {{ $projects->projectInstallment->sum('amount') ?? '0' }}
+                                                                    جنيه
+                                                                </td>
+                                                                <th scope="row"
+                                                                    style="text-align: inherit;width: 130px;">
+                                                                    التكلفة المتبقية :</th>
+                                                                <td style="text-align: inherit;">
+                                                                    {{ ($projects->total_cost ?? '0') - ($projects->projectInstallment->sum('amount') ?? '0') }}
+                                                                    جنيه
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="height: 50px;">
+                                                                <th scope="row"
+                                                                    style="text-align: inherit;width: 130px;">
+                                                                    المساحة / الزمام :</th>
+                                                                <td style="text-align: inherit;">
+                                                                    <div class="badge badge-light">
+                                                                        {{ $projects->acre }}
+                                                                        فدان</div>
+                                                                    <div class="badge badge-light">
+                                                                        {{ $projects->carat }}
+                                                                        فراط</div>
+                                                                    <div class="badge badge-light">
+                                                                        {{ $projects->share }}
+                                                                        سهم</div>
+                                                                </td>
+                                                                <th scope="row"
+                                                                    style="text-align: inherit;width: 130px;">
+                                                                    المساحة / الزمام (الفعلي):</th>
+                                                                <td style="text-align: inherit;">
+                                                                    <div class="badge badge-light">
+                                                                        {{ $projects->net_acre }}
+                                                                        فدان</div>
+                                                                    <div class="badge badge-light">
+                                                                        {{ $projects->net_carat }}
+                                                                        فراط</div>
+                                                                    <div class="badge badge-light">
+                                                                        {{ $projects->net_share }}
+                                                                        سهم</div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <table class="table table-bordered" style="margin-top: 50px;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">تاريخ الحصر </th>
+                                                                <th scope="col">تاريخ العرض والنشر </th>
+                                                                <th scope="col">تاريخ المعارضات </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">بدأ</th>
+                                                                <td>{{ $projects->pdate->enclose_start }}</td>
+                                                                <td>{{ $projects->pdate->view_start }}</td>
+                                                                <td>{{ $projects->pdate->opposition_start }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">نهو</th>
+                                                                <td>{{ $projects->pdate->enclose_end }}</td>
+                                                                <td>{{ $projects->pdate->view_end }}</td>
+                                                                <td>{{ $projects->pdate->opposition_end }}</td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                    <table class="table table-bordered" style="margin-top: 50px;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">تاريخ ابلاغ الضرائب </th>
+                                                                <th scope="col">تاريخ ابلاغ المساحة </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">مبدأي (صرف)</th>
+                                                                <td>{{ $projects->pdate->tax_initial }}</td>
+                                                                <td>{{ $projects->pdate->area_initial }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">نهائي (مساحة)</th>
+                                                                <td>{{ $projects->pdate->tax_final }}</td>
+                                                                <td>{{ $projects->pdate->area_final }}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            @php
+                                                $i = 0;
+                                                $i = $loop->iteration % 4;
+                                            @endphp
+                                            @if ($i == 2 || $i == 0)
+                                                <div class="pagebreak"> </div>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endisset
                             </div>
                             <div class="justify-content-right d-flex">
-                                <button class="btn btn-danger  float-left mt-3 mr-2" id="print_Button" onclick="printDiv()"> <i
-                                        class="mdi mdi-printer ml-1"></i>طباعة</button>
+                                <button class="btn btn-danger  float-left mt-3 mr-2" id="print_Button"
+                                    onclick="printDiv()"> <i class="mdi mdi-printer ml-1"></i>طباعة</button>
                             </div>
                         </div>
                     </div>
@@ -315,16 +346,16 @@
             }
         }
     </script>
-        <script type="text/javascript">
-            function printDiv() {
-                var printContents = document.getElementById('print').innerHTML;
-                var originalContents = document.body.innerHTML;
-                document.body.innerHTML = printContents;
-                window.print();
-                document.body.innerHTML = originalContents;
-                location.reload();
-            }
-        </script>
+    <script type="text/javascript">
+        function printDiv() {
+            var printContents = document.getElementById('print').innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+            location.reload();
+        }
+    </script>
     <script>
         function addSkillRow() {
             var elements = document.getElementsByClassName('skill-input');

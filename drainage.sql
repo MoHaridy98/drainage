@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2023 at 11:59 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Feb 15, 2023 at 01:16 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,8 +30,19 @@ SET time_zone = "+00:00";
 CREATE TABLE `agricultural_association` (
   `id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
-  `region_id` int(11) NOT NULL
+  `region_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `agricultural_association`
+--
+
+INSERT INTO `agricultural_association` (`id`, `name`, `region_id`, `created_at`, `updated_at`) VALUES
+(1, 'جمعية 1', 2, '2023-01-29 08:28:08', '2023-02-05 07:10:23'),
+(2, 'جمعية 2', 1, '2023-01-29 08:29:39', '2023-02-05 07:10:39'),
+(3, 'جمعية 3', 2, '2023-01-29 08:32:24', '2023-02-05 07:11:00');
 
 -- --------------------------------------------------------
 
@@ -42,8 +53,19 @@ CREATE TABLE `agricultural_association` (
 CREATE TABLE `benefits` (
   `Total_installment` float NOT NULL,
   `farmer_id` int(11) NOT NULL,
-  `project_id` int(11) NOT NULL
+  `project_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `benefits`
+--
+
+INSERT INTO `benefits` (`Total_installment`, `farmer_id`, `project_id`, `created_at`, `updated_at`) VALUES
+(100, 14, 9, '2023-02-08 09:37:40', '2023-02-08 10:53:57'),
+(500.5, 15, 9, '2023-02-08 10:24:34', '2023-02-08 10:53:57'),
+(150, 16, 9, '2023-02-08 10:23:50', '2023-02-08 10:35:51');
 
 -- --------------------------------------------------------
 
@@ -53,8 +75,21 @@ CREATE TABLE `benefits` (
 
 CREATE TABLE `city` (
   `id` int(11) NOT NULL,
-  `name` varchar(32) NOT NULL
+  `name` varchar(32) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `city`
+--
+
+INSERT INTO `city` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'اسوان', NULL, NULL),
+(2, 'دراو', NULL, NULL),
+(3, 'نصر النوبة', NULL, NULL),
+(4, 'كوم امبو', NULL, NULL),
+(5, 'ادفو', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -75,7 +110,7 @@ CREATE TABLE `date` (
   `enclose_end` date DEFAULT NULL,
   `view_start` date DEFAULT NULL,
   `view_end` date DEFAULT NULL,
-  `end` int(11) DEFAULT NULL,
+  `end` date DEFAULT NULL,
   `project_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -86,7 +121,17 @@ CREATE TABLE `date` (
 --
 
 INSERT INTO `date` (`id`, `excution`, `area_initial`, `area_final`, `tax_initial`, `tax_final`, `opposition_start`, `opposition_end`, `enclose_start`, `enclose_end`, `view_start`, `view_end`, `end`, `project_id`, `created_at`, `updated_at`) VALUES
-(1, '2023-01-28', '2023-01-23', NULL, '2023-01-23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 7, '2023-01-16 08:57:59', '2023-01-16 08:57:59');
+(5, '2023-02-01', '2023-01-12', '2023-01-03', '2023-01-12', '2023-01-12', '2023-01-11', '2023-01-11', '2023-01-19', '2023-01-28', '2023-01-10', '2023-02-02', '2023-02-28', 9, '2023-01-19 07:50:32', '2023-02-15 10:13:37'),
+(7, '2023-02-16', '2023-02-15', NULL, '2023-02-15', '2023-02-15', NULL, NULL, NULL, NULL, NULL, NULL, '2023-02-17', 10, '2023-02-15 07:29:47', '2023-02-15 07:30:25'),
+(8, '2023-01-01', '2023-01-01', NULL, '2023-01-01', '2023-02-02', NULL, NULL, NULL, NULL, NULL, NULL, '2023-01-01', 11, '2023-02-15 10:10:26', '2023-02-15 10:13:10'),
+(9, '2022-12-31', '2022-12-31', NULL, '2022-12-31', '2023-02-09', NULL, NULL, NULL, NULL, NULL, NULL, '2023-02-07', 12, '2023-02-15 10:11:02', '2023-02-15 10:13:20'),
+(10, '2023-02-03', '2023-02-11', NULL, '2023-02-11', '2023-02-24', NULL, NULL, NULL, NULL, NULL, NULL, '2023-03-03', 13, '2023-02-15 10:11:23', '2023-02-15 10:13:30'),
+(11, '2023-02-15', '2023-02-05', NULL, '2023-02-05', '2023-02-01', NULL, NULL, NULL, NULL, NULL, NULL, '2023-03-03', 14, '2023-02-15 10:11:35', '2023-02-15 10:13:43'),
+(12, '2023-02-09', '2023-02-16', NULL, '2023-02-16', '2023-01-31', NULL, NULL, NULL, NULL, NULL, NULL, '2023-02-22', 15, '2023-02-15 10:11:54', '2023-02-15 10:13:51'),
+(13, '2023-02-25', '2023-02-06', NULL, '2023-02-06', '2023-01-30', NULL, NULL, NULL, NULL, NULL, NULL, '2023-02-03', 16, '2023-02-15 10:12:07', '2023-02-15 10:14:01'),
+(14, '2023-02-14', '2023-02-14', NULL, '2023-02-14', '2023-02-08', NULL, NULL, NULL, NULL, NULL, NULL, '2023-02-10', 17, '2023-02-15 10:12:22', '2023-02-15 10:14:08'),
+(15, '2023-02-13', '2023-02-07', NULL, '2023-02-07', '2023-02-10', NULL, NULL, NULL, NULL, NULL, NULL, '2023-02-21', 18, '2023-02-15 10:12:41', '2023-02-15 10:14:15'),
+(16, '2023-02-19', '2023-02-22', NULL, '2023-02-22', '2023-01-31', NULL, NULL, NULL, NULL, NULL, NULL, '2023-02-02', 19, '2023-02-15 10:12:52', '2023-02-15 10:14:24');
 
 -- --------------------------------------------------------
 
@@ -116,8 +161,19 @@ CREATE TABLE `farmer` (
   `acre` int(11) NOT NULL,
   `carat` int(11) NOT NULL,
   `share` int(11) NOT NULL,
-  `association_id` int(11) NOT NULL
+  `association_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `farmer`
+--
+
+INSERT INTO `farmer` (`id`, `name`, `acre`, `carat`, `share`, `association_id`, `created_at`, `updated_at`) VALUES
+(14, 'سيبالبيابي', 2, 3, 5, 1, '2023-01-30 07:06:24', '2023-01-30 07:06:24'),
+(15, 'محمد', 5, 4, 3, 1, '2023-01-30 07:06:24', '2023-02-05 08:39:30'),
+(16, 'ثصق', 3, 2, 5, 2, '2023-01-30 07:06:24', '2023-01-30 07:06:24');
 
 -- --------------------------------------------------------
 
@@ -130,8 +186,20 @@ CREATE TABLE `installment` (
   `date` date NOT NULL,
   `amount` float NOT NULL,
   `project_id` int(11) NOT NULL,
-  `farmer_id` int(11) NOT NULL
+  `farmer_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `installment`
+--
+
+INSERT INTO `installment` (`id`, `date`, `amount`, `project_id`, `farmer_id`, `created_at`, `updated_at`) VALUES
+(7, '2023-02-08', 250, 9, NULL, NULL, NULL),
+(8, '2023-02-14', 500, 9, NULL, '2023-02-14 07:49:07', '2023-02-14 07:49:07'),
+(9, '2023-02-06', 150, 10, NULL, '2023-02-14 07:55:29', '2023-02-14 07:55:29'),
+(10, '2023-01-31', 120.5, 9, NULL, '2023-02-15 08:59:34', '2023-02-15 08:59:34');
 
 -- --------------------------------------------------------
 
@@ -202,6 +270,8 @@ CREATE TABLE `project` (
   `net_carat` int(11) DEFAULT NULL,
   `net_share` int(11) DEFAULT NULL,
   `total_cost` float NOT NULL,
+  `verified` tinyint(1) NOT NULL DEFAULT 0,
+  `has_changed` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -210,14 +280,18 @@ CREATE TABLE `project` (
 -- Dumping data for table `project`
 --
 
-INSERT INTO `project` (`id`, `name`, `acre`, `carat`, `share`, `net_acre`, `net_carat`, `net_share`, `total_cost`, `created_at`, `updated_at`) VALUES
-(1, 'uyukyuk', 7, 7, 7, NULL, NULL, NULL, 77, '2023-01-16 07:24:52', '2023-01-16 07:24:52'),
-(2, 'llll', 2, 1, 25, NULL, NULL, NULL, 12123, '2023-01-16 08:08:49', '2023-01-16 08:08:49'),
-(3, 'ابيايبا', 5, 5, 5, NULL, NULL, NULL, 545, '2023-01-16 08:53:33', '2023-01-16 08:53:33'),
-(4, 'سلسلس', 34, 34, 34, NULL, NULL, NULL, 3443, '2023-01-16 08:54:05', '2023-01-16 08:54:05'),
-(5, 'سلسلس', 34, 34, 34, NULL, NULL, NULL, 3443, '2023-01-16 08:54:50', '2023-01-16 08:54:50'),
-(6, 'fghfgh', 45, 54, 4, NULL, NULL, NULL, 546456, '2023-01-16 08:57:33', '2023-01-16 08:57:33'),
-(7, 'fghfgh', 45, 54, 4, NULL, NULL, NULL, 546456, '2023-01-16 08:57:59', '2023-01-16 08:57:59');
+INSERT INTO `project` (`id`, `name`, `acre`, `carat`, `share`, `net_acre`, `net_carat`, `net_share`, `total_cost`, `verified`, `has_changed`, `created_at`, `updated_at`) VALUES
+(9, 'aaaaa', 2, 31, 43, 1, 40, 21, 2000, 1, 0, '2023-01-19 07:50:32', '2023-02-15 10:13:37'),
+(10, 'sadfasd', 23, 21, 12, NULL, NULL, NULL, 213, 1, 0, '2023-01-19 09:33:37', '2023-02-15 07:30:25'),
+(11, 'sdaf', 4, 5, 5, NULL, NULL, NULL, 54, 1, 0, '2023-02-15 10:10:26', '2023-02-15 10:13:10'),
+(12, 'asdf', 4, 4, 4, NULL, NULL, NULL, 445, 1, 0, '2023-02-15 10:11:02', '2023-02-15 10:13:20'),
+(13, 'ujkj', 5, 4654, 34, NULL, NULL, NULL, 5, 1, 0, '2023-02-15 10:11:23', '2023-02-15 10:13:30'),
+(14, 'asdf', 234, 3234, 23, NULL, NULL, NULL, 324, 1, 0, '2023-02-15 10:11:35', '2023-02-15 10:13:43'),
+(15, 'sdaf', 2, 23, 34, NULL, NULL, NULL, 4234, 1, 0, '2023-02-15 10:11:54', '2023-02-15 10:13:51'),
+(16, 'sadf', 23, 234, 23, NULL, NULL, NULL, 234, 1, 0, '2023-02-15 10:12:07', '2023-02-15 10:14:01'),
+(17, 'sdaf', 23, 32, 23, NULL, NULL, NULL, 43, 1, 0, '2023-02-15 10:12:21', '2023-02-15 10:14:08'),
+(18, 'wer', 32, 23, 23, NULL, NULL, NULL, 324, 1, 0, '2023-02-15 10:12:41', '2023-02-15 10:14:15'),
+(19, 'sdf', 243, 23, 23, NULL, NULL, NULL, 324, 1, 0, '2023-02-15 10:12:52', '2023-02-15 10:14:24');
 
 -- --------------------------------------------------------
 
@@ -228,8 +302,18 @@ INSERT INTO `project` (`id`, `name`, `acre`, `carat`, `share`, `net_acre`, `net_
 CREATE TABLE `region` (
   `id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
-  `city_id` int(11) NOT NULL
+  `city_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `region`
+--
+
+INSERT INTO `region` (`id`, `name`, `city_id`, `created_at`, `updated_at`) VALUES
+(1, 'منطقة أ', 1, NULL, NULL),
+(2, 'منطقة ب', 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -253,7 +337,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'mokhtar', 'mmelnobey92@gmail.com', NULL, '$2y$10$gcxBv.fUHqx9a2NrqyqivO2By7zS4SCe60A50SjOOw5DzAl1gMBVO', NULL, '2023-01-16 06:39:26', '2023-01-16 06:39:26');
+(1, 'mokhtar', 'mmelnobey92@gmail.com', NULL, '$2y$10$gcxBv.fUHqx9a2NrqyqivO2By7zS4SCe60A50SjOOw5DzAl1gMBVO', NULL, '2023-01-16 06:39:26', '2023-01-16 06:39:26'),
+(2, 'Mohammad', 'moharidy98@gmail.com', NULL, '$2y$10$Ssw9wjIrG8DQ2A07r6KkWObmVFX8JbKhE.OT8rjFbczHaaseLgko.', 'q1Gvs8qWNo25tZrIUOamMtFYFydWVwAw1wt9710PIbLA4ODIyxfpk48hgFRu', '2023-01-16 09:07:14', '2023-01-16 09:07:14');
 
 --
 -- Indexes for dumped tables
@@ -270,8 +355,7 @@ ALTER TABLE `agricultural_association`
 -- Indexes for table `benefits`
 --
 ALTER TABLE `benefits`
-  ADD PRIMARY KEY (`farmer_id`,`project_id`),
-  ADD KEY `project_id` (`project_id`);
+  ADD PRIMARY KEY (`farmer_id`,`project_id`);
 
 --
 -- Indexes for table `city`
@@ -353,16 +437,40 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `agricultural_association`
+--
+ALTER TABLE `agricultural_association`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `city`
+--
+ALTER TABLE `city`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `date`
 --
 ALTER TABLE `date`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `farmer`
+--
+ALTER TABLE `farmer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `installment`
+--
+ALTER TABLE `installment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -380,13 +488,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `region`
+--
+ALTER TABLE `region`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -402,19 +516,15 @@ ALTER TABLE `agricultural_association`
 -- Constraints for table `benefits`
 --
 ALTER TABLE `benefits`
-  ADD CONSTRAINT `benefits_ibfk_1` FOREIGN KEY (`farmer_id`) REFERENCES `farmer` (`id`);
-
---
--- Constraints for table `farmer`
---
-ALTER TABLE `farmer`
-  ADD CONSTRAINT `farmer_ibfk_1` FOREIGN KEY (`association_id`) REFERENCES `agricultural_association` (`id`);
+  ADD CONSTRAINT `benefits_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`),
+  ADD CONSTRAINT `benefits_ibfk_3` FOREIGN KEY (`farmer_id`) REFERENCES `farmer` (`id`);
 
 --
 -- Constraints for table `installment`
 --
 ALTER TABLE `installment`
-  ADD CONSTRAINT `installment_ibfk_2` FOREIGN KEY (`farmer_id`) REFERENCES `farmer` (`id`);
+  ADD CONSTRAINT `installment_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`),
+  ADD CONSTRAINT `installment_ibfk_3` FOREIGN KEY (`farmer_id`) REFERENCES `farmer` (`id`);
 
 --
 -- Constraints for table `region`

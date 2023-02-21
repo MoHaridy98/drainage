@@ -56,7 +56,7 @@ class ReportController extends Controller
     public function print($id)
     {
         //
-        $projects = Project :: with('pdate')->select()->find($id);
+        $projects = Project :: with('pdate','projectInstallment')->select()->find($id);
         // $Dates = Date ::with('projectDate')->select()->find($id);
         return view("pages.report.print",compact('projects'));
     }
@@ -82,14 +82,15 @@ class ReportController extends Controller
      */
     public function allreport_project(Request $request)
     {
-        $aid = $request['agr_ass'];
-        $Projects = Project :: with('pdate')->where('verified', 1 )->select()->get();
-        $City = City :: select()->get();
-        $Region = Region :: select()->get();
-        $Agrass = Agrass :: select()->get();
-        $Farmer = Farmer :: select()->with('assname','farmerBenifit')->where('association_id',$aid)->get();
+        $city = $request['city'];
+        $region = $request['region'];
+        $Projects = Project :: with('pdate','projectInstallment')->where('verified', 1 )->select()->get();
+        // $City = City :: select()->where('id',$city)->get();
+        // $Region = Region :: select()->where('id',$region)->get();
+        // $Agrass = Agrass :: select()->get();
+        // $Farmer = Farmer :: select()->with('assname','farmerBenifit')->where('association_id',$aid)->get();
 
-        return view("pages.report.all-report",compact('Region','City','Agrass','Farmer','Projects'));
+        return view("pages.report.all-report",compact('Projects'));
     }
 
     /**
