@@ -33,27 +33,31 @@
                     <div class="section-body">
                         <div class="row" style="direction: rtl">
                             <div class="col-12 col-md-12 col-lg-12">
-                                @include('layouts.success')
-                                @include('layouts.error')
-                                <form class="needs-validation" id="work_experience" novalidate="" action="{{ route('updateRoles.Permission') }}"
-                                    method="POST" enctype="multipart/form-data">
+                                <form class="form-control"
+                                    action="{{ route('role.update', $roles->id) }}" method="post"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="card card-primary">
                                         <div class="card-header">
-                                            <h4>اضافة صلاحية </h4>
+                                            <h4>تعديل صلاحية </h4>
                                         </div>
                                         <div class="card-body">
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
-                                                    <input style="height: calc(2.25rem + 6px);" type="text"
-                                                        name="agr_name"
-                                                        class="form-control"placeholder=" اسم الصلاحية  ">
+                                                    <input type="text" value="{{ $roles->name }}" disabled
+                                                        name="name"
+                                                        class="form-control @error('name') is-invalid @enderror">
+                                                    @error('name')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
-                                                <select class="form-control select2" multiple="multiple"
+                                                <select class="form-control select2" name="permissions[]" multiple="multiple"
                                                     data-height="100%">
                                                     @isset($permissions)
                                                         @if ($permissions && $permissions->count() > 0)
@@ -68,13 +72,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <button type="submit" class="btn btn-success">حفظ</button>
+                                </form>
                             </div>
-                            <button type="submit" class="btn btn-success">حفظ</button>
-                            </form>
                         </div>
-                        {{-- <a href="javascript:void(0)" style="padding: 5px 10px 5px 10px;" id="addWork-btn"
-                                class="btn btn-primary form-label" onclick="addWorkRow()">+ اضف مستحق
-                            </a> --}}
                     </div>
             </div>
         </div>
@@ -97,15 +98,6 @@
     <script src="assets/js/custom.js"></script>
     <script src="assets/bundles/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
     <script src="assets/bundles/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script>
-        $('.option').hide();
-        $('#city').on('change', function(e) {
-            $('.option').hide();
-            $('.city-' + e.target.value).show();
-        });
-
-    </script>
-
 </body>
 
 

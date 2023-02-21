@@ -51,8 +51,7 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
     Route::post('/farmer-store', [App\Http\Controllers\Pages\AgrController::class, 'farmerStore'])->name('agr.farmerStore');
     Route::post('/farmer-update{id}', [App\Http\Controllers\Pages\AgrController::class, 'farmerUpdate'])->name('farmer.update');
 
-
-    Route::Post('/update{id}', [App\Http\Controllers\Pages\SpaceController::class, 'create'])->name('space.update');
+    Route::Post('/updatespace{id}', [App\Http\Controllers\Pages\SpaceController::class, 'create'])->name('space.update');
     Route::get('/space', [App\Http\Controllers\Pages\SpaceController::class, 'space'])->name('space.list');
     Route::get('/space-create{id}', [App\Http\Controllers\Pages\SpaceController::class, 'index'])->name('space');
     Route::get('/space-dues{id}', [App\Http\Controllers\Pages\SpaceController::class, 'dues'])->name('space.dues');
@@ -103,8 +102,10 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
 
     Route::get('/roles', [App\Http\Controllers\Pages\RolesController::class, 'index'])->name('Roles');
     Route::get('/addRoles', [App\Http\Controllers\Pages\RolesController::class, 'create'])->name('AddRoles.Permission');
+    Route::Post('/addRoles_store', [App\Http\Controllers\Pages\RolesController::class, 'store'])->name('AddRoles.Permission.store');
     Route::get('/editRoles{id}', [App\Http\Controllers\Pages\RolesController::class, 'edit'])->name('editRoles.Permission');
-    Route::post('/updateRoles{id}', [App\Http\Controllers\Pages\RolesController::class, 'update'])->name('updateRoles.Permission');
+    Route::post('/roles{id}', [App\Http\Controllers\Pages\RolesController::class, 'update'])->name('role.update');
+    Route::Get('/deleteRoles{id}', [App\Http\Controllers\Pages\RolesController::class, 'destroy'])->name('deleteRoles.Permission');
 
 });
 

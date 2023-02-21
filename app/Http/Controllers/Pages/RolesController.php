@@ -43,6 +43,15 @@ class RolesController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name' => 'bail|required|unique:roles',
+            'permissions' => 'bail|required',
+        ]);
+
+        $role = Role::create(['name' => $request->name]);
+        $per =  Permission::whereIn('id', $request->permissions)->get();
+        $role->syncPermissions($per);
+        return redirect()->route('Roles')->with(['success' => 'تم التسجيل بنجاح']);
     }
 
     /**
@@ -65,12 +74,13 @@ class RolesController extends Controller
     public function edit($id)
     {
         //
-        $roles = Role::select()->find($id);
-        //$permissions = Permission::select()->get();
-        return view('pages.users.add-permission',compact('roles'));
+       // $user = auth()->user();
+        $permissions = Permission::get();
+        $roles = Role::with('permissions')->find($id);
+        return view('pages.users.editroles',compact('roles','permissions'));
     }
 
-    /**
+        /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -80,10 +90,15 @@ class RolesController extends Controller
     public function update(Request $request, $id)
     {
         //
-        
-
-        return redirect()->route('Roles');
+        $request->validate([
+            'permissions' => 'bail|required',
+        ]);
+        $roles = Role::find($id);
+        $per =  Permission::whereIn('id', $request->permissions)->get();
+        $roles->syncPermissions($per);
+        return redirect()->route('Roles')->with(['success' => 'تم التعديل بنجاح']);
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -94,5 +109,8 @@ class RolesController extends Controller
     public function destroy($id)
     {
         //
+        $role = Role::find($id);
+        $role->delete();
+        return redirect()->route('Roles')->with(['success' => 'تم الحذف بنجاح']);
     }
 }

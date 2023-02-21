@@ -93,6 +93,8 @@
                 </ul>
             </li>
             <li class="menu-header"></li>
+            @if (auth()->user()->hasRole('super_admin'))
+            @can('space')
             <li class="dropdown">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><span>مدرية المساحة</span>
                     <i data-feather="briefcase"></i></a>
@@ -101,6 +103,8 @@
                     <li><a class="nav-link" href="{{ route('space.list') }}"> كل المشاريع</a></li>
                 </ul>
             </li>
+            @endcan
+            @endif
             <li class="menu-header"></li>
             <li class="dropdown">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><span>مدرية الزراعــة</span>
@@ -142,10 +146,12 @@
                 <a href="#" class="menu-toggle nav-link has-dropdown"><span>الإعدادات</span>
                     <i data-feather="briefcase"></i></a>
                 <ul class="dropdown-menu">
-                    
+                    @can('users')
                     <li><a class="nav-link" href="{{ route('Users') }}">  مستخدميين</a></li>
-
+                    @endcan
+                    @can('roles')
                     <li><a class="nav-link" href="{{ route('Roles') }}">اضافة اذونات</a></li>
+                    @endcan
                 </ul>
             </li>
         </ul>

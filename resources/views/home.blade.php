@@ -129,8 +129,8 @@
                                 </div>
                                 <div class="card-body">
                                     <canvas id="line-chart"></canvas>
-                                    <input type="hidden" name="years" value="">
-                                    <input type="hidden" name="data" value="">
+                                    <input type="hidden" name="years" value="{{ $orderCharts['label'] }}">
+                                    <input type="hidden" name="data" value="{{ $orderCharts['data'] }}">
                                 </div>
                             </div>
                         </div>
@@ -141,9 +141,9 @@
                                 </div>
                                 <div class="card-body">
                                     <canvas id="lineChartFill"></canvas>
-                                    <input type="hidden" name="users" value="">
-                                    <input type="hidden" name="service" value="">
-                                    <input type="hidden" name="month" value="">
+                                    <input type="hidden" name="users" value="{{ $users['user'] }}">
+                                    <input type="hidden" name="service" value="{{ $users['service'] }}">
+                                    <input type="hidden" name="month" value="{{ $users['month'] }}">
                                 </div>
                             </div>
                         </div>

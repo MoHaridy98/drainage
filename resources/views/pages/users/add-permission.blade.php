@@ -35,7 +35,7 @@
                             <div class="col-12 col-md-12 col-lg-12">
                                 @include('layouts.success')
                                 @include('layouts.error')
-                                <form class="needs-validation" id="work_experience" novalidate="" action="#"
+                                <form class="form-control" action="{{ route('AddRoles.Permission.store') }}"
                                     method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="card card-primary">
@@ -45,32 +45,36 @@
                                         <div class="card-body">
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
-                                                    <input style="height: calc(2.25rem + 6px);" type="text"
-                                                        name="agr_name"
-                                                        class="form-control"placeholder=" اسم الصلاحية  ">
+                                                    <input type="text" value="{{ old('name') }}" name="name"
+                                                        class="form-control @error('name') is-invalid @enderror">
+                                                    @error('name')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
-                                                <select class="form-control select2" multiple="multiple"
-                                                    data-height="100%">
-                                                    @isset($permissions)
-                                                        @if ($permissions && $permissions->count() > 0)
-                                                            @foreach ($permissions as $permission)
-                                                                <option value="{{ $permission->id }}">
-                                                                    {{ $permission->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        @endif
-                                                    @endisset
+                                                <select class="form-control @error('permissions') is-invalid @enderror"
+                                                    multiple="multiple" name="permissions[]" data-height="100%">
+                                                    @foreach ($permissions as $permission)
+                                                        <option value="{{ $permission->id }}">{{ $permission->name }}
+                                                        </option>
+                                                    @endforeach
                                                 </select>
+                                                @error('permissions')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
+                                    <button type="submit" class="btn btn-success">حفظ</button>
+                                </form>
                             </div>
-                            <button type="submit" class="btn btn-success">حفظ</button>
-                            </form>
                         </div>
                         {{-- <a href="javascript:void(0)" style="padding: 5px 10px 5px 10px;" id="addWork-btn"
                                 class="btn btn-primary form-label" onclick="addWorkRow()">+ اضف مستحق

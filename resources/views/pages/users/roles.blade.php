@@ -63,8 +63,8 @@
                                                                                 <td>{{ $Role->id }}</td>
                                                                                 <td>{{ $Role->name }}</td>
                                                                                 <td>
-                                                                                    <a class="badge badge-info text-dark mb-1"
-                                                                                        href="{{ route('editRoles.Permission', $Role->id) }}">عرض وتعديل</a>
+                                                                                    <a class="badge badge-info text-dark mb-1" href="{{ route('editRoles.Permission', $Role->id) }}">عرض وتعديل</a>
+                                                                                    <a class="badge badge-info text-dark mb-1" href="{{ route('deleteRoles.Permission', $Role->id) }}"> حذف</a>
                                                                                 </td>
                                                                             </tr>
                                                                         @endforeach
