@@ -41,26 +41,12 @@
                                     @csrf
                                     <div class="card card-primary">
                                         <div class="card-header">
-                                            <h4> اضافة مستحقات [الهيئة العامة المصرية لمشروعات الصرف ] </h4>
+                                            <h4> اضافة مشروع [الهيئة العامة المصرية لمشروعات الصرف ] </h4>
+                                            <button class="btn btn-dark"
+                                                style="position: absolute; left: 10px; top:5px"><a
+                                                    class="nav-link text-white"
+                                                    href="{{ route('sewage.list') }}">عودة</a></button>
                                         </div>
-                                        <div class="card-body">
-
-                                            <div class="form-row">
-
-                                                <div class="form-group col-md-12">
-                                                    <label> لمشروع</label>
-                                                    <div class="input-group">
-                                                        <select class="form-control" name="categorys_id">
-                                                            <option> الصرف المغطي </option>
-                                                        </select>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="card card-primary">
                                         <div class="card-body">
                                             <div class="form-row pt-5">
                                                 <div class="form-group col-md-6">

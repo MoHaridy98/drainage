@@ -63,6 +63,7 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
 |--------------------------------------------------------------------------
 */
     Route::get('/taxes', [App\Http\Controllers\Pages\TaxesController::class, 'index'])->name('taxes.list');
+    Route::get('/taxes-dues{id}', [App\Http\Controllers\Pages\TaxesController::class, 'dues'])->name('taxes.dues');
     Route::get('/taxes-create{id}', [App\Http\Controllers\Pages\TaxesController::class, 'taxCreate'])->name('taxes.total');
     Route::post('/taxes-store{id}', [App\Http\Controllers\Pages\TaxesController::class, 'store'])->name('taxes.create');
     Route::get('/taxes-delete{id}', [App\Http\Controllers\Pages\TaxesController::class, 'destroy'])->name('taxes.delete');
@@ -85,6 +86,7 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
 */
 
     Route::get('/report', [App\Http\Controllers\Pages\ReportController::class, 'index'])->name('report');
+    Route::get('/sewageReport', [App\Http\Controllers\Pages\ReportController::class, 'sewageReport'])->name('sewage-report');
     Route::get('/all-report', [App\Http\Controllers\Pages\ReportController::class, 'allreport'])->name('all-report');
     Route::get('/project-report', [App\Http\Controllers\Pages\ReportController::class, 'allreport_project'])->name('all.report_project');
     Route::get('/report-print{id}', [App\Http\Controllers\Pages\ReportController::class, 'print'])->name('print');

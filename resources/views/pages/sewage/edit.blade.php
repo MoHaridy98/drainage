@@ -36,14 +36,17 @@
                             <div class="col-12 col-md-12 col-lg-12">
                                 @include('layouts.success')
                                 @include('layouts.error')
-                                <form class="needs-validation" novalidate=""
-                                    action="{{ route('sewage.update', $projects->id) }}" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="card card-primary">
-                                        <div class="card-header">
-                                            <h4> تعديل المشروع [الهيئة العامة المصرية لمشروعات الصرف ] </h4>
-                                        </div>
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h4> تعديل المشروع [الهيئة العامة المصرية لمشروعات الصرف ] </h4>
+                                        <button class="btn btn-dark" style="position: absolute; left: 10px; top:5px"><a
+                                                class="nav-link text-white"
+                                                href="{{ route('sewage.list') }}">عودة</a></button>
+                                    </div>
+                                    <form class="needs-validation" novalidate=""
+                                        action="{{ route('sewage.update', $projects->id) }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
                                         <div class="card-body">
                                             <div class="form-row pt-5">
                                                 <div class="form-group col-md-6">
@@ -125,8 +128,8 @@
                                             </div>
 
                                         </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-success">حفظ</button>
+                                </div>
+                                <button type="submit" class="btn btn-success">حفظ</button>
                                 </form>
                             </div>
                             {{-- <a href="javascript:void(0)" style="padding: 5px 10px 5px 10px;"

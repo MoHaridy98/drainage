@@ -33,9 +33,8 @@
                     <div class="section-body">
                         <div class="row" style="direction: rtl">
                             <div class="col-12 col-md-12 col-lg-12">
-                                <form class="form-control"
-                                    action="{{ route('role.update', $roles->id) }}" method="post"
-                                    enctype="multipart/form-data">
+                                <form class="form-control" action="{{ route('role.update', $roles->id) }}"
+                                    method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="card card-primary">
                                         <div class="card-header">
@@ -44,6 +43,7 @@
                                         <div class="card-body">
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
+                                                    <label class="control-label">أسم الصلاحية</label>
                                                     <input type="text" value="{{ $roles->name }}" disabled
                                                         name="name"
                                                         class="form-control @error('name') is-invalid @enderror">
@@ -57,8 +57,9 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
-                                                <select class="form-control select2" name="permissions[]" multiple="multiple"
-                                                    data-height="100%">
+                                                <label class="control-label">أسم الصلاحية</label>
+                                                <select class="form-control select2" name="permissions[]"
+                                                    multiple="multiple" data-height="100%">
                                                     @isset($permissions)
                                                         @if ($permissions && $permissions->count() > 0)
                                                             @foreach ($permissions as $permission)

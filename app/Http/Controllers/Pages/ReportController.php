@@ -27,6 +27,13 @@ class ReportController extends Controller
         $Vprojects = Project :: with('pdate')->where('verified', 1 )->select()->get();
         return view('pages.report.report',compact('projects','Vprojects'));
     }
+    public function sewageReport()
+    {
+        //
+        $projects = Project :: with('pdate')->select()->get();
+        $Vprojects = Project :: with('pdate')->where('verified', 1 )->select()->get();
+        return view('pages.report.sewage',compact('projects','Vprojects'));
+    }
 
     /**
      * Show the form for creating a new resource.

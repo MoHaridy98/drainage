@@ -36,6 +36,16 @@ class TaxesController extends Controller
 
     }
 
+    public function dues($id){
+        $projects = Project :: with('pdate')->select()->find($id);
+        $City = City :: select()->get();
+        $Region = Region :: select()->get();
+        $Agrass = Agrass :: select()->get();
+        $Benefits = Benefits :: select()->where('project_id',$id)->get();
+        $FarmerAll = Farmer :: select()->with('assname','farmerBenifit')->get();
+        return view("pages.taxes.dues",compact('FarmerAll','Benefits','projects','Agrass','City','Region'));
+    }
+
     public function taxCreate($id)
     {
         //

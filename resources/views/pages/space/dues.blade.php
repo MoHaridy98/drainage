@@ -43,7 +43,6 @@
                             <div class="card-header">
                                 <h4>مـديريــة المساحة (التكلفة التفصيلية)</h4>
                             </div>
-
                             <div class="card-body">
                                 <form class="needs-validation" id="work_experience" novalidate=""
                                     action="{{ route('space.duescreate', $projects->id) }}" method="POST"
@@ -120,15 +119,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @isset($FarmerAll)
-                                                @if ($FarmerAll && $FarmerAll->count() > 0)
-                                                    @foreach ($FarmerAll as $farmer)
+                                            @isset($Benefits)
+                                                @if ($Benefits && $Benefits->count() > 0)
+                                                    @foreach ($Benefits as $item)
                                                         <tr>
-                                                            <td>{{ $farmer->assname->name }}
+                                                            <td>{{ $item->farmerName->assname->name }}
                                                             </td>
-                                                            <td>{{ $farmer->name }}
+                                                            <td>{{ $item->farmerName->name }}
                                                             </td>
-                                                            <td>{{ $farmer->farmerBenifit->Total_installment ?? 0 }}
+                                                            <td>{{ $item->Total_installment ?? 0 }}
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -178,106 +177,121 @@
                                                                 <td><input type="text" name="fid[]"
                                                                         value="{{ $farmer->id }}"
                                                                         hidden>{{ $farmer->name }}</td>
-                                                                <td><input type="number" step="0.1"
-                                                                        value={{ $farmer->farmerBenifit->Total_installment ?? 0 }}
-                                                                        name="cost[]">
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-                                                    @endif
-                                                @endisset
-                                            </tbody>
-                                            {{-- <tfoot>
+                                                                <td>
+                                                                    @isset($Benefits)
+                                                                        @if ($Benefits && $Benefits->count() > 0)
+                                                                            @foreach ($Benefits as $item)
+                                                                                {{ $projects->project_id }}
+                                                                                @if ($item->project_id == $projects->id && $item->farmer_id == $farmer->id)
+                                                                                    <input type="number" step="0.1"
+                                                                                        value={{ $item->Total_installment ?? 0 }}
+                                                                                        name="cost[]">
+                                                                                @break
+
+                                                                            @else
+                                                                                <input type="number" step="0.1"
+                                                                                    name="cost[]">
+                                                                            @endif
+                                                                        @endforeach
+                                                                    @endif
+                                                                @endisset
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
+                                            @endisset
+                                        </tbody>
+                                        {{-- <tfoot>
                                                 <tr>
                                                     <th>تكلفة المشروع: {{ $projects->total_cost }}</th>
                                                     <th style="text-align:left">الاجمالي:</th>
                                                     <th></th>
                                                 </tr>
                                             </tfoot> --}}
-                                        </table>
-                                        <button type="submit" class="btn btn-success">حفظ</button>
-                                    </form>
-                                </div>
+                                    </table>
+                                    <button type="submit" class="btn btn-success">حفظ</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                {{-- <a href="javascript:void(0)" style="padding: 5px 10px 5px 10px;" id="addWork-btn"
+            {{-- <a href="javascript:void(0)" style="padding: 5px 10px 5px 10px;" id="addWork-btn"
                                 class="btn btn-primary form-label" onclick="addWorkRow()">+ اضف مستحق
                             </a> --}}
-                @include('layouts.setting')
-            </div>
-            @include('layouts.footer')
+            @include('layouts.setting')
         </div>
+        @include('layouts.footer')
     </div>
-    <!-- General JS Scripts -->
-    <script src="assets/js/app.min.js"></script>
-    <!-- JS Libraies -->
-    <script src="assets/bundles/datatables/datatables.min.js"></script>
-    <script src="assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
-    <script src="assets/bundles/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Page Specific JS File -->
-    <script src="assets/js/page/datatables.js"></script>
-    <script src="assets/bundles/izitoast/js/iziToast.min.js"></script>
-    <!-- Page Specific JS File -->
-    <script src="assets/js/page/toastr.js"></script>
-    <!-- Template JS File -->
-    <script src="assets/js/scripts.js"></script>
-    <!-- Custom JS File -->
-    <script src="assets/js/custom.js"></script>
-    <script src="assets/bundles/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
-    <script src="assets/bundles/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('table.table').DataTable({
-                footerCallback: function(row, data, start, end, display) {
-                    var api = this.api();
-                    // Remove the formatting to get integer data for summation
-                    var intVal = function(i) {
-                        return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i ===
-                            'number' ? i : 0;
-                    };
+</div>
+<!-- General JS Scripts -->
+<script src="assets/js/app.min.js"></script>
+<!-- JS Libraies -->
+<script src="assets/bundles/datatables/datatables.min.js"></script>
+<script src="assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script src="assets/bundles/jquery-ui/jquery-ui.min.js"></script>
+<!-- Page Specific JS File -->
+<script src="assets/js/page/datatables.js"></script>
+<script src="assets/bundles/izitoast/js/iziToast.min.js"></script>
+<!-- Page Specific JS File -->
+<script src="assets/js/page/toastr.js"></script>
+<!-- Template JS File -->
+<script src="assets/js/scripts.js"></script>
+<!-- Custom JS File -->
+<script src="assets/js/custom.js"></script>
+<script src="assets/bundles/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+<script src="assets/bundles/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script>
+    $(document).ready(function() {
+        $('table.table').DataTable({
+            footerCallback: function(row, data, start, end, display) {
+                var api = this.api();
+                // Remove the formatting to get integer data for summation
+                var intVal = function(i) {
+                    return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i ===
+                        'number' ? i : 0;
+                };
 
-                    // Total over all pages
-                    total = api
-                        .column(2)
-                        .data()
-                        .reduce(function(a, b) {
-                            return intVal(a) + intVal(b);
-                        }, 0);
-                    // Update footer
-                    $(api.column(2).footer()).html(total + ' جنية ');
-                },
-            });
+                // Total over all pages
+                total = api
+                    .column(2)
+                    .data()
+                    .reduce(function(a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+                // Update footer
+                $(api.column(2).footer()).html(total + ' جنية ');
+            },
         });
+    });
 
-        $('.option').hide();
+    $('.option').hide();
+    $('.coption').hide();
+    $('.aoption').hide();
+    $('#city').on('change', function(e) {
         $('.coption').hide();
+        $('.city-' + e.target.value).show();
+    });
+
+    $('#area').on('change', function(e) {
         $('.aoption').hide();
-        $('#city').on('change', function(e) {
-            $('.coption').hide();
-            $('.city-' + e.target.value).show();
-        });
+        $('.agrass-' + e.target.value).show();
+    });
 
-        $('#area').on('change', function(e) {
-            $('.aoption').hide();
-            $('.agrass-' + e.target.value).show();
-        });
-
-        function addWorkRow() {
-            var elements = document.getElementsByClassName('work-xp-input');
-            var empty = "no"
-            for (var i = 0; i < elements.length; i++) {
-                if (elements[i].value == "") {
-                    empty = "yes"
-                }
+    function addWorkRow() {
+        var elements = document.getElementsByClassName('work-xp-input');
+        var empty = "no"
+        for (var i = 0; i < elements.length; i++) {
+            if (elements[i].value == "") {
+                empty = "yes"
             }
+        }
 
-            if (empty == "no" && document.getElementsByClassName("work-xp").length < 4) {
-                const div = document.createElement('div');
-                div.className = 'card card-primary';
-                div.innerHTML = `
+        if (empty == "no" && document.getElementsByClassName("work-xp").length < 4) {
+            const div = document.createElement('div');
+            div.className = 'card card-primary';
+            div.innerHTML = `
                 <div class="card-body form-row">
                 <div class="form-group col-md-3">
                     <input type="text" class="form-control"placeholder=" اسم المشروع / المنطقة">
@@ -292,39 +306,39 @@
                 height: 35px;" value="x" onclick="removeWorkRow(this)" />
                 </div>
                 `;
-                document.getElementById('work_experience').appendChild(div);
-                if (document.getElementsByClassName("work-xp").length == 4) {
-                    document.getElementById("addWork-btn").style.display = "none";
-                }
-                if (document.getElementsByClassName("work-xp").length != 4) {
-                    document.getElementById("addWork-btn").style.display = "block";
-                }
-            } else {
-                alert("برجاء ملء البيانات!");
+            document.getElementById('work_experience').appendChild(div);
+            if (document.getElementsByClassName("work-xp").length == 4) {
+                document.getElementById("addWork-btn").style.display = "none";
             }
-        }
-
-        function removeWorkRow(input) {
-            confirm("متأكد؟") ? document.getElementById('work_experience').removeChild(input.parentNode) : 0;
             if (document.getElementsByClassName("work-xp").length != 4) {
                 document.getElementById("addWork-btn").style.display = "block";
             }
+        } else {
+            alert("برجاء ملء البيانات!");
         }
-    </script>
-    <script>
-        function addSkillRow() {
-            var elements = document.getElementsByClassName('skill-input');
-            var empty = "no"
-            for (var i = 0; i < elements.length; i++) {
-                if (elements[i].value == "") {
-                    empty = "yes"
-                }
-            }
+    }
 
-            if (empty == "no" && document.getElementsByClassName("skills").length < 10) {
-                const div = document.createElement('div');
-                div.className = 'col-md-4 skills';
-                div.innerHTML = `
+    function removeWorkRow(input) {
+        confirm("متأكد؟") ? document.getElementById('work_experience').removeChild(input.parentNode) : 0;
+        if (document.getElementsByClassName("work-xp").length != 4) {
+            document.getElementById("addWork-btn").style.display = "block";
+        }
+    }
+</script>
+<script>
+    function addSkillRow() {
+        var elements = document.getElementsByClassName('skill-input');
+        var empty = "no"
+        for (var i = 0; i < elements.length; i++) {
+            if (elements[i].value == "") {
+                empty = "yes"
+            }
+        }
+
+        if (empty == "no" && document.getElementsByClassName("skills").length < 10) {
+            const div = document.createElement('div');
+            div.className = 'col-md-4 skills';
+            div.innerHTML = `
                 <div class="h5">
                 <select type="text" name="skill_id[]" class="skill-input" id="" placeholder="اسم المهارة">
                 <optgroup label="من فضلك أخترالمهارة "></optgroup>
@@ -336,25 +350,25 @@
                             class="btn btn-danger form-label" onclick="removeSkillRow(this)">-</a>
               </div>
             `;
-                document.getElementById('skills').appendChild(div);
-                if (document.getElementsByClassName("skills").length == 9) {
-                    document.getElementById("addSkill-btn").style.display = "none";
-                }
-                if (document.getElementsByClassName("skills").length != 9) {
-                    document.getElementById("addSkill-btn").style.display = "block";
-                }
-            } else {
-                alert("برجاء ملء البيانات!");
+            document.getElementById('skills').appendChild(div);
+            if (document.getElementsByClassName("skills").length == 9) {
+                document.getElementById("addSkill-btn").style.display = "none";
             }
-        }
-
-        function removeSkillRow(input) {
-            confirm("متأكد؟") ? document.getElementById('skills').removeChild(input.parentNode.parentNode) : 0;
             if (document.getElementsByClassName("skills").length != 9) {
                 document.getElementById("addSkill-btn").style.display = "block";
             }
+        } else {
+            alert("برجاء ملء البيانات!");
         }
-    </script>
+    }
+
+    function removeSkillRow(input) {
+        confirm("متأكد؟") ? document.getElementById('skills').removeChild(input.parentNode.parentNode) : 0;
+        if (document.getElementsByClassName("skills").length != 9) {
+            document.getElementById("addSkill-btn").style.display = "block";
+        }
+    }
+</script>
 </body>
 
 

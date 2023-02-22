@@ -194,11 +194,11 @@
                                                                                         <div class="dropdown-menu"
                                                                                             aria-labelledby="btnGroupVerticalDrop2">
                                                                                             <a class="dropdown-item"
+                                                                                                href="{{ route('taxes.dues', $project->id) }}">عرض
+                                                                                                المستحقات</a>
+                                                                                            <a class="dropdown-item"
                                                                                                 href="{{ route('taxes.total', $project->id) }}">اضافة
                                                                                                 اجمالية</a>
-                                                                                            {{-- <a class="dropdown-item"
-                                                                                                href="#">اضافة
-                                                                                                اقساط</a> --}}
 
                                                                                         </div>
                                                                                     </div>

@@ -136,14 +136,14 @@
                                                                     style="text-align: inherit;width: 130px; ">
                                                                     تاريخ الانشاء :</th>
                                                                 <td style="text-align: inherit; ">
-                                                                    {{ $projects->pdate->enclose_end }}</td>
+                                                                    {{ $projects->pdate->excution ?? 'NULL' }}</td>
                                                             </tr>
                                                             <tr style="height: 50px;">
                                                                 <th scope="row"
                                                                     style="text-align: inherit;width: 130px; ">
                                                                     تاريخ الانتهاء :</th>
                                                                 <td style="text-align: inherit;">
-                                                                    {{ $projects->pdate->enclose_end }}</td>
+                                                                    {{ $projects->pdate->end ?? 'NULL' }}</td>
                                                             </tr>
                                                             <tr style="height: 50px;">
                                                                 <th scope="row"
@@ -212,15 +212,15 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th scope="row">بدأ</th>
-                                                                <td>{{ $projects->pdate->enclose_start }}</td>
-                                                                <td>{{ $projects->pdate->view_start }}</td>
-                                                                <td>{{ $projects->pdate->opposition_start }}</td>
+                                                                <td>{{ $projects->pdate->enclose_start ?? 'NULL' }}</td>
+                                                                <td>{{ $projects->pdate->view_start ?? 'NULL' }}</td>
+                                                                <td>{{ $projects->pdate->opposition_start ?? 'NULL' }}</td>
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">نهو</th>
-                                                                <td>{{ $projects->pdate->enclose_end }}</td>
-                                                                <td>{{ $projects->pdate->view_end }}</td>
-                                                                <td>{{ $projects->pdate->opposition_end }}</td>
+                                                                <td>{{ $projects->pdate->enclose_end ?? 'NULL' }}</td>
+                                                                <td>{{ $projects->pdate->view_end ?? 'NULL' }}</td>
+                                                                <td>{{ $projects->pdate->opposition_end ?? 'NULL' }}</td>
                                                             </tr>
 
                                                         </tbody>
@@ -236,13 +236,13 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th scope="row">مبدأي (صرف)</th>
-                                                                <td>{{ $projects->pdate->tax_initial }}</td>
-                                                                <td>{{ $projects->pdate->area_initial }}</td>
+                                                                <td>{{ $projects->pdate->tax_initial ?? 'NULL' }}</td>
+                                                                <td>{{ $projects->pdate->area_initial ?? 'NULL' }}</td>
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">نهائي (مساحة)</th>
-                                                                <td>{{ $projects->pdate->tax_final }}</td>
-                                                                <td>{{ $projects->pdate->area_final }}</td>
+                                                                <td>{{ $projects->pdate->tax_final ?? 'NULL' }}</td>
+                                                                <td>{{ $projects->pdate->area_final ?? 'NULL' }}</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>

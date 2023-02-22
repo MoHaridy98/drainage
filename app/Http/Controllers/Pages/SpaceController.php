@@ -40,18 +40,19 @@ class SpaceController extends Controller
         $City = City :: select()->get();
         $Region = Region :: select()->get();
         $Agrass = Agrass :: select()->get();
-        $FarmerAll = Farmer :: select()->with('assname','farmerBenifit')->get();
-        return view("pages.space.dues",compact('FarmerAll','projects','Agrass','City','Region'));
+        $Benefits = Benefits :: select()->where('project_id',$id)->get();
+        return view("pages.space.dues",compact('Benefits','projects','Agrass','City','Region'));
     }
+
     public function duesCreate(Request $request , $pid){
         $aid = $request['agr_ass'];
         $projects = Project :: with('pdate')->select()->find($pid);
         $City = City :: select()->get();
         $Region = Region :: select()->get();
         $Agrass = Agrass :: select()->get();
+        $Benefits = Benefits :: select()->where('project_id',$pid)->get();
         $Farmer = Farmer :: select()->with('assname','farmerBenifit')->where('association_id',$aid)->get();
-        $FarmerAll = Farmer :: select()->with('assname','farmerBenifit')->get();
-        return view("pages.space.dues",compact('FarmerAll','projects','Agrass','Farmer','City','Region'));
+        return view("pages.space.dues",compact('Benefits','projects','Agrass','Farmer','City','Region'));
     }
     public function duesStore(Request $request)
     {
@@ -59,7 +60,7 @@ class SpaceController extends Controller
             for($i = 0 ; $i< count($request->fid) ; $i++){
                 $cost[] = $request->cost[$i];
                 $farmer_id[] = $request->fid[$i];
-                $farmer_benifit = Benefits:: select('farmer_id')->where('farmer_id',$farmer_id[$i])->value('farmer_id');
+                $farmer_benifit = Benefits:: select('farmer_id','project_id')->where('farmer_id',$farmer_id[$i])->where('project_id',$request['pid'])->value('farmer_id');
                 //return response()->json([$farmer_benifit]);
                 if($farmer_benifit == NULL){
                     $benefits = Benefits:: create(([
@@ -68,7 +69,7 @@ class SpaceController extends Controller
                         'project_id' => $request['pid'],
                     ]));
                 }else{
-                    $benefits = Benefits:: where ('farmer_id', $farmer_id[$i])-> update(([
+                    $benefits = Benefits:: where('farmer_id', $farmer_id[$i])->where('project_id',$request['pid'])-> update(([
                         'Total_installment' => $cost[$i],
                         'project_id' => $request['pid'],
                     ]));
@@ -76,7 +77,7 @@ class SpaceController extends Controller
             }
             return redirect()->route('space.dues' , $request['pid']) -> with(['success' => 'تمت الاضافة بنجاح']);
         }catch(\Exception $ex){
-            return redirect()->route('space.dues' , $request['pid']) -> with(['error' => 'خطأ' . $ex]);
+            // return redirect()->route('space.dues' , $request['pid']) -> with(['error' => 'خطأ' . $ex]);
         }
     }
     /**

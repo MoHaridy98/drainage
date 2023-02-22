@@ -41,23 +41,19 @@
                                     <div class="card card-primary">
                                         <div class="card-header">
                                             <h4>اضافة مستخدم </h4>
-                                            {{-- <button class="btn btn-dark"
-                                                style="position: absolute; left: 10px; top:5px"><a
-                                                    class="nav-link text-white"
-                                                    href="{{ route('agr.list') }}">عودة</a></button> --}}
                                         </div>
                                         <div class="card-body">
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
 
                                                     <input style="height: calc(2.25rem + 6px);" type="text"
-                                                        name="agr_name"
+                                                        name="user_name"
                                                         class="form-control"placeholder=" اسم المستخدم  ">
                                                 </div>
                                                 <div class="form-group col-md-6">
 
-                                                    <input style="height: calc(2.25rem + 6px);" type="text"
-                                                        name="agr_name"
+                                                    <input style="height: calc(2.25rem + 6px);" type="email"
+                                                        name="user_email"
                                                         class="form-control"placeholder=" البريد الإلكتروني ">
                                                 </div>
 
@@ -65,14 +61,13 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
 
-                                                    <input style="height: calc(2.25rem + 6px);" type="text"
-                                                        name="agr_name"
-                                                        class="form-control"placeholder=" الرقم السري ">
+                                                    <input style="height: calc(2.25rem + 6px);" type="password"
+                                                        name="pass" class="form-control"placeholder=" الرقم السري ">
                                                 </div>
                                                 <div class="form-group col-md-6">
 
-                                                    <input style="height: calc(2.25rem + 6px);" type="text"
-                                                        name="agr_name"
+                                                    <input style="height: calc(2.25rem + 6px);" type="password"
+                                                        name="pass"
                                                         class="form-control"placeholder="تاكيد الرقم السري ">
                                                 </div>
 
@@ -80,7 +75,7 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
 
-                                                    <select class="form-control" id="city" name="city">
+                                                    <select class="form-control" name="role">
                                                         <option value="" disabled selected>اختر الصلحية</option>
                                                         @isset($roles)
                                                             @if ($roles && $roles->count() > 0)
@@ -95,8 +90,9 @@
 
                                                 <div class="form-group col-md-6">
 
-                                                    <select class="form-control" name="region">
-                                                        <option value="" disabled selected>اختر حالة المستخدم</option>
+                                                    <select class="form-control" name="state">
+                                                        <option value="" disabled selected>اختر حالة المستخدم
+                                                        </option>
                                                         <option value="1"> فعال </option>
                                                         <option value="0"> غير فعال</option>
                                                     </select>
@@ -108,9 +104,6 @@
                                     <button type="submit" class="btn btn-success">حفظ</button>
                                 </form>
                             </div>
-                            {{-- <a href="javascript:void(0)" style="padding: 5px 10px 5px 10px;" id="addWork-btn"
-                                class="btn btn-primary form-label" onclick="addWorkRow()">+ اضف مستحق
-                            </a> --}}
                         </div>
                     </div>
             </div>

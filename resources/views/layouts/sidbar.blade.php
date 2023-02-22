@@ -84,76 +84,97 @@
                 <a href="{{ route('home') }}" class="nav-link"><span>الرئيسية</span><i data-feather="monitor"></i></a>
             </li>
             <li class="menu-header"></li>
-            <li class="dropdown">
-                <a href="#" class="menu-toggle nav-link has-dropdown"><span>الهيئة العامة للصرف</span>
-                    <i data-feather="briefcase"></i></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('sewage') }}"> اضافة مشروع</a></li>
-                    <li><a class="nav-link" href="{{ route('sewage.list') }}"> كل المشاريع</a></li>
-                </ul>
-            </li>
-            <li class="menu-header"></li>
-            @if (auth()->user()->hasRole('super_admin'))
-            @can('space')
-            <li class="dropdown">
-                <a href="#" class="menu-toggle nav-link has-dropdown"><span>مدرية المساحة</span>
-                    <i data-feather="briefcase"></i></a>
-                <ul class="dropdown-menu">
-                    {{-- <li><a class="nav-link" href="{{ route('space') }}">مراجعة مشروع</a></li> --}}
-                    <li><a class="nav-link" href="{{ route('space.list') }}"> كل المشاريع</a></li>
-                </ul>
-            </li>
-            @endcan
+            @if (auth()->user()->hasRole('super_admin') ||
+                    auth()->user()->hasRole('الصرف'))
+                @can('sewage')
+                    <li class="dropdown">
+                        <a href="{{ route('sewage.list') }}" class="nav-link"><span>الهيئة العامة
+                                للصرف</span>
+                            <i data-feather="briefcase"></i></a>
+                        {{-- <ul class="dropdown-menu">
+                            <li><a class="nav-link" href="{{ route('sewage') }}"> اضافة مشروع</a></li>
+                            <li><a class="nav-link" href="{{ route('sewage.list') }}"> المشاريع</a></li>
+                        </ul> --}}
+                    </li>
+                @endcan
             @endif
             <li class="menu-header"></li>
-            <li class="dropdown">
-                <a href="#" class="menu-toggle nav-link has-dropdown"><span>مدرية الزراعــة</span>
-                    <i data-feather="briefcase"></i></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('agr.list') }}">جمعيات زراعية</a></li>
-                    <li><a class="nav-link" href="{{ route('agr.farmer') }}">مزارعين</a></li>
-                </ul>
-            </li>
+            @if (auth()->user()->hasRole('super_admin') ||
+                    auth()->user()->hasRole('المساحة'))
+                @can('space')
+                    <li class="dropdown">
+                        <a href="{{ route('space.list') }}" class="nav-link"><span>مدرية
+                                المساحة</span>
+                            <i data-feather="briefcase"></i></a>
+                        {{-- <ul class="dropdown-menu">
+                            <li><a class="nav-link" href="{{ route('space') }}">مراجعة مشروع</a></li>
+                            <li><a class="nav-link" href="{{ route('space.list') }}"> كل المشاريع</a></li>
+                        </ul> --}}
+                    </li>
+                @endcan
+            @endif
             <li class="menu-header"></li>
-            <li class="dropdown">
-                <a href="#" class="menu-toggle nav-link has-dropdown"><span> الضرائـب العقاريــة</span>
-                    <i data-feather="briefcase"></i></a>
-                <ul class="dropdown-menu">
-                    {{-- <li><a class="nav-link" href="{{ route('taxes') }}">اضافة مستحق </a></li> --}}
-                    <li><a class="nav-link" href="{{ route('taxes.list') }}"> كل المستحقات</a></li>
-                </ul>
-            </li>
+            @if (auth()->user()->hasRole('super_admin') ||
+                    auth()->user()->hasRole('الزراعة'))
+                @can('agr')
+                    <li class="dropdown">
+                        <a href="#" class="menu-toggle nav-link has-dropdown"><span>مدرية الزراعــة</span>
+                            <i data-feather="briefcase"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link" href="{{ route('agr.list') }}">جمعيات زراعية</a></li>
+                            <li><a class="nav-link" href="{{ route('agr.farmer') }}">مزارعين</a></li>
+                        </ul>
+                    </li>
+                @endcan
+            @endif
+            <li class="menu-header"></li>
+            @if (auth()->user()->hasRole('super_admin') ||
+                    auth()->user()->hasRole('الضرائب'))
+                @can('taxes')
+                    <li class="dropdown">
+                        <a href="{{ route('taxes.list') }}" class="nav-link"><span> الضرائـب العقاريــة</span>
+                            <i data-feather="briefcase"></i></a>
+                        {{-- <ul class="dropdown-menu">
+                        <li><a class="nav-link" href="{{ route('taxes') }}">اضافة مستحق </a></li>
+                        <li><a class="nav-link" href="{{ route('taxes.list') }}"> كل المستحقات</a></li>
+                    </ul> --}}
+                    </li>
+                @endcan
+            @endif
             <li class="menu-header"></li>
 
             <li class="dropdown">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><span> تقارير المشرعات</span>
                     <i data-feather="briefcase"></i></a>
                 <ul class="dropdown-menu">
-
-                    @if (auth()->user()->hasRole('super_admin'))
-                        @can('report')
-                            <li><a class="nav-link" href="{{ route('report') }}">تقرير مفصل</a></li>
-                        @endcan
-                        @can('all-report')
-                            <li><a class="nav-link" href="{{ route('all.report_project') }}">تقرير مجمع</a></li>
-                        @endcan
-                        @endif
+                    @can('report')
+                        <li><a class="nav-link" href="{{ route('report') }}">تقرير مفصل</a></li>
+                    @endcan
+                    @can('sewage-report')
+                        <li><a class="nav-link" href="{{ route('sewage-report') }}">تقرير الصرف المغطى</a></li>
+                    @endcan
+                    @can('all-report')
+                        <li><a class="nav-link" href="{{ route('all.report_project') }}">تقرير مجمع</a></li>
+                    @endcan
                 </ul>
             </li>
             <li class="menu-header"></li>
+            <li class="menu-header"></li>
 
-            <li class="dropdown">
-                <a href="#" class="menu-toggle nav-link has-dropdown"><span>الإعدادات</span>
-                    <i data-feather="briefcase"></i></a>
-                <ul class="dropdown-menu">
-                    @can('users')
-                    <li><a class="nav-link" href="{{ route('Users') }}">  مستخدميين</a></li>
-                    @endcan
-                    @can('roles')
-                    <li><a class="nav-link" href="{{ route('Roles') }}">اضافة اذونات</a></li>
-                    @endcan
-                </ul>
-            </li>
+            @if (auth()->user()->hasRole('super_admin'))
+                <li class="dropdown">
+                    <a href="#" class="menu-toggle nav-link has-dropdown"><span>الإعدادات</span>
+                        <i data-feather="briefcase"></i></a>
+                    <ul class="dropdown-menu">
+                        @can('users')
+                            <li><a class="nav-link" href="{{ route('Users') }}"> مستخدميين</a></li>
+                        @endcan
+                        @can('roles')
+                            <li><a class="nav-link" href="{{ route('Roles') }}">اضافة اذونات</a></li>
+                        @endcan
+                    </ul>
+                </li>
+            @endif
         </ul>
     </aside>
 </div>

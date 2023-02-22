@@ -29,6 +29,7 @@ class Farmer extends Model
     public function farmerBenifit(){
         return $this->hasOne(Benefits::class ,'farmer_id');
     }
+    
     public function farmerInstallment(){
         return $this->hasOne(Installment::class ,'farmer_id');
     }
