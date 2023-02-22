@@ -116,7 +116,7 @@ if (ctx) {
 			labels: JSON.parse($('input[name=month]').val()),
 			datasets: [
 				{
-					label: "users",
+					label: "المشاريع",
 					borderColor: "rgba(0,0,0,.09)",
 					borderWidth: "1",
 					backgroundColor: "rgba(0,0,0,.07)",

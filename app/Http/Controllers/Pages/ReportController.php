@@ -10,6 +10,8 @@ use App\Models\Region;
 use App\Models\City;
 use App\Models\Project;
 use App\Models\Farmer;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class ReportController extends Controller
 {
