@@ -189,41 +189,44 @@
                                                                                 @break
 
                                                                             @else
-                                                                                <input type="number" step="0.1"
-                                                                                    name="cost[]">
+                                                                                @if ($item->project_id != $projects->id && $item->farmer_id != $farmer->id)
+                                                                                    <input type="number" step="0.1"
+                                                                                        name="cost[]">
+                                                                                @break
                                                                             @endif
-                                                                        @endforeach
-                                                                    @endif
-                                                                @endisset
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                @endif
-                                            @endisset
-                                        </tbody>
-                                        {{-- <tfoot>
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endif
+                                                            @endisset
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                        @endisset
+                                    </tbody>
+                                    {{-- <tfoot>
                                                 <tr>
                                                     <th>تكلفة المشروع: {{ $projects->total_cost }}</th>
                                                     <th style="text-align:left">الاجمالي:</th>
                                                     <th></th>
                                                 </tr>
                                             </tfoot> --}}
-                                    </table>
-                                    <button type="submit" class="btn btn-success">حفظ</button>
-                                </form>
-                            </div>
+                                </table>
+                                <button type="submit" class="btn btn-success">حفظ</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            {{-- <a href="javascript:void(0)" style="padding: 5px 10px 5px 10px;" id="addWork-btn"
+        {{-- <a href="javascript:void(0)" style="padding: 5px 10px 5px 10px;" id="addWork-btn"
                                 class="btn btn-primary form-label" onclick="addWorkRow()">+ اضف مستحق
                             </a> --}}
-            @include('layouts.setting')
-        </div>
-        @include('layouts.footer')
+        @include('layouts.setting')
     </div>
+    @include('layouts.footer')
+</div>
 </div>
 <!-- General JS Scripts -->
 <script src="assets/js/app.min.js"></script>
