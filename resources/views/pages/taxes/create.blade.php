@@ -80,19 +80,13 @@
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label>اجمالي ما تم جمعه</label>
-                                                    {{-- <input type="text"
-                                                        value="
-                                                    @if ($installment && $installment->count() > 0) @foreach ($installment as $item)
-                                                            {{ $item->amount->count() }}
-                                                            @endforeach @endif
-                                                     "
-                                                        class="form-control" disabled> --}}
+                                                    <input type="text" value="{{ $inst }}"
+                                                        class="form-control" disabled>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label>المتبقي من اجمالي التكلفة</label>
-                                                    {{-- <input type="text"
-                                                        value="{{ $project->total_cost - $installment->amount }}"
-                                                        class="form-control" disabled> --}}
+                                                    <input type="text" value="{{ $project->total_cost - $inst }}"
+                                                        class="form-control" disabled>
                                                 </div>
                                             </div>
                                             <hr>

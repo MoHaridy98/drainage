@@ -55,7 +55,8 @@ class TaxesController extends Controller
         // ->where('project_id',$id)
         // ->get();
         $installment = Installment :: select()->where('project_id',$id)->get();
-        return view("pages.taxes.create", compact('project','installment'));
+        $inst = Installment :: where('project_id',$id)->sum('amount');
+        return view("pages.taxes.create", compact('project','installment','inst'));
     }
 
     /**
