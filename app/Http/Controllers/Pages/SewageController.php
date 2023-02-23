@@ -136,24 +136,25 @@ class SewageController extends Controller
     public function destroy($id)
     {
         $project = Project :: with('pdate','projectBenifit','projectInstallment')->select()->find($id);
-        // try{
-        //     try{
-        //         $project->pdate->id;
-        //         $project->pdate->forcedelete();
-        //     }catch(\Exception $ex){}
-        //     try{
-        //         $project->projectInstallment->id;
-        //         $project->projectInstallment->forcedelete();
-        //     }catch(\Exception $ex){}
-        //     try{
-        //         $project->projectBenifit->id;
-        //         $project->projectBenifit->forcedelete();
-        //     }catch(\Exception $ex){}
+        try{
+            try{
+                $project->pdate->id;
+                $project->pdate->forcedelete();
+            }catch(\Exception $ex){}
+            try{
+                
+                $project->projectInstallment->id;
+                $project->projectInstallment->forcedelete();
+            }catch(\Exception $ex){}
+            try{
+                $project->projectBenifit->id;
+                $project->projectBenifit->forcedelete();
+            }catch(\Exception $ex){}
 
-        //     $project->forcedelete();
-        //     return redirect()->route('sewage.list') -> with(['success' => 'تم الحذف!']);
-        // }catch(\Exception $ex){
-        //     return redirect()->route('sewage.list') -> with(['error' => 'خطأ' .$ex]);
-        // }
+            $project->forcedelete();
+            return redirect()->route('sewage.list') -> with(['success' => 'تم الحذف!']);
+        }catch(\Exception $ex){
+            return redirect()->route('sewage.list') -> with(['error' => 'خطأ' .$ex]);
+        }
     }
 }

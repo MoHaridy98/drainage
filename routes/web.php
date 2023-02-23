@@ -99,6 +99,7 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
 
     Route::get('/users', [App\Http\Controllers\Pages\UsersController::class, 'index'])->name('Users');
     Route::get('/adduser', [App\Http\Controllers\Pages\UsersController::class, 'add_user'])->name('AddUsers');
+    Route::POST('/create-user', [App\Http\Controllers\Pages\UsersController::class, 'create'])->name('createUsers');
     Route::get('/edit-user{id}', [App\Http\Controllers\Pages\UsersController::class, 'edit'])->name('editUsers');
     Route::get('/updateuser{id}', [App\Http\Controllers\Pages\UsersController::class, 'update'])->name('update.User');
 

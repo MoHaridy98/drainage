@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
@@ -31,7 +32,8 @@
                             <div class="col-12 col-md-12 col-lg-12">
 
                                 <form class="needs-validation" id="work_experience" novalidate=""
-                                    action="{{ route('update.User', $user->id) }}" method="get" enctype="multipart/form-data">
+                                    action="{{ route('update.User', $user->id) }}" method="get"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="card card-primary">
                                         <div class="card-header">
@@ -64,12 +66,12 @@
                                                 <div class="form-group col-md-6">
 
                                                     <select class="form-control" name="role">
-                                                        <option value="{{ $user->role }}"> {{ $user->role }}
+                                                        <option value="{{ $user->role }}" hidden> {{ $user->role }}
                                                         </option>
                                                         @isset($roles)
                                                             @if ($roles && $roles->count() > 0)
                                                                 @foreach ($roles as $role)
-                                                                    <option value="{{ $role->id }}">{{ $role->name }}
+                                                                    <option value="{{ $role->name }}">{{ $role->name }}
                                                                     </option>
                                                                 @endforeach
                                                             @endif
@@ -80,7 +82,8 @@
                                                 <div class="form-group col-md-6">
 
                                                     <select class="form-control" name="state">
-                                                        <option value="{{ $user->state }}" disabled selected> {{ $user->state }}
+                                                        <option value="{{ $user->state }}" disabled selected>
+                                                            {{ $user->state }}
                                                         </option>
                                                         <option value="1"> فعال </option>
                                                         <option value="0"> غير فعال</option>

@@ -36,7 +36,7 @@
                                 @include('layouts.success')
                                 @include('layouts.error')
                                 <form class="needs-validation" id="work_experience" novalidate=""
-                                    action="{{ route('agr.store') }}" method="POST" enctype="multipart/form-data">
+                                    action="{{ route('createUsers') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="card card-primary">
                                         <div class="card-header">
@@ -47,30 +47,22 @@
                                                 <div class="form-group col-md-6">
 
                                                     <input style="height: calc(2.25rem + 6px);" type="text"
-                                                        name="user_name"
+                                                        name="name"
                                                         class="form-control"placeholder=" اسم المستخدم  ">
                                                 </div>
                                                 <div class="form-group col-md-6">
 
                                                     <input style="height: calc(2.25rem + 6px);" type="email"
-                                                        name="user_email"
+                                                        name="email"
                                                         class="form-control"placeholder=" البريد الإلكتروني ">
                                                 </div>
 
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-
                                                     <input style="height: calc(2.25rem + 6px);" type="password"
-                                                        name="pass" class="form-control"placeholder=" الرقم السري ">
+                                                        name="password" class="form-control"placeholder=" الرقم السري ">
                                                 </div>
-                                                <div class="form-group col-md-6">
-
-                                                    <input style="height: calc(2.25rem + 6px);" type="password"
-                                                        name="pass"
-                                                        class="form-control"placeholder="تاكيد الرقم السري ">
-                                                </div>
-
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
@@ -80,7 +72,7 @@
                                                         @isset($roles)
                                                             @if ($roles && $roles->count() > 0)
                                                                 @foreach ($roles as $role)
-                                                                    <option value="{{ $role->id }}">{{ $role->name }}
+                                                                    <option value="{{ $role->name }}">{{ $role->name }}
                                                                     </option>
                                                                 @endforeach
                                                             @endif

@@ -62,9 +62,21 @@ class UsersController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function create(Request $request)
     {
+        try{
+            User :: create(([
+            'name' => $request['name'],
+            'email' =>$request['email'],
+            'password' => Hash::make($request['password']),
+            'role' => $request['role'],
+            'state' => $request['state'],
+    ]));
+        return redirect()->route('Users')-> with(['success' => 'تم التسجيل بنجاح']);
+    }catch(\Exception $ex){
+        return redirect()->route('Users')-> with(['success' => 'تم التسجيل بنجاح']);
 
+    }
     }
 
     /**

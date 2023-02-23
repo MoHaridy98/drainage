@@ -20,7 +20,7 @@ class RolesAndPermissionSeeder extends Seeder
         $arrayOfPermissionsNames =[
             'agr','agr.create','agr.edit','farmer','farmarCreate','farmarEdite','all-report',
             'print','report','sewage','sewage.create','sewage.edite','space','space.create',
-            'dues','taxes','taxes.create','home','users','roles'
+            'dues','taxes','taxes.create','home','users','roles','sewage-report'
 
 
         ];
