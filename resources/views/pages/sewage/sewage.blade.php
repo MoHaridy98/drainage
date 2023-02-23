@@ -92,20 +92,9 @@
                                                                 <td>{{ $project->total_cost }} جنية</td>
                                                                 <td>
                                                                     <div class="btn-group dropup">
-                                                                        <button id="btnGroupVerticalDrop5"type="button"
-                                                                            class="btn"data-toggle="dropdown"
-                                                                            aria-haspopup="true"aria-expanded="false">
-                                                                            <i class="fas fa-ellipsis-v"></i>
-                                                                        </button>
-
-                                                                        <div class="dropdown-menu"
-                                                                            aria-labelledby="btnGroupVerticalDrop2">
-                                                                            <a class="dropdown-item"
-                                                                                href="{{ route('sewage.edit', $project->id) }}">عرض
-                                                                                وتعديل</a>
-                                                                            <a class="dropdown-item"
-                                                                                href="{{ route('sewage.delete', $project->id) }}">حذف</a>
-                                                                        </div>
+                                                                        <a class="dropdown-item"
+                                                                            href="{{ route('sewage.edit', $project->id) }}">عرض
+                                                                            وتعديل</a>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -155,20 +144,9 @@
                                                                 <td>{{ $project->total_cost }} جنية</td>
                                                                 <td>
                                                                     <div class="btn-group dropup">
-                                                                        <button id="btnGroupVerticalDrop5"type="button"
-                                                                            class="btn"data-toggle="dropdown"
-                                                                            aria-haspopup="true"aria-expanded="false">
-                                                                            <i class="fas fa-ellipsis-v"></i>
-                                                                        </button>
-
-                                                                        <div class="dropdown-menu"
-                                                                            aria-labelledby="btnGroupVerticalDrop2">
-                                                                            <a class="dropdown-item"
-                                                                                href="{{ route('sewage.edit', $project->id) }}">عرض
-                                                                                وتعديل</a>
-                                                                            <a class="dropdown-item"
-                                                                                href="{{ route('sewage.delete', $project->id) }}">حذف</a>
-                                                                        </div>
+                                                                        <a class="dropdown-item"
+                                                                            href="{{ route('sewage.edit', $project->id) }}">عرض
+                                                                            وتعديل</a>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -218,20 +196,9 @@
                                                                 <td>{{ $project->total_cost }} جنية</td>
                                                                 <td>
                                                                     <div class="btn-group dropup">
-                                                                        <button id="btnGroupVerticalDrop5"type="button"
-                                                                            class="btn"data-toggle="dropdown"
-                                                                            aria-haspopup="true"aria-expanded="false">
-                                                                            <i class="fas fa-ellipsis-v"></i>
-                                                                        </button>
-
-                                                                        <div class="dropdown-menu"
-                                                                            aria-labelledby="btnGroupVerticalDrop2">
-                                                                            <a class="dropdown-item"
-                                                                                href="{{ route('sewage.edit', $project->id) }}">عرض
-                                                                                وتعديل</a>
-                                                                            <a class="dropdown-item"
-                                                                                href="{{ route('sewage.delete', $project->id) }}">حذف</a>
-                                                                        </div>
+                                                                        <a class="dropdown-item"
+                                                                            href="{{ route('sewage.edit', $project->id) }}">عرض
+                                                                            وتعديل</a>
                                                                     </div>
                                                                 </td>
                                                             </tr>

@@ -75,7 +75,7 @@
         <div class="sidebar-brand">
             <a href="{{ route('home') }}" style="letter-spacing: initial"> <img alt="image" src="assets/img/logo.png"
                     class="header-logo" />
-                <span class="logo-name">متابعة المشاريع</span>
+                <span class="logo-name">متابعة المشاريع {{ Auth::user()->hasRole('super_admin') }}</span>
             </a>
         </div>
         <ul class="sidebar-menu">
@@ -83,10 +83,10 @@
             <li class="dropdown active">
                 <a href="{{ route('home') }}" class="nav-link"><span>الرئيسية</span><i data-feather="monitor"></i></a>
             </li>
-            <li class="menu-header"></li>
             @if (auth()->user()->hasRole('super_admin') ||
                     auth()->user()->hasRole('الصرف'))
                 @can('sewage')
+                    <li class="menu-header"></li>
                     <li class="dropdown">
                         <a href="{{ route('sewage.list') }}" class="nav-link"><span>الهيئة العامة
                                 للصرف</span>
@@ -98,10 +98,10 @@
                     </li>
                 @endcan
             @endif
-            <li class="menu-header"></li>
             @if (auth()->user()->hasRole('super_admin') ||
                     auth()->user()->hasRole('المساحة'))
                 @can('space')
+                    <li class="menu-header"></li>
                     <li class="dropdown">
                         <a href="{{ route('space.list') }}" class="nav-link"><span>مدرية
                                 المساحة</span>
@@ -113,10 +113,10 @@
                     </li>
                 @endcan
             @endif
-            <li class="menu-header"></li>
             @if (auth()->user()->hasRole('super_admin') ||
                     auth()->user()->hasRole('الزراعة'))
                 @can('agr')
+                    <li class="menu-header"></li>
                     <li class="dropdown">
                         <a href="#" class="menu-toggle nav-link has-dropdown"><span>مدرية الزراعــة</span>
                             <i data-feather="briefcase"></i></a>
@@ -127,10 +127,10 @@
                     </li>
                 @endcan
             @endif
-            <li class="menu-header"></li>
             @if (auth()->user()->hasRole('super_admin') ||
                     auth()->user()->hasRole('الضرائب'))
                 @can('taxes')
+                    <li class="menu-header"></li>
                     <li class="dropdown">
                         <a href="{{ route('taxes.list') }}" class="nav-link"><span> الضرائـب العقاريــة</span>
                             <i data-feather="briefcase"></i></a>

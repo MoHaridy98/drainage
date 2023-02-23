@@ -17,20 +17,24 @@ class RolesAndPermissionSeeder extends Seeder
     public function run()
     {
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        //site permissions
         $arrayOfPermissionsNames =[
             'agr','agr.create','agr.edit','farmer','farmarCreate','farmarEdite','all-report',
             'print','report','sewage','sewage.create','sewage.edite','space','space.create',
             'dues','taxes','taxes.create','home','users','roles','sewage-report'
-
-
         ];
-
         $permissions = collect($arrayOfPermissionsNames)->map(function($permissions){
             return ['name'=>$permissions , 'guard_name'=>'web'];
         });
-
         Permission :: insert ($permissions->toArray());
-        $role = Role :: create(['name'=>'super_admin'])
-        ->givePermissionTo($arrayOfPermissionsNames);
+
+        //site users
+        $arrayOfRoles =[
+            'super_admin','الصرف','المساحة','الزراعة','الضرائب','user'
+        ];
+        $roles = collect($arrayOfRoles)->map(function($roles){
+            return ['name'=>$roles];
+        });
+        Role :: insert ($permissions->toArray());
     }
 }

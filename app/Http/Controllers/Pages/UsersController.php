@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Model_has_roles;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
@@ -65,18 +66,21 @@ class UsersController extends Controller
     protected function create(Request $request)
     {
         try{
-            User :: create(([
-            'name' => $request['name'],
-            'email' =>$request['email'],
-            'password' => Hash::make($request['password']),
-            'role' => $request['role'],
-            'state' => $request['state'],
-    ]));
-        return redirect()->route('Users')-> with(['success' => 'تم التسجيل بنجاح']);
-    }catch(\Exception $ex){
-        return redirect()->route('Users')-> with(['success' => 'تم التسجيل بنجاح']);
-
-    }
+            $user = User :: create(([
+             'name' => $request['name'],
+             'email' =>$request['email'],
+             'password' => Hash::make($request['password']),
+             'role' => $request['role'],
+             'state' => $request['state'],
+             ]));
+             Model_has_roles :: create(([
+                 'role_id' => $request['role'],
+                 'model_id' => $user->id,
+             ]));
+            return redirect()->route('Users')-> with(['success' => 'تم التسجيل بنجاح']);
+        }catch(\Exception $ex){
+            return redirect()->route('Users')-> with(['error' => 'خطأ']);
+        }
     }
 
     /**
@@ -119,16 +123,19 @@ class UsersController extends Controller
     public function update(Request $request,$id)
     {
        try{
-             User :: where('id',$id)->update(([
-        'name' => $request['name'],
-        'email' =>$request['email'],
-        'password' => Hash::make($request['password']),
-        'role' => $request['role'],
-        'state' => $request['state'],
-    ]));
-    return redirect()->route('Users')-> with(['success' => 'تم التسجيل بنجاح']);
+            User :: where('id',$id)->update(([
+                'name' => $request['name'],
+                'email' =>$request['email'],
+                'password' => Hash::make($request['password']),
+                'role' => $request['role'],
+                'state' => $request['state'],
+            ]));
+            Model_has_roles :: where('model_id',$id)->update(([
+                'role_id' => $request['role'],
+            ]));
+            return redirect()->route('Users')-> with(['success' => 'تم التسجيل بنجاح']);
     }catch(\Exception $ex){
-    return redirect()->route('Users')-> with(['success' => 'تم التسجيل بنجاح']);
+    return redirect()->route('Users')-> with(['error' => 'خطا'. $ex]);
 
      }
 

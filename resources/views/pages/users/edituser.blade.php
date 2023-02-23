@@ -66,12 +66,12 @@
                                                 <div class="form-group col-md-6">
 
                                                     <select class="form-control" name="role">
-                                                        <option value="{{ $user->role }}" hidden> {{ $user->role }}
+                                                        <option value="{{ $user->role }}" hidden> اختر الصلاحيات
                                                         </option>
                                                         @isset($roles)
                                                             @if ($roles && $roles->count() > 0)
                                                                 @foreach ($roles as $role)
-                                                                    <option value="{{ $role->name }}">{{ $role->name }}
+                                                                    <option value="{{ $role->id }}">{{ $role->name }}
                                                                     </option>
                                                                 @endforeach
                                                             @endif
@@ -82,8 +82,8 @@
                                                 <div class="form-group col-md-6">
 
                                                     <select class="form-control" name="state">
-                                                        <option value="{{ $user->state }}" disabled selected>
-                                                            {{ $user->state }}
+                                                        <option value="{{ $user->state }}" hidden selected>
+                                                            اختر الحالة
                                                         </option>
                                                         <option value="1"> فعال </option>
                                                         <option value="0"> غير فعال</option>

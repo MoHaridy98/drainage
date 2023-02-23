@@ -67,12 +67,13 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
 
-                                                    <select class="form-control" name="role">
-                                                        <option value="" disabled selected>اختر الصلحية</option>
+                                                    <select class="form-control" name="role" required>
+                                                        <option value="" disabled hidden selected>اختر الصلحية
+                                                        </option>
                                                         @isset($roles)
                                                             @if ($roles && $roles->count() > 0)
                                                                 @foreach ($roles as $role)
-                                                                    <option value="{{ $role->name }}">{{ $role->name }}
+                                                                    <option value="{{ $role->id }}">{{ $role->name }}
                                                                     </option>
                                                                 @endforeach
                                                             @endif
@@ -82,8 +83,9 @@
 
                                                 <div class="form-group col-md-6">
 
-                                                    <select class="form-control" name="state">
-                                                        <option value="" disabled selected>اختر حالة المستخدم
+                                                    <select class="form-control" name="state" required>
+                                                        <option value="" disabled hidden selected>اختر حالة
+                                                            المستخدم
                                                         </option>
                                                         <option value="1"> فعال </option>
                                                         <option value="0"> غير فعال</option>
