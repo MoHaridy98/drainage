@@ -86,7 +86,7 @@ class SewageController extends Controller
     {
         try{
             $project = Project :: with('pdate')->select()->find($id);
-            $Dates = Date :: where('project_id', $id)->select()->find($id);
+            //return redirect()->route('sewage.list') -> with(['success' => '--> ' . $project->pdate->project_id]);
             if(!$project){
                 return redirect()->route('sewage.list')->with(['error' => 'مشروع غير موجود']);
             }
@@ -101,14 +101,16 @@ class SewageController extends Controller
 
 
             ]));
-            if($Dates){
+            try{
+                $project->pdate->project_id;
                 $project = Date:: where ('project_id', $id)-> update(([
                     'excution' => $request['excution'],
                     'end' => $request['end'],
                     'area_initial' => $request['area_initial'],
                     'tax_initial' => $request['area_initial'],
                 ]));
-            }else{
+                return redirect()->route('sewage.list') -> with(['success' => 'تم التسجيل بنجاح']);
+            }catch(\Exception $ex){
                 $project = Date:: create(([
                     'excution' => $request['excution'],
                     'end' => $request['end'],
@@ -116,8 +118,8 @@ class SewageController extends Controller
                     'tax_initial' => $request['area_initial'],
                     'project_id' => $id ,
                 ]));
+                return redirect()->route('sewage.list') -> with(['success' => 'تم التسجيل بنجاح']);
             }
-            return redirect()->route('sewage.list') -> with(['success' => 'تم التسجيل بنجاح']);
         }catch(\Exception $ex){
             return redirect()->route('sewage.list') -> with(['error' => 'خطأ' . $ex]);
         }
@@ -133,14 +135,25 @@ class SewageController extends Controller
      */
     public function destroy($id)
     {
-        try{
-            $project = Project :: with('pdate')->find($id);
-            $Dates = Date :: with('projectDate')->find($id);
-            if($Dates)$Dates->forcedelete();
-            $project->forcedelete();
-            return redirect()->route('sewage.list') -> with(['success' => 'تم الحذف!']);
-        }catch(\Exception $ex){
-            return redirect()->route('sewage.list') -> with(['error' => 'خطأ' .$Dates]);
-        }
+        $project = Project :: with('pdate','projectBenifit','projectInstallment')->select()->find($id);
+        // try{
+        //     try{
+        //         $project->pdate->id;
+        //         $project->pdate->forcedelete();
+        //     }catch(\Exception $ex){}
+        //     try{
+        //         $project->projectInstallment->id;
+        //         $project->projectInstallment->forcedelete();
+        //     }catch(\Exception $ex){}
+        //     try{
+        //         $project->projectBenifit->id;
+        //         $project->projectBenifit->forcedelete();
+        //     }catch(\Exception $ex){}
+
+        //     $project->forcedelete();
+        //     return redirect()->route('sewage.list') -> with(['success' => 'تم الحذف!']);
+        // }catch(\Exception $ex){
+        //     return redirect()->route('sewage.list') -> with(['error' => 'خطأ' .$ex]);
+        // }
     }
 }
