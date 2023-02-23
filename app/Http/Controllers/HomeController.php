@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Installment;
 use App\Models\Project;
 use App\Models\User;
+use App\Models\Date;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,34 +28,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $orderCharts = $this->orderChart();
+        $now = Carbon::today()->format('y-m-d');
+        $project = Project :: with('pdate')->get();
+        $installment = Installment :: get();
+        $end =  Date::whereDate('end','<=', $now)->get();
+
         $users = $this->userChart();
-        return view('home',compact('orderCharts','users'));
-    }
-    public function orderChart()
-    {
-        $masterYear = array();
-        $labelsYear = array();
-
-        array_push($masterYear, Project::whereMonth('created_at', Carbon::now(env('timezone')))->count());
-        for ($i = 1; $i <= 11; $i++)
-        {
-            if ($i >= Carbon::now(env('timezone'))->month)
-            {
-                array_push($masterYear, Project::whereMonth('created_at',Carbon::now(env('timezone'))->subMonths($i))->whereYear('created_at', Carbon::now(env('timezone'))->subYears(1))->count());
-            }
-            else
-            {
-                array_push($masterYear, Project::whereMonth('created_at', Carbon::now(env('timezone'))->subMonths($i))->whereYear('created_at', Carbon::now(env('timezone'))->year)->count());
-            }
-        }
-
-        array_push($labelsYear, Carbon::now(env('timezone'))->format('M-y'));
-        for ($i = 1; $i <= 11; $i++)
-        {
-            array_push($labelsYear, Carbon::now(env('timezone'))->subMonths($i)->format('M-y'));
-        }
-        return ['data' => json_encode($masterYear), 'label' => json_encode($labelsYear)];
+        return view('home',compact('users','project','installment','end'));
     }
 
     public function userChart()
@@ -65,11 +45,11 @@ class HomeController extends Controller
         $user = [];
         for ($i = 0; $i < 12; $i++)
         {
-            $d =  Installment::whereMonth('created_at', $now->month)->whereYear('created_at', $now->year)->get();
-            $s =  Project::whereMonth('created_at', $now->month)->whereYear('created_at', $now->year)->get();
-            array_push($month, $now->format('M'));
-            array_push($service, $d->count());
-            array_push($user, $s->count());
+            $end =  Date::whereMonth('end', $now->month)->whereYear('end', $now->year)->get();
+            $start =  Date::whereMonth('excution', $now->month)->whereYear('excution', $now->year)->get();
+            array_push($month, $now->format('M').' '.$now->format('Y'));
+            array_push($service, $end->count());
+            array_push($user, $start->count());
             $now =  $now->subMonth();
         }
 

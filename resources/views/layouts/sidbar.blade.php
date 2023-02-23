@@ -75,7 +75,7 @@
         <div class="sidebar-brand">
             <a href="{{ route('home') }}" style="letter-spacing: initial"> <img alt="image" src="assets/img/logo.png"
                     class="header-logo" />
-                <span class="logo-name">متابعة المشاريع {{ Auth::user()->hasRole('super_admin') }}</span>
+                <span class="logo-name">متابعة المشاريع </span>
             </a>
         </div>
         <ul class="sidebar-menu">
