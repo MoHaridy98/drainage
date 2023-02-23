@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         $user = User:: create([
             'name'=>'MoHaridy',
             'email'=>'moharidy98@gmail.com',
-            'password'=> Hash ::make('123456789'),
+            'password'=> Hash ::make('1419'),
             'role'=>'super_admin',
             'state'=>'1',
         ]);
