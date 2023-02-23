@@ -79,7 +79,7 @@ class UsersController extends Controller
              ]));
             return redirect()->route('Users')-> with(['success' => 'تم التسجيل بنجاح']);
         }catch(\Exception $ex){
-            return redirect()->route('Users')-> with(['error' => 'خطأ']);
+            return redirect()->route('Users')-> with(['error' => 'خطأ'.$ex]);
         }
     }
 
@@ -150,5 +150,8 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('Users')->with(['success' => 'تم الحذف بنجاح']);
     }
 }

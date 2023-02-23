@@ -102,6 +102,8 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
     Route::POST('/create-user', [App\Http\Controllers\Pages\UsersController::class, 'create'])->name('createUsers');
     Route::get('/edit-user{id}', [App\Http\Controllers\Pages\UsersController::class, 'edit'])->name('editUsers');
     Route::get('/updateuser{id}', [App\Http\Controllers\Pages\UsersController::class, 'update'])->name('update.User');
+    Route::Get('/deleteuser{id}', [App\Http\Controllers\Pages\UsersController::class, 'destroy'])->name('delete.user');
+
 
     Route::get('/roles', [App\Http\Controllers\Pages\RolesController::class, 'index'])->name('Roles');
     Route::get('/addRoles', [App\Http\Controllers\Pages\RolesController::class, 'create'])->name('AddRoles.Permission');

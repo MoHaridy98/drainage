@@ -66,11 +66,18 @@
                                                                                 <td>{{ $user->id }}</td>
                                                                                 <td>{{ $user->name }}</td>
                                                                                 <td class="mb-2">{{ $user->role }}</td>
-                                                                                <td class="mb-2">{{ $user->state }}</td>
+
+                                                                                <td class="mb-2">
+                                                                                    @if ($user->state == 0)
+                                                                                    <div class="badge badge-danger">غير نشط</div>
+                                                                                @elseif($user->state == 1)
+                                                                                    <div class="badge badge-success">نشط</div>
+                                                                                @endif
+                                                                                </td>
                                                                                 <td class="mb-2">{{ $user->email }}</td>
                                                                                 <td>
-                                                                                    <a class="badge badge-info text-dark mb-1"
-                                                                                        href="{{ route('editUsers', $user->id) }}">عرض وتعديل</a>
+                                                                                    <a class="badge badge-info text-dark mb-1" href="{{ route('editUsers', $user->id) }}">عرض وتعديل</a>
+                                                                                    <a class="badge badge-info text-dark mb-1" href="{{ route('delete.user', $user->id) }}">حذف</a>
                                                                                 </td>
                                                                             </tr>
                                                                         @endforeach
