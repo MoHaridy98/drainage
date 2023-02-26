@@ -29,65 +29,59 @@
             @include('layouts.sidbar')
             <!-- Main Content -->
             <div class="main-content">
-                <section class="section">
-                    <div class="section-body">
-                        <div class="row" style="direction: rtl">
-                            <div class="col-12 col-md-12 col-lg-12">
-                                @include('layouts.success')
-                                @include('layouts.error')
-                                <form class="form-control" action="{{ route('AddRoles.Permission.store') }}"
-                                    method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="card card-primary">
-                                        <div class="card-header">
-                                            <h4>اضافة صلاحية </h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12">
-                                                    <input type="text" value="{{ old('name') }}" name="name"
-                                                        class="form-control @error('name') is-invalid @enderror">
-                                                    @error('name')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
+                <div class="row" style="direction: rtl">
+                    <div class="col-12 col-md-12 col-lg-12">
+                        @include('layouts.success')
+                        @include('layouts.error')
+                        <form action="{{ route('AddRoles.Permission.store') }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h4>اضافة صلاحية </h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label class="control-label">أسم الصلاحية</label>
+                                            <input type="text" placeholder="الاسم" name="name"
+                                                class="form-control @error('name') is-invalid @enderror">
+                                            @error('name')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12">
-                                                <select class="form-control @error('permissions') is-invalid @enderror"
-                                                    multiple="multiple" name="permissions[]" data-height="100%">
-                                                    @foreach ($permissions as $permission)
-                                                        <option value="{{ $permission->id }}">{{ $permission->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                                @error('permissions')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
+                                            @enderror
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-success">حفظ</button>
-                                </form>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label class="control-label"> الصلاحيات</label>
+                                            <select class="form-control @error('permissions') is-invalid @enderror"
+                                                multiple="multiple" name="permissions[]" data-height="100%">
+                                                @foreach ($permissions as $permission)
+                                                    <option value="{{ $permission->id }}">
+                                                        {{ $permission->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('permissions')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        {{-- <a href="javascript:void(0)" style="padding: 5px 10px 5px 10px;" id="addWork-btn"
-                                class="btn btn-primary form-label" onclick="addWorkRow()">+ اضف مستحق
-                            </a> --}}
+                            <button type="submit" class="btn btn-success">حفظ</button>
+                        </form>
                     </div>
+                </div>
             </div>
         </div>
-        </section>
         @include('layouts.setting')
     </div>
     @include('layouts.footer')
-    </div>
-    </div>
     <!-- General JS Scripts -->
     <script src="assets/js/app.min.js"></script>
     <!-- JS Libraies -->

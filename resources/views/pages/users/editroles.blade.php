@@ -29,63 +29,56 @@
             @include('layouts.sidbar')
             <!-- Main Content -->
             <div class="main-content">
-                <section class="section">
-                    <div class="section-body">
-                        <div class="row" style="direction: rtl">
-                            <div class="col-12 col-md-12 col-lg-12">
-                                <form class="form-control" action="{{ route('role.update', $roles->id) }}"
-                                    method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="card card-primary">
-                                        <div class="card-header">
-                                            <h4>تعديل صلاحية </h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12">
-                                                    <label class="control-label">أسم الصلاحية</label>
-                                                    <input type="text" value="{{ $roles->name }}" disabled
-                                                        name="name"
-                                                        class="form-control @error('name') is-invalid @enderror">
-                                                    @error('name')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
+                <div class="row" style="direction: rtl">
+                    <div class="col-12 col-md-12 col-lg-12">
+                        <form action="{{ route('role.update', $roles->id) }}" method="post"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h4>تعديل صلاحية </h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label class="control-label">أسم الصلاحية</label>
+                                            <input type="text" value="{{ $roles->name }}" disabled name="name"
+                                                class="form-control @error('name') is-invalid @enderror">
+                                            @error('name')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12">
-                                                <label class="control-label">أسم الصلاحية</label>
-                                                <select class="form-control select2" name="permissions[]"
-                                                    multiple="multiple" data-height="100%">
-                                                    @isset($permissions)
-                                                        @if ($permissions && $permissions->count() > 0)
-                                                            @foreach ($permissions as $permission)
-                                                                <option value="{{ $permission->id }}">
-                                                                    {{ $permission->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        @endif
-                                                    @endisset
-                                                </select>
-                                            </div>
+                                            @enderror
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-success">حفظ</button>
-                                </form>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label class="control-label"> الصلاحيات</label>
+                                            <select class="form-control select2" name="permissions[]"
+                                                multiple="multiple" data-height="100%">
+                                                @isset($permissions)
+                                                    @if ($permissions && $permissions->count() > 0)
+                                                        @foreach ($permissions as $permission)
+                                                            <option value="{{ $permission->id }}" selected>
+                                                                {{ $permission->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
+                                                @endisset
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                            <button type="submit" class="btn btn-success">حفظ</button>
+                        </form>
                     </div>
+                </div>
             </div>
         </div>
-        </section>
         @include('layouts.setting')
     </div>
     @include('layouts.footer')
-    </div>
-    </div>
     <!-- General JS Scripts -->
     <script src="assets/js/app.min.js"></script>
     <!-- JS Libraies -->

@@ -58,15 +58,17 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     <input style="height: calc(2.25rem + 6px);" type="password"
-                                                        value="{{ $user->password }}" name="password"
-                                                        class="form-control"placeholder=" الرقم السري ">
+                                                        id="password" minlength="6" name="password"
+                                                        class="form-control" placeholder=" الرقم السري " required>
+                                                    <label for="checkbox">عرض الرقم السري</label>
+                                                    <input type="checkbox" id="checkbox" onclick="show()">
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
 
                                                     <select class="form-control" name="role">
-                                                        <option value="{{ $user->role }}" hidden> اختر الصلاحيات
+                                                        <option value="{{ $user->id }}" hidden>{{ $user->role }}
                                                         </option>
                                                         @isset($roles)
                                                             @if ($roles && $roles->count() > 0)
@@ -83,7 +85,7 @@
 
                                                     <select class="form-control" name="state">
                                                         <option value="{{ $user->state }}" hidden selected>
-                                                            اختر الحالة
+                                                            {{ $user->state ? 'فعال' : 'غير فعال' }}
                                                         </option>
                                                         <option value="1"> فعال </option>
                                                         <option value="0"> غير فعال</option>
@@ -118,7 +120,16 @@
     <script src="assets/js/custom.js"></script>
     <script src="assets/bundles/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
     <script src="assets/bundles/bootstrap-daterangepicker/daterangepicker.js"></script>
-
+    <script>
+        function show() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
 
 </body>
 

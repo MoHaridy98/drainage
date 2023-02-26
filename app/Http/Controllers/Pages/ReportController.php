@@ -12,6 +12,7 @@ use App\Models\Project;
 use App\Models\Farmer;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Carbon\Carbon;
 
 class ReportController extends Controller
 {
@@ -33,6 +34,32 @@ class ReportController extends Controller
         $projects = Project :: with('pdate')->select()->get();
         $Vprojects = Project :: with('pdate')->where('verified', 1 )->select()->get();
         return view('pages.report.sewage',compact('projects','Vprojects'));
+    }
+    public function spaceReport()
+    {
+        //
+        $Vprojects = Project :: select('*','project.id')->join('date','project_id','=','project.id')->where('verified', 1 )->get();
+        return view('pages.report.space',compact('Vprojects'));
+    }
+    public function space_date(Request $request)
+    {
+        $form = $request['dateAction'];
+        $date =  date('d-m-Y',strtotime($request['date']));
+        $year = Carbon::createFromFormat('d-m-Y', $date)->format('Y');
+        $month = Carbon::createFromFormat('d-m-Y', $date)->format('m');
+        switch($form){
+            case 'all':
+                $Vprojects = Project :: select('*','project.id')->join('date','project_id','=','project.id')->where('verified', 1 )->get();
+                break;  
+            case 'date':
+                $Vprojects = Project :: select('*','project.id')->with('pdate')->where('verified', 1 )
+                    ->join('date','project_id','=','project.id')
+                    ->whereMonth('area_initial','=', $month)
+                    ->whereYear('area_initial','=', $year)
+                    ->get();
+                break;
+        }
+        return view('pages.report.space',compact('Vprojects'));
     }
 
     /**

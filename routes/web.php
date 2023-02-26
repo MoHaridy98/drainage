@@ -87,6 +87,8 @@ Route::group(['namespace'=> 'admin','middleware' => 'auth'],function (){
 
     Route::get('/report', [App\Http\Controllers\Pages\ReportController::class, 'index'])->name('report');
     Route::get('/sewageReport', [App\Http\Controllers\Pages\ReportController::class, 'sewageReport'])->name('sewage-report');
+    Route::get('/spaceReport', [App\Http\Controllers\Pages\ReportController::class, 'spaceReport'])->name('space-report');
+    Route::get('/space-date', [App\Http\Controllers\Pages\ReportController::class, 'space_date'])->name('space-date');
     Route::get('/all-report', [App\Http\Controllers\Pages\ReportController::class, 'allreport'])->name('all-report');
     Route::get('/project-report', [App\Http\Controllers\Pages\ReportController::class, 'allreport_project'])->name('all.report_project');
     Route::get('/report-print{id}', [App\Http\Controllers\Pages\ReportController::class, 'print'])->name('print');

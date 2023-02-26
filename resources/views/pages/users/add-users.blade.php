@@ -61,7 +61,8 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     <input style="height: calc(2.25rem + 6px);" type="password"
-                                                        name="password" class="form-control"placeholder=" الرقم السري ">
+                                                        name="password" minlength="6"
+                                                        class="form-control"placeholder=" الرقم السري ">
                                                 </div>
                                             </div>
                                             <div class="form-row">

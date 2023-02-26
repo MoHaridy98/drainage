@@ -73,8 +73,8 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ route('home') }}" style="letter-spacing: initial"> <img alt="image" src="assets/img/logo.png"
-                    class="header-logo" />
+            <a href="{{ route('home') }}" style="letter-spacing: initial"> <img alt="image"
+                    src="images/logo/aswan.png" class="header-logo" />
                 <span class="logo-name">متابعة المشاريع </span>
             </a>
         </div>
@@ -150,10 +150,13 @@
                     @can('report')
                         <li><a class="nav-link" href="{{ route('report') }}">تقرير مفصل</a></li>
                     @endcan
-                    @can('sewage-report')
+                    @can('report.sewage')
                         <li><a class="nav-link" href="{{ route('sewage-report') }}">تقرير الصرف المغطى</a></li>
                     @endcan
-                    @can('all-report')
+                    @can('report.space')
+                        <li><a class="nav-link" href="{{ route('space-report') }}">تقرير المساحة</a></li>
+                    @endcan
+                    @can('report.all')
                         <li><a class="nav-link" href="{{ route('all.report_project') }}">تقرير مجمع</a></li>
                     @endcan
                 </ul>
