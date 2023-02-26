@@ -19,9 +19,10 @@ class RolesAndPermissionSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
         //site permissions
         $arrayOfPermissionsNames =[
-            'agr','agr.create','agr.edit','farmer','farmarCreate','farmarEdite','all-report',
-            'print','report','sewage','sewage.create','sewage.edite','space','space.create',
-            'dues','taxes','taxes.create','home','users','roles','sewage-report'
+            'agr','agr.create','agr.edit','farmer','farmar.create','farmar.edite','report.all',
+            'report.print','report','report.sewage','report.space','sewage.create','sewage.edit',
+            'sewage','space.create','space.dues','space','taxes.create','taxes.dues','taxes','home',
+            'users','users.add','users.edit','roles','roles.add','roles.edit'
         ];
         $permissions = collect($arrayOfPermissionsNames)->map(function($permissions){
             return ['name'=>$permissions , 'guard_name'=>'web'];
