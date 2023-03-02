@@ -89,6 +89,23 @@
                                                         class="form-control" disabled>
                                                 </div>
                                             </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label> قيمة القسط السنوي</label>
+                                                    <input type="text" value="{{ $project->total_cost / 20 }}"
+                                                        class="form-control" disabled>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>بداية من</label>
+                                                    <input type="text" value="{{ $year }}"
+                                                        class="form-control" disabled>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>الى</label>
+                                                    <input type="text" value="{{ $year + 20 }}"
+                                                        class="form-control" disabled>
+                                                </div>
+                                            </div>
                                             <hr>
                                             <div class="form-row pt-2">
                                                 <div class="form-group col-md-7">
@@ -105,15 +122,15 @@
                                                     <input type="date" name="date" class="form-control">
                                                 </div>
                                             </div>
+                                            <button type="submit" class="btn btn-success">حفظ</button>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-success">حفظ</button>
                                 </form>
                             </div>
                             <div class="col-lg-6">
                                 <div class="card card-secondary">
                                     <div class="card-header">
-                                        <h4>جدول الاقساط</h4>
+                                        <h4>جدول التسديد</h4>
                                     </div>
                                     <div class="card-body" style="direction: rtl;">
                                         <div class="table-responsive">
@@ -137,7 +154,8 @@
                                                                     <td>{{ $item->date }}</td>
                                                                     <td>
                                                                         <div class="btn-group dropup">
-                                                                            <button id="btnGroupVerticalDrop5"type="button"
+                                                                            <button
+                                                                                id="btnGroupVerticalDrop5"type="button"
                                                                                 class="btn"data-toggle="dropdown"
                                                                                 aria-haspopup="true"aria-expanded="false">
                                                                                 <i class="fas fa-ellipsis-v"></i>
@@ -156,6 +174,68 @@
                                                     @endisset
                                                 </tbody>
                                             </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card card-secondary" id="print">
+                                    <div class="card-header">
+                                        <h4> جدول الاقساط السنوية ل " {{ $project->name }} " </h4>
+                                    </div>
+                                    <div class="card-body" style="direction: rtl;">
+                                        <table class="table table-striped table-hover" id="table"
+                                            style="width:100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>السنة</th>
+                                                    <th>قيمة القسط</th>
+                                                    <th>المحصل</th>
+                                                    <th>المتأخرات</th>
+                                                    <th>اجمالي المطلوب</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (range($year, $year + 19) as $y)
+                                                    <tr>
+                                                        <td>{{ $y }}</td>
+                                                        <td>{{ number_format($project->total_cost / 19, 4) }}</td>
+                                                        <td>{{ $totalYear = number_format(App\Models\Installment::select('amount')->whereYear('date', $y)->where('project_id', $project->id)->sum('amount'),4) }}
+                                                        </td>
+                                                        <td>
+                                                            @if (@Carbon\Carbon::today()->year >= $y)
+                                                                {{ number_format($project->total_cost / 19 - $totalYear, 4) }}
+                                                            @else
+                                                                {{ 0 }}
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if ($y == $year)
+                                                                {{ number_format($project->total_cost / 19, 4) }}
+                                                            @elseif(@Carbon\Carbon::today()->year == $y)
+                                                                <span
+                                                                    style="color: red; font-weight: bold">{{ number_format($project->total_cost / 19 -App\Models\Installment::select('amount')->whereYear('date', $y - 1)->where('project_id', $project->id)->sum('amount') +$project->total_cost / 19,4) }}</span>
+                                                            @else
+                                                                {{ number_format($project->total_cost / 19, 4) }}
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td>الاجمالي:</td>
+                                                    <td>{{ $project->total_cost }}</td>
+                                                    <td>المحصل:</td>
+                                                    <td>{{ $inst }}</td>
+                                                    <td></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                        <div class="justify-content-right d-flex">
+                                            <button class="btn btn-danger  float-left mt-3 mr-2" id="print_Button"
+                                                onclick="printDiv()"> <i
+                                                    class="mdi mdi-printer ml-1"></i>طباعة</button>
                                         </div>
                                     </div>
                                 </div>
@@ -186,98 +266,22 @@
     <script src="assets/bundles/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script>
         $(document).ready(function() {
+            $('#table').DataTable({
+                paging: false,
+                searching: false,
+            });
             $('table.table').DataTable();
         });
 
-        function addWorkRow() {
-            var elements = document.getElementsByClassName('work-xp-input');
-            var empty = "no"
-            for (var i = 0; i < elements.length; i++) {
-                if (elements[i].value == "") {
-                    empty = "yes"
-                }
-            }
-
-            if (empty == "no" && document.getElementsByClassName("work-xp").length < 6) {
-                const div = document.createElement('div');
-                div.className = 'card card-primary work-xp';
-                div.innerHTML = `
-                <div class="card-body form-row">
-                    <div class="form-group col-md-3">
-                        <input type="text" class="form-control"placeholder=" اسم المشروع / المنطقة">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <input type="number" name="xp-year" class="form-control"placeholder="المساحة">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <input type="number" name="work-xp" class="form-control"placeholder=" التكلفة المستحقة">
-                    </div>
-                    </div>
-                    <input type="button" class="btn-danger" style="width: 50px;
-                    height: 35px; position: absolute; left: 0; border-radius: 10px" value="x" onclick="removeWorkRow(this)" />
-                `;
-                document.getElementById('work_experience').appendChild(div);
-                if (document.getElementsByClassName("work-xp").length == 6) {
-                    document.getElementById("addWork-btn").style.display = "none";
-                }
-                if (document.getElementsByClassName("work-xp").length != 6) {
-                    document.getElementById("addWork-btn").style.display = "block";
-                }
-            } else {
-                alert("برجاء ملء البيانات!");
-            }
-        }
-
-        function removeWorkRow(input) {
-            console.log(input);
-            confirm("متأكد؟") ? document.getElementById('work_experience').removeChild(input.parentNode) : 0;
-            if (document.getElementsByClassName("work-xp").length != 6) {
-                document.getElementById("addWork-btn").style.display = "block";
-            }
-        }
-    </script>
-    <script>
-        function addSkillRow() {
-            var elements = document.getElementsByClassName('skill-input');
-            var empty = "no"
-            for (var i = 0; i < elements.length; i++) {
-                if (elements[i].value == "") {
-                    empty = "yes"
-                }
-            }
-
-            if (empty == "no" && document.getElementsByClassName("skills").length < 10) {
-                const div = document.createElement('div');
-                div.className = 'col-md-4 skills';
-                div.innerHTML = `
-                <div class="h5">
-                <select type="text" name="skill_id[]" class="skill-input" id="" placeholder="اسم المهارة">
-                <optgroup label="من فضلك أخترالمهارة "></optgroup>
-
-                <option value=""</option>
-
-                </select>
-                <a href="javascript:void(0)" style="padding: 5px 20px 5px 20px;"
-                            class="btn btn-danger form-label" onclick="removeSkillRow(this)">-</a>
-              </div>
-            `;
-                document.getElementById('skills').appendChild(div);
-                if (document.getElementsByClassName("skills").length == 9) {
-                    document.getElementById("addSkill-btn").style.display = "none";
-                }
-                if (document.getElementsByClassName("skills").length != 9) {
-                    document.getElementById("addSkill-btn").style.display = "block";
-                }
-            } else {
-                alert("برجاء ملء البيانات!");
-            }
-        }
-
-        function removeSkillRow(input) {
-            confirm("متأكد؟") ? document.getElementById('skills').removeChild(input.parentNode.parentNode) : 0;
-            if (document.getElementsByClassName("skills").length != 9) {
-                document.getElementById("addSkill-btn").style.display = "block";
-            }
+        function printDiv() {
+            document.getElementById('print_Button').style.display = "none"
+            var printContents = document.getElementById('print').innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+            location.reload();
+            window.print();
         }
     </script>
 </body>

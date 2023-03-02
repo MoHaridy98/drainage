@@ -11,6 +11,7 @@ use App\Models\Farmer;
 use App\Models\Benefits;
 use App\Models\Installment;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 use Illuminate\Support\Facades\DB as DB;
 
@@ -24,7 +25,7 @@ class TaxesController extends Controller
     public function index()
     {
         //
-        $farmer = Benefits :: select()->with('farmerName.assname','farmerName.assname.regionname','farmerName.assname.regionname.cityname')->get();
+        //$farmer = Benefits :: select()->with('farmerName.assname','farmerName.assname.regionname','farmerName.assname.regionname.cityname')->get();
         // $project = Benefits :: select(DB::raw("SUM(Total_installment) as Total_installment , project_id"))->with('projectName','projectName.pdate')->groupBy('project_id')->get();
         $projectTotal = DB::table('installment')
             ->rightjoin('project', 'project.id', '=', 'installment.project_id')
@@ -32,7 +33,7 @@ class TaxesController extends Controller
             ->select('project.id','date.tax_final','project.name','project.total_cost' , DB::raw('COALESCE(SUM(installment.amount),0) as amount'))
             ->groupBy('project.id', 'project.total_cost','project.name','date.tax_final')
             ->get();
-        return view("pages.taxes.taxes" , compact('farmer','projectTotal'));
+        return view("pages.taxes.taxes" , compact('projectTotal'));
 
     }
 
@@ -48,7 +49,7 @@ class TaxesController extends Controller
 
     public function taxCreate($id)
     {
-        //
+        $now = Carbon::today();
         $project = Project :: with('pdate')->select()->find($id);
         // $installment = DB::table('installment')
         // ->select(DB::raw('SUM(amount) as amount'))
@@ -56,7 +57,11 @@ class TaxesController extends Controller
         // ->get();
         $installment = Installment :: select()->where('project_id',$id)->get();
         $inst = Installment :: where('project_id',$id)->sum('amount');
-        return view("pages.taxes.create", compact('project','installment','inst'));
+        $totalYear = Installment:: select('amount')->whereYear('date',$now->year)
+            ->where('project_id',$id)->sum('amount');
+        $date =  date('d-m-Y',strtotime($project->pdate->tax_final));
+        $year = Carbon::createFromFormat('d-m-Y', $date)->format('Y');
+        return view("pages.taxes.create", compact('project','installment','inst','year','totalYear'));
     }
 
     /**

@@ -112,6 +112,10 @@
                 </section>
                 <section class="section">
                     <div class="section-body">
+                        <div class="justify-content-right d-flex">
+                            <button class="btn btn-danger  float-left mt-3 mr-2" id="print_Button" onclick="printDiv()">
+                                <i class="mdi mdi-printer ml-1"></i>طباعة</button>
+                        </div>
                         <div class="row" style="direction: rtl">
                             <div class="col-12 col-md-12 col-lg-12">
                                 @isset($Projects)
@@ -259,10 +263,7 @@
                                     @endif
                                 @endisset
                             </div>
-                            <div class="justify-content-right d-flex">
-                                <button class="btn btn-danger  float-left mt-3 mr-2" id="print_Button"
-                                    onclick="printDiv()"> <i class="mdi mdi-printer ml-1"></i>طباعة</button>
-                            </div>
+
                         </div>
                     </div>
                 </section>
